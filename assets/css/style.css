@@ -1,0 +1,222 @@
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+    /* Red Wine Palette */
+    --color-wine: #722F37;
+    --color-wine-dark: #501d23;
+    --color-cream: #F1E1A6;
+    --color-gold: #C5A059;
+    --color-charcoal: #2C2C2C;
+    --color-off-white: #FAFAFA;
+    --color-gray-soft: #e9ecef;
+    
+    /* Fonts */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+    
+    /* Spacing & Borders */
+    --radius-md: 0.5rem;
+    --shadow-soft: 0 4px 20px rgba(0,0,0,0.05);
+    --shadow-hover: 0 10px 25px rgba(114, 47, 55, 0.15);
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-off-white);
+    color: var(--color-charcoal);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: var(--font-heading);
+    color: var(--color-wine);
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(114, 47, 55, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-wine) !important;
+}
+
+.nav-link {
+    color: var(--color-charcoal) !important;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--color-wine) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px;
+    left: 0;
+    background-color: var(--color-wine);
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* =========================================
+   3. HERO SECTION
+   ========================================= */
+.hero-section {
+    background: linear-gradient(135deg, var(--color-off-white) 0%, #fff0f3 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-wine-dark);
+}
+
+.hero-section .lead {
+    color: var(--color-charcoal);
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+.btn-primary {
+    background-color: var(--color-wine);
+    border-color: var(--color-wine);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-heading);
+    letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-wine-dark);
+    border-color: var(--color-wine-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-outline-secondary {
+    color: var(--color-wine);
+    border-color: var(--color-wine);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-heading);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--color-wine);
+    color: #fff;
+    border-color: var(--color-wine);
+}
+
+.hero-image-placeholder {
+    background-color: #fff;
+    border: 2px dashed var(--color-cream);
+    box-shadow: var(--shadow-soft);
+}
+
+/* =========================================
+   4. SECTIONS (Skills & Projects)
+   ========================================= */
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 4px;
+    background-color: var(--color-cream);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
+.card {
+    border: none;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-title {
+    color: var(--color-wine);
+    font-weight: 700;
+}
+
+.bg-light {
+    background-color: #ffffff !important; 
+}
+
+.skills-section {
+    background-color: #fffcfc !important; /* Extremely light pink tint */
+}
+
+/* Projects */
+.projects-preview-section .ratio {
+    border-bottom: 3px solid var(--color-cream);
+}
+
+.btn-outline-primary {
+    color: var(--color-wine);
+    border-color: var(--color-cream);
+    font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--color-wine);
+    color: #fff;
+    border-color: var(--color-wine);
+}
+
+/* =========================================
+   5. FOOTER
+   ========================================= */
+.footer-section {
+    background-color: var(--color-wine-dark) !important;
+    border-top: 4px solid var(--color-gold);
+}
+
+.footer-section a {
+    color: var(--color-cream) !important;
+    opacity: 0.8;
+}
+
+.footer-section a:hover {
+    opacity: 1;
+    color: #fff !important;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+}
