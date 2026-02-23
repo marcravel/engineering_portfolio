@@ -2,9 +2,9 @@
    1. VARIABLES & RESET
    ========================================= */
 :root {
-    /* Red Wine Palette */
-    --color-wine: #722F37;
-    --color-wine-dark: #501d23;
+    /* Navy Palette */
+    --color-navy: #1E3A8A;
+    --color-navy-dark: #172554;
     --color-cream: #F1E1A6;
     --color-gold: #C5A059;
     --color-charcoal: #2C2C2C;
@@ -18,7 +18,7 @@
     /* Spacing & Borders */
     --radius-md: 0.5rem;
     --shadow-soft: 0 4px 20px rgba(0,0,0,0.05);
-    --shadow-hover: 0 10px 25px rgba(114, 47, 55, 0.15);
+    --shadow-hover: 0 10px 25px rgba(30, 58, 138, 0.15);
 }
 
 body {
@@ -30,7 +30,7 @@ body {
 
 h1, h2, h3, h4, h5, h6, .navbar-brand {
     font-family: var(--font-heading);
-    color: var(--color-wine);
+    color: var(--color-navy);
 }
 
 a {
@@ -44,13 +44,13 @@ a {
 .navbar {
     background-color: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(114, 47, 55, 0.1);
+    border-bottom: 1px solid rgba(30, 58, 138, 0.1);
 }
 
 .navbar-brand {
     font-weight: 700;
     font-size: 1.5rem;
-    color: var(--color-wine) !important;
+    color: var(--color-navy) !important;
 }
 
 .nav-link {
@@ -60,7 +60,7 @@ a {
 }
 
 .nav-link:hover, .nav-link.active {
-    color: var(--color-wine) !important;
+    color: var(--color-navy) !important;
 }
 
 .nav-link::after {
@@ -70,7 +70,7 @@ a {
     height: 2px;
     bottom: 5px;
     left: 0;
-    background-color: var(--color-wine);
+    background-color: var(--color-navy);
     transition: width 0.3s;
 }
 
@@ -82,7 +82,7 @@ a {
    3. HERO SECTION
    ========================================= */
 .hero-section {
-    background: linear-gradient(135deg, var(--color-off-white) 0%, #fff0f3 100%);
+    background: linear-gradient(135deg, var(--color-off-white) 0%, #e8f0fe 100%);
     position: relative;
     overflow: hidden;
 }
@@ -90,7 +90,7 @@ a {
 .hero-section h1 {
     font-size: 3.5rem;
     font-weight: 700;
-    color: var(--color-wine-dark);
+    color: var(--color-navy-dark);
 }
 
 .hero-section .lead {
@@ -100,31 +100,31 @@ a {
 }
 
 .btn-primary {
-    background-color: var(--color-wine);
-    border-color: var(--color-wine);
+    background-color: var(--color-navy);
+    border-color: var(--color-navy);
     padding: 0.75rem 1.5rem;
     font-family: var(--font-heading);
     letter-spacing: 0.5px;
 }
 
 .btn-primary:hover {
-    background-color: var(--color-wine-dark);
-    border-color: var(--color-wine-dark);
+    background-color: var(--color-navy-dark);
+    border-color: var(--color-navy-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
 }
 
 .btn-outline-secondary {
-    color: var(--color-wine);
-    border-color: var(--color-wine);
+    color: var(--color-navy);
+    border-color: var(--color-navy);
     padding: 0.75rem 1.5rem;
     font-family: var(--font-heading);
 }
 
 .btn-outline-secondary:hover {
-    background-color: var(--color-wine);
+    background-color: var(--color-navy);
     color: #fff;
-    border-color: var(--color-wine);
+    border-color: var(--color-navy);
 }
 
 .hero-image-placeholder {
@@ -167,7 +167,7 @@ a {
 }
 
 .card-title {
-    color: var(--color-wine);
+    color: var(--color-navy);
     font-weight: 700;
 }
 
@@ -176,7 +176,7 @@ a {
 }
 
 .skills-section {
-    background-color: #fffcfc !important; /* Extremely light pink tint */
+    background-color: #f8fafc !important; /* Extremely light blue tint */
 }
 
 /* Projects */
@@ -185,22 +185,22 @@ a {
 }
 
 .btn-outline-primary {
-    color: var(--color-wine);
+    color: var(--color-navy);
     border-color: var(--color-cream);
     font-weight: 600;
 }
 
 .btn-outline-primary:hover {
-    background-color: var(--color-wine);
+    background-color: var(--color-navy);
     color: #fff;
-    border-color: var(--color-wine);
+    border-color: var(--color-navy);
 }
 
 /* =========================================
    5. FOOTER
    ========================================= */
 .footer-section {
-    background-color: var(--color-wine-dark) !important;
+    background-color: var(--color-navy-dark) !important;
     border-top: 4px solid var(--color-gold);
 }
 

@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PCBTrace from '../components/PCBTrace.astro';
+import projectsData from '../data/projects.json';
+---
+
+<BaseLayout title="Marc | Engineering Portfolio">
+    <!-- ===================== HERO SECTION ===================== -->
+    <header class="py-5 hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Text -->
+                <div class="col-lg-7">
+                    <p class="text-uppercase small text-muted mb-2">Engineering Portfolio</p>
+                    <h1 class="display-5 fw-bold mb-3">
+                        Hi, I'm Marc.<br>
+                        Electronics, Embedded Systems & Robotics.
+                    </h1>
+                    <p class="lead mb-4">
+                        I design and build systems that connect hardware, software, and automation:
+                        from microcontrollers and sensors to robotics and control.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="/projects" class="btn btn-primary">
+                            View Projects
+                        </a>
+                        <a href="/docs/cv.pdf" class="btn btn-outline-secondary" target="_blank">
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Placeholder image/illustration -->
+                <div class="col-lg-5 mt-4 mt-lg-0">
+                    <div class="hero-image-placeholder border rounded-3 p-4 text-center">
+                        <p class="mb-1 fw-semibold">Profile / Illustration</p>
+                        <p class="text-muted small mb-0 ">
+                            <img src="/assets/img/my_profile.jpg" class="img-fluid" alt="My Profile">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <PCBTrace />
+
+    <!-- ===================== SKILLS SECTION ===================== -->
+    <section class="py-5 bg-light skills-section">
+        <div class="container">
+            <h2 class="mb-4 section-title text-center">Skills Overview</h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Embedded Systems</h5>
+                            <p class="card-text small text-muted">
+                                Microcontrollers, peripherals, timers, UART, SPI, I2C, and low-level C.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Electronics</h5>
+                            <p class="card-text small text-muted">
+                                Analog & digital circuits, PCB prototyping, sensors, actuators, power stages.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Robotics & Control</h5>
+                            <p class="card-text small text-muted">
+                                Line follower, maze solver, control systems, mechatronics integration.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Programming</h5>
+                            <p class="card-text small text-muted">
+                                C/C++, Python, basic AI/ML, scripting, tooling for engineering workflows.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <PCBTrace />
+
+    <!-- ===================== PROJECTS PREVIEW ===================== -->
+    <section class="py-5 projects-preview-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="section-title mb-0">Selected Projects</h2>
+                <a href="/projects" class="btn btn-sm btn-outline-primary">
+                    View All
+                </a>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                {projectsData.map(project => (
+                    <ProjectCard project={project} />
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>

@@ -1,0 +1,97 @@
+---
+interface Props {
+  project: {
+    id: number;
+    category: string;
+    title: string;
+    techStack: string[];
+    description: string;
+    achievements?: string;
+  }
+}
+
+const { project } = Astro.props;
+---
+
+<div class="col-md-6 col-lg-4">
+    <div class="card h-100 project-card">
+        <div class="radar-scan"></div>
+        <div class="ratio ratio-16x9 bg-light proj-img-box">
+            <div class="d-flex align-items-center justify-content-center text-muted small">
+                {project.category}
+            </div>
+        </div>
+        <div class="card-body d-flex flex-column proj-body">
+            <h5 class="card-title text-primary-color">{project.title}</h5>
+            <p class="card-text small text-muted mb-auto">
+                <strong>{project.techStack.join(', ')}</strong>.
+                {project.description}
+            </p>
+            {project.achievements && (
+                <p class="small mt-3 mb-0" style="color: var(--color-gold); font-weight: 600;">
+                    {project.achievements}
+                </p>
+            )}
+        </div>
+    </div>
+</div>
+
+<style>
+/* Radar sweep container inside the card */
+.project-card {
+    position: relative;
+    overflow: hidden;
+    /* Retain original shadow on hover from style.css, but add some border radius */
+    border-radius: var(--radius-md); 
+}
+
+/* The scanning line pseudo-elements */
+.radar-scan {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* On hover, fade in the scan and start animation */
+.project-card:hover .radar-scan {
+    opacity: 1;
+}
+
+.radar-scan::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 200%;
+    height: 10px;
+    background: linear-gradient(to top, rgba(30, 58, 138, 0), rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0));
+    box-shadow: 0 0 10px rgba(30, 58, 138, 0.5);
+    transform: rotate(25deg);
+    animation: radar-sweep 2.5s infinite linear;
+    display: none;
+}
+
+.project-card:hover .radar-scan::after {
+    display: block;
+}
+
+@keyframes radar-sweep {
+    0% {
+        transform: translateY(-50%) rotate(25deg);
+    }
+    100% {
+        transform: translateY(200%) rotate(25deg);
+    }
+}
+
+.text-primary-color {
+    color: var(--color-navy);
+}
+
+.proj-img-box {
+    border-bottom: 3px solid var(--color-cream);
+}
+</style>
