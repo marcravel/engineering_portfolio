@@ -6,5 +6,5 @@ export default defineConfig({
   
   // IF your repository is named something like "portfolio" instead of "username.github.io", 
   // you MUST include the base property matching the repo name exactly:
-  // base: '/portfolio', 
+  base: '/engineering_portfolio', 
 });
