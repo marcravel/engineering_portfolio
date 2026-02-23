@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About - Marc">
+    <section class="py-5">
+        <div class="container text-light">
+            <h1 class="display-4 fw-bold mb-5 section-title">About Me</h1>
+            
+            <div class="row g-5">
+                <!-- Left Column: Bio & Skills -->
+                <div class="col-lg-7">
+                    <!-- Professional Summary -->
+                    <div class="mb-5">
+                        <h3 class="h4 mb-3" style="color: var(--color-emerald);">Professional Summary</h3>
+                        <p class="lead" style="color: var(--color-text-muted);">
+                            I am an electrical and electronics engineering student with a strong foundation in designing and building systems at the intersection of Hardware, Embedded Systems, and Artificial Intelligence/Computer Vision. From programming robust microcontroller logic (PIC, STM32, ESP32) to developing advanced sensor architectures and automation scripts, I blend low-level electronics with high-level control algorithms to create intelligent, responsive solutions.
+                        </p>
+                    </div>
+
+                    <!-- Technical Skills Matrix -->
+                    <div class="mb-5">
+                        <h3 class="h4 mb-4" style="color: var(--color-emerald);">Technical Skills Matrix</h3>
+                        
+                        <div class="mb-4">
+                            <h5 class="h6 text-uppercase text-secondary mb-2">Hardware & Embedded</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">PIC</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">STM32</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">ESP32</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">Arduino</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">PCB Design</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">Circuit Design</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="h6 text-uppercase text-secondary mb-2">Software, AI & Control</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">C/C++</span>
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">Python</span>
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">OpenCV</span>
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">Fuzzy Logic</span>
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">ROS2</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="h6 text-uppercase text-secondary mb-2">Tools & Multimedia</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">Git</span>
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">HTML/CSS/JS</span>
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">Linux</span>
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">Video Editing</span>
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">YouTube "Code & Copper" Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="mb-5">
+                        <h3 class="h4 mb-3" style="color: var(--color-emerald);">Languages</h3>
+                        <div class="d-flex flex-wrap gap-3">
+                            <span class="text-light"><strong class="text-white">English</strong> (Professional)</span>
+                            <span class="text-light"><strong class="text-white">French</strong> (Fluent)</span>
+                            <span class="text-light"><strong class="text-white">Turkish</strong> (Fluent)</span>
+                            <span class="text-light"><strong class="text-white">German</strong> (A1)</span>
+                            <span class="text-light"><strong class="text-white">Malagasy</strong> (Native)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Education & Experience -->
+                <div class="col-lg-5">
+                    <h3 class="h4 mb-4" style="color: var(--color-emerald);">Education & Honors</h3>
+                    
+                    <!-- Education Card 1 -->
+                    <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">Bachelor of Electrical and Electronics Engineering</h5>
+                        <p class="text-success mb-2 small fw-semibold">2023 – Present • 3rd Year Student</p>
+                        <p class="text-light opacity-75 small mb-2">Faculty of Technology, Selçuk Üniversitesi | Konya, Türkiye</p>
+                        <div class="mt-2">
+                            <span class="badge bg-success bg-opacity-25 text-success border border-success px-2 py-1">🏆 Turkish Government Scholarship Awardee</span>
+                        </div>
+                    </div>
+
+                    <!-- Education Card 2 -->
+                    <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">High School Diploma (Scientific)</h5>
+                        <p class="text-success mb-2 small fw-semibold">2017 – 2021</p>
+                        <p class="text-light opacity-75 small mb-2">Lycée Privé Saint Joseph | Antsirabe, Madagascar</p>
+                        <div class="mt-2">
+                            <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary px-2 py-1">🎓 Magna Cum Laude (Mention Bien)</span>
+                        </div>
+                    </div>
+
+                    <h3 class="h4 mb-4 mt-5" style="color: var(--color-emerald);">Experience</h3>
+                    
+                    <!-- Experience Card 1 -->
+                    <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">Programmer and Robotics Trainee</h5>
+                        <p class="text-success mb-2 small fw-semibold">Nov 2021 – Jun 2022</p>
+                        <p class="text-light opacity-75 small mb-3">ITRAS Group | Antananarivo, Madagascar</p>
+                        <ul class="small text-light opacity-75 mb-0 ps-3">
+                            <li class="mb-1">Developed optimized algorithms for path planning and control systems.</li>
+                            <li class="mb-1">Designed and created microcontroller-based circuit boards for controlling sensors, motors, and actuators.</li>
+                            <li>Built maze-solving and line-following robots demonstrating strong problem-solving and creative thinking.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+/* Hover Effects for Cards matching ProjectCards */
+.edu-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-dark-secondary) !important;
+}
+
+.edu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover) !important;
+    border-color: rgba(16, 185, 129, 0.3) !important;
+    border-width: 2px !important;
+}
+
+/* Base adjustment for the bg-dark-subtle utility to fit our theme better */
+.bg-dark-subtle {
+    background-color: var(--color-bg-dark-secondary) !important;
+}
+</style>
