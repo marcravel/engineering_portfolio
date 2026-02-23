@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import projectsData from '../../data/projects.json';
+---
+
+<BaseLayout title="Projects - Marc">
+    <section class="py-5">
+        <div class="container text-light">
+            <h1 class="display-4 fw-bold mb-3 section-title text-center">All Projects</h1>
+            <p class="text-center text-muted lead mb-5">A comprehensive archive of my robotics, automation, and embedded systems work.</p>
+            
+            <div class="row g-4">
+                {projectsData.map((project) => (
+                    <ProjectCard project={project} />
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>
