@@ -7,7 +7,7 @@
     "techStack": ["Embedded C", "MPLAB XC8", "Microcontrollers"],
     "description": "Designed and programmed a fast autonomous line follower. Implemented efficient control logic for high-speed path tracking.",
     "achievements": "🥇 1st place + 2 Gold Medals at the Madagascar Cup of Robotics",
-    "image": "/img/line-follower-bots.jpg"
+    "image": "img/projects/line-follower-bots.jpg"
   },
   {
     "id": 2,
