@@ -7,7 +7,7 @@
     "techStack": ["Embedded C", "MPLAB XC8", "Microcontrollers"],
     "description": "Designed and programmed a fast autonomous line follower. Implemented efficient control logic for high-speed path tracking.",
     "achievements": "🥇 1st place + 2 Gold Medals at the Madagascar Cup of Robotics",
-    "image": "../public/img/line-follower-bots.jpg"
+    "image": "/img/line-follower-bots.jpg"
   },
   {
     "id": 2,
@@ -35,7 +35,7 @@
     "techStack": ["Control Logic", "Soil Moisture Sensing"],
     "description": "Designed an automated irrigation system based on soil moisture sensing, implementing control logic for efficient water usage.",
     "achievements": "🥉 3rd place at the MADA ROBOT CONTEST",
-    "image": "https://images.unsplash.com/photo-1416879598056-cb829ca13511?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": 5,
@@ -44,6 +44,6 @@
     "title": "Smart Greenhouse Control System",
     "techStack": ["ESP32", "Fuzzy Logic", "IoT", "Web Dashboard"],
     "description": "Developed an ESP32-based smart greenhouse controller utilizing a fuzzy logic control system for adaptive environmental regulation (Temperature, Soil moisture, Air humidity, Lighting). Features multi-sensor data acquisition, real-time actuator control, and a web-based dashboard.",
-    "image": "https://images.unsplash.com/photo-1530836369250-ef71a3616d3e?auto=format&fit=crop&w=800&q=80"
+    "image": "https://images.unsplash.com/photo-1595801362095-816cc142dce4?auto=format&fit=crop&w=800&q=80"
   }
 ]

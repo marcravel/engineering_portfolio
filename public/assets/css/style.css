@@ -2,14 +2,17 @@
    1. VARIABLES & RESET
    ========================================= */
 :root {
-    /* Navy Palette */
-    --color-navy: #1E3A8A;
-    --color-navy-dark: #172554;
-    --color-cream: #F1E1A6;
-    --color-gold: #C5A059;
-    --color-charcoal: #2C2C2C;
-    --color-off-white: #FAFAFA;
-    --color-gray-soft: #e9ecef;
+    /* Dark Theme Palette base */
+    --color-bg-dark: #0f172a;      /* Rich slate deep background */
+    --color-bg-dark-secondary: #1e293b; /* Slightly lighter slate for cards/nav */
+    --color-text-main: #f8fafc;
+    --color-text-muted: #94a3b8;
+    
+    /* Brand Accents */
+    --color-emerald: #10b981;    /* Vibrant emerald primary */
+    --color-emerald-dark: #047857; /* Darker emerald for hover states */
+    --color-cream: #e2e8f0;      /* Adapted cream to a cool gray-white */
+    --color-gold: #fbbf24;       /* Warmer accent for achievements */
     
     /* Fonts */
     --font-heading: 'Playfair Display', serif;
@@ -17,20 +20,20 @@
     
     /* Spacing & Borders */
     --radius-md: 0.5rem;
-    --shadow-soft: 0 4px 20px rgba(0,0,0,0.05);
-    --shadow-hover: 0 10px 25px rgba(30, 58, 138, 0.15);
+    --shadow-soft: 0 4px 20px rgba(0,0,0,0.5);
+    --shadow-hover: 0 10px 25px rgba(16, 185, 129, 0.15); /* Emerald subtle glow */
 }
 
 body {
     font-family: var(--font-body);
-    background-color: var(--color-off-white);
-    color: var(--color-charcoal);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-main);
     line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-brand {
     font-family: var(--font-heading);
-    color: var(--color-navy);
+    color: var(--color-text-main);
 }
 
 a {
@@ -42,25 +45,25 @@ a {
    2. NAVBAR
    ========================================= */
 .navbar {
-    background-color: rgba(255, 255, 255, 0.95) !important;
+    background-color: rgba(18, 18, 18, 0.95) !important;
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(30, 58, 138, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .navbar-brand {
     font-weight: 700;
     font-size: 1.5rem;
-    color: var(--color-navy) !important;
+    color: var(--color-text-main) !important;
 }
 
 .nav-link {
-    color: var(--color-charcoal) !important;
+    color: var(--color-text-muted) !important;
     font-weight: 500;
     position: relative;
 }
 
 .nav-link:hover, .nav-link.active {
-    color: var(--color-navy) !important;
+    color: var(--color-text-main) !important;
 }
 
 .nav-link::after {
@@ -82,53 +85,72 @@ a {
    3. HERO SECTION
    ========================================= */
 .hero-section {
-    background: linear-gradient(135deg, var(--color-off-white) 0%, #e8f0fe 100%);
+    background-color: var(--color-bg-dark);
+    /* Intersecting linear gradients for the 30x30 engineering grid */
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: center center;
     position: relative;
     overflow: hidden;
+    /* Inset box shadow for vignette effect */
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+}
+
+.hero-section > .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section > .container {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-section h1 {
     font-size: 3.5rem;
     font-weight: 700;
-    color: var(--color-navy-dark);
+    color: var(--color-text-main);
 }
 
 .hero-section .lead {
-    color: var(--color-charcoal);
+    color: var(--color-text-muted);
     font-size: 1.25rem;
     opacity: 0.9;
 }
 
 .btn-primary {
-    background-color: var(--color-navy);
-    border-color: var(--color-navy);
+    background-color: var(--color-emerald);
+    border-color: var(--color-emerald);
+    color: #121212; /* Dark text for contrast on bright emerald */
     padding: 0.75rem 1.5rem;
     font-family: var(--font-heading);
     letter-spacing: 0.5px;
+    font-weight: 600;
 }
 
 .btn-primary:hover {
-    background-color: var(--color-navy-dark);
-    border-color: var(--color-navy-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
+    background-color: var(--color-emerald-dark);
+    border-color: var(--color-emerald-dark);
+    color: #fff;
 }
 
 .btn-outline-secondary {
-    color: var(--color-navy);
-    border-color: var(--color-navy);
+    color: var(--color-emerald);
+    border-color: var(--color-emerald);
     padding: 0.75rem 1.5rem;
     font-family: var(--font-heading);
 }
 
 .btn-outline-secondary:hover {
-    background-color: var(--color-navy);
-    color: #fff;
-    border-color: var(--color-navy);
+    background-color: var(--color-emerald);
+    color: #121212;
+    border-color: var(--color-emerald);
 }
 
 .hero-image-placeholder {
-    background-color: #fff;
+    background-color: var(--color-bg-dark-secondary);
     border: 2px dashed var(--color-cream);
     box-shadow: var(--shadow-soft);
 }
@@ -148,13 +170,14 @@ a {
     display: block;
     width: 60%;
     height: 4px;
-    background-color: var(--color-cream);
+    background-color: var(--color-emerald); /* Using emerald for underline accents */
     margin: 0.5rem auto 0;
     border-radius: 2px;
 }
 
 .card {
-    border: none;
+    background-color: var(--color-bg-dark-secondary); /* Give cards the lighter dark tone */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* very subtle border */
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-soft);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -164,54 +187,54 @@ a {
 .card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    border-color: rgba(16, 185, 129, 0.3); /* Subtle emerald border on hover */
 }
 
 .card-title {
-    color: var(--color-navy);
+    color: var(--color-emerald);
     font-weight: 700;
-}
-
-.bg-light {
-    background-color: #ffffff !important; 
-}
-
-.skills-section {
-    background-color: #f8fafc !important; /* Extremely light blue tint */
 }
 
 /* Projects */
 .projects-preview-section .ratio {
-    border-bottom: 3px solid var(--color-cream);
+    border-bottom: 3px solid var(--color-emerald);
+}
+
+.badge-emerald {
+    background-color: var(--color-emerald);
+    color: var(--color-bg-dark);
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .btn-outline-primary {
-    color: var(--color-navy);
-    border-color: var(--color-cream);
+    color: var(--color-text-main);
+    border-color: var(--color-emerald);
     font-weight: 600;
 }
 
 .btn-outline-primary:hover {
-    background-color: var(--color-navy);
-    color: #fff;
-    border-color: var(--color-navy);
+    background-color: var(--color-emerald);
+    color: #121212;
+    border-color: var(--color-emerald);
 }
 
 /* =========================================
    5. FOOTER
    ========================================= */
 .footer-section {
-    background-color: var(--color-navy-dark) !important;
-    border-top: 4px solid var(--color-gold);
+    background-color: var(--color-bg-dark-secondary) !important;
+    border-top: 4px solid var(--color-emerald-dark);
 }
 
 .footer-section a {
-    color: var(--color-cream) !important;
+    color: var(--color-text-muted) !important;
     opacity: 0.8;
 }
 
 .footer-section a:hover {
     opacity: 1;
-    color: #fff !important;
+    color: var(--color-emerald) !important;
 }
 
 /* Responsive Tweaks */
@@ -220,3 +243,4 @@ a {
         font-size: 2.5rem;
     }
 }
+

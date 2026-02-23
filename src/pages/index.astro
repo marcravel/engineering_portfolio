@@ -31,23 +31,29 @@ import projectsData from '../data/projects.json';
                     </div>
                 </div>
 
-                <!-- Placeholder image/illustration -->
-                <div class="col-lg-5 mt-4 mt-lg-0">
-                    <div class="hero-image-placeholder border rounded-3 p-4 text-center">
-                        <p class="mb-1 fw-semibold">Profile / Illustration</p>
-                        <p class="text-muted small mb-0 ">
-                            <img src="/assets/img/my_profile.jpg" class="img-fluid" alt="My Profile">
-                        </p>
+                <!-- Profile image -->
+                <div class="col-lg-5 mt-5 mt-lg-0 d-flex justify-content-center">
+                    <div class="w-75 w-md-60 text-center">
+                        <img src="/assets/img/my_profile.jpg" class="img-fluid rounded-4 shadow-lg profile-img-hero" alt="Marc Ravelontsalama">
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <PCBTrace />
+    <style>
+        .profile-img-hero {
+            /* Add any specific extra styling here, the shadow-lg and rounded-4 from bootstrap do most of the work */
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15) !important;
+            transition: transform 0.3s ease;
+        }
+        .profile-img-hero:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 
     <!-- ===================== SKILLS SECTION ===================== -->
-    <section class="py-5 bg-light skills-section">
+    <section class="py-5">
         <div class="container">
             <h2 class="mb-4 section-title text-center">Skills Overview</h2>
 
@@ -98,8 +104,6 @@ import projectsData from '../data/projects.json';
             </div>
         </div>
     </section>
-
-    <PCBTrace />
 
     <!-- ===================== PROJECTS PREVIEW ===================== -->
     <section class="py-5 projects-preview-section">
