@@ -29,8 +29,11 @@ if (project.image) {
     }
 }
 
-// Optionally prepend base url to the links too if it's GitHub pages, but standard relies on absolute root paths or base url.
-const projectLink = project.slug ? `/projects/${project.slug}` : `/projects/${project.id}`;
+// Determine the proper link path considering GitHub Pages base url
+const bUrl = import.meta.env.BASE_URL.endsWith('/') 
+    ? import.meta.env.BASE_URL 
+    : import.meta.env.BASE_URL + '/';
+const projectLink = project.slug ? `${bUrl}projects/${project.slug}` : `${bUrl}projects/${project.id}`;
 ---
 
 <div class="col-md-6 col-lg-4 pb-4">
