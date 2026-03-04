@@ -9,6 +9,7 @@ interface Props {
     achievements?: string;
     image?: string;
     slug?: string;
+    active?: number;
   }
 }
 
@@ -34,11 +35,22 @@ const bUrl = import.meta.env.BASE_URL.endsWith('/')
     ? import.meta.env.BASE_URL 
     : import.meta.env.BASE_URL + '/';
 const projectLink = project.slug ? `${bUrl}projects/${project.slug}` : `${bUrl}projects/${project.id}`;
+
+const isActive = project.active === 1;
+const Wrapper = isActive ? 'a' : 'div';
+const wrapperProps = isActive 
+    ? { href: projectLink, class: "text-decoration-none d-block h-100" } 
+    : { class: "d-block h-100 position-relative disabled-wrapper" };
 ---
 
 <div class="col-md-6 col-lg-4 pb-4">
-    <a href={projectLink} class="text-decoration-none d-block h-100">
+    <Wrapper {...wrapperProps}>
         <div class="card h-100 project-card border-0 shadow-sm" style={`background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%), url('${imageUrl}'); background-size: cover; background-position: center; min-height: 400px;`}>
+            {!isActive && (
+                <div class="position-absolute w-100 h-100 z-2 d-flex justify-content-center align-items-center coming-soon-overlay rounded" style="background-color: rgba(15, 23, 42, 0.85);">
+                    <span class="badge badge-emerald px-4 py-2 fs-5 shadow-sm">Details available soon</span>                 
+                </div>
+            )}
             <div class="card-body d-flex flex-column proj-body position-relative z-1 p-4">
                 <div class="mb-3">
                     <span class="badge badge-emerald px-3 py-2 shadow-sm">{project.category}</span>
@@ -57,7 +69,7 @@ const projectLink = project.slug ? `${bUrl}projects/${project.slug}` : `${bUrl}p
                 )}
             </div>
         </div>
-    </a>
+    </Wrapper>
 </div>
 
 <style>
@@ -74,5 +86,18 @@ const projectLink = project.slug ? `${bUrl}projects/${project.slug}` : `${bUrl}p
     box-shadow: var(--shadow-hover) !important;
     border-color: rgba(16, 185, 129, 0.3); /* Subtle emerald border on hover */
     border-width: 2px;
+}
+
+.disabled-wrapper {
+    cursor: default;
+}
+
+.coming-soon-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.disabled-wrapper:hover .coming-soon-overlay {
+    opacity: 1;
 }
 </style>
