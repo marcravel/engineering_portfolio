@@ -1,0 +1,15 @@
+This project was part of my robotics apprenticeship at Itras Group, an IT company based in Antananarivo, the capital of Madagascar. The company runs a robotics club called MTH (Malagasy Technology Hub), where aspiring engineers can learn and practice robotics alongside experienced professionals from the company.
+
+In March 2022, the organization STEM4GOOD Madagascar announced the Madagascar Cup of Robotics 2022. We entered the competition as the MTH Robotics Club.
+
+The contest was divided into two categories based on the microcontroller used as the robot's brain: an Arduino-based line follower and a Non-Arduino-based line follower. For both categories, we built our robots on the Romi 2-wheeled chassis by Pololu, paired with the Romi 32U4 Control Board, which integrates a motor driver, motor headers, power circuit, and battery terminals and motors pre-assembled with encoders for precise motion feedback.
+
+Both robots used High-Density (HD) QTR Arrays with 4 mm pitch as their line-sensing system. These reflectance sensors feature a linear array of IR emitter/phototransistor pairs, making them well suited for detecting changes in surface reflectivity, such as a black line against a white background. With fully independent outputs and compact, high-density spacing, they allowed us to achieve fast and accurate line detection critical for competitive speeds.
+
+For the Arduino-based category, we used an Arduino Mega as the brain, while the Non-Arduino category was powered by a PIC16F1938 microcontroller. Both robots were controlled using a PID algorithm, which allowed us to finely tune speed and steering response. We also custom-designed the PCBs that house the sensor arrays; in the case of the PIC-based robot, the microcontroller itself was also integrated directly onto this board.
+
+Both robots set the speed record in their respective categories, earning us two Gold Medals and 1st place overall in the competition.
+
+Following a prior contest where I earned 3rd place, Itras Group gave me the chance to join their robotics club, MTH, and the Madagascar Cup of Robotics 2022 was the result of that opportunity.
+
+Under the guidance of the company's engineers, I gained a thorough grounding in both electronics and low-level programming. From the fundamentals of electron movement and circuit design, PCB design and layout techniques, all the way through to PID control algorithms and maze-solving strategies. Beyond the technical knowledge, this project shaped how I work as an engineer: it challenged me to collaborate closely with teammates under pressure, think critically when hardware or code didn't behave as expected, and iterate quickly to find solutions. It taught me that building something that works reliably is rarely a straight line and that persistence, curiosity, and good teamwork make all the difference.
