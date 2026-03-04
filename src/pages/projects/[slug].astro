@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import projectsData from '../../data/projects.json';
+import fs from 'fs/promises';
+import path from 'path';
 
-// Generate paths for all projects based on their slug
 export async function getStaticPaths() {
   return projectsData.map((project) => ({
     params: { slug: project.slug },
@@ -20,6 +21,22 @@ if (heroImage && !heroImage.startsWith('http')) {
         : import.meta.env.BASE_URL + '/';
     heroImage = `${baseUrl}${heroImage}`;
 }
+
+let descriptionContent = project.longDescription || project.description;
+let isTextFile = typeof descriptionContent === 'string' && descriptionContent.endsWith('.txt');
+if (isTextFile) {
+    try {
+        const filePath = path.join(process.cwd(), 'public', descriptionContent.replace(/^\/+/, ''));
+        descriptionContent = await fs.readFile(filePath, 'utf-8');
+    } catch (err) {
+        console.error("Failed to read description file:", err);
+        descriptionContent = "Description currently unavailable.";
+    }
+}
+
+const descriptionParagraphs = (typeof descriptionContent === 'string' ? descriptionContent : '')
+    .split('\n')
+    .filter(p => p.trim() !== '');
 ---
 
 <BaseLayout title={`${project.title} - Marc Projects`}>
@@ -91,9 +108,11 @@ if (heroImage && !heroImage.startsWith('http')) {
                     <!-- Long Description -->
                     <div class="mb-5">
                         <h3 class="h4 mb-4" style="color: var(--color-emerald);">Overview</h3>
-                        <p class="lead text-light opacity-75" style="line-height: 1.8;">
-                            {project.longDescription || project.description}
-                        </p>
+                        <div class="lead text-light opacity-75" style="line-height: 1.8;">
+                            {descriptionParagraphs.map(paragraph => (
+                                <p>{paragraph}</p>
+                            ))}
+                        </div>
                     </div>
 
                     <!-- Supplemental Gallery -->
@@ -112,8 +131,8 @@ if (heroImage && !heroImage.startsWith('http')) {
                                     }
                                     return (
                                         <div class="col-md-6 col-lg-4">
-                                            <div class="card bg-dark border-secondary overflow-hidden h-100" style="min-height: 200px;">
-                                                <img src={imgPath} class="card-img h-100 w-100" style="object-fit: cover;" alt="Project Gallery Image" loading="lazy" />
+                                            <div class="card bg-dark border-secondary overflow-hidden h-100 ratio ratio-4x3" style="cursor: pointer;">
+                                                <img src={imgPath} class="card-img h-100 w-100 gallery-image" style="object-fit: cover; transition: transform 0.3s ease;" alt="Project Gallery Image" loading="lazy" />
                                             </div>
                                         </div>
                                     )
@@ -123,6 +142,20 @@ if (heroImage && !heroImage.startsWith('http')) {
                     )}
 
                 </div>
+            </div>
+
+            <!-- Image Modal -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content bg-transparent border-0">
+                  <div class="modal-header border-0 pb-0 position-absolute top-0 end-0 z-3">
+                    <button type="button" class="btn-close btn-close-white bg-dark bg-opacity-50 p-3 m-2 rounded-circle shadow-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body p-0 text-center d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+                    <img id="modalImage" src="" class="img-fluid rounded shadow" style="max-height: 90vh; object-fit: contain;" alt="Large project image view">
+                  </div>
+                </div>
+              </div>
             </div>
 
         </div>
@@ -139,10 +172,34 @@ if (heroImage && !heroImage.startsWith('http')) {
     color: var(--color-emerald) !important;
 }
 
-.hover-opacity {
-    transition: opacity 0.2s ease;
-}
 .hover-opacity:hover {
     opacity: 0.8;
 }
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
 </style>
+
+<script>
+    // Initialize image modal functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const galleryImages = document.querySelectorAll('.gallery-image');
+        const modalImage = document.getElementById('modalImage');
+        
+        // Need to check if bootstrap is available (it should be from BaseLayout)
+        let imageModal = null;
+        if (typeof window.bootstrap !== 'undefined') {
+            imageModal = new window.bootstrap.Modal(document.getElementById('imageModal'));
+        }
+
+        galleryImages.forEach(img => {
+            img.addEventListener('click', function() {
+                if (modalImage && imageModal) {
+                    modalImage.src = this.src;
+                    imageModal.show();
+                }
+            });
+        });
+    });
+</script>
