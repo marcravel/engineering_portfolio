@@ -25,8 +25,21 @@
   "youtubeId": null,
   "gallery": null
 },
-  {
+{
     "id": 3,
+    "active": 0,
+    "slug": "smart-greenhouse",
+    "category": "Automation & IoT",
+    "title": "Smart Greenhouse Control System",
+    "techStack": ["ESP32", "Fuzzy Logic", "IoT", "Web Dashboard"],
+    "description": "Developed an ESP32-based smart greenhouse controller utilizing a fuzzy logic control system for adaptive environmental regulation (Temperature, Soil moisture, Air humidity, Lighting). Features multi-sensor data acquisition, real-time actuator control, and a web-based dashboard.",
+    "image": "https://images.unsplash.com/photo-1595801362095-816cc142dce4?auto=format&fit=crop&w=800&q=80",
+    "longDescription": "A comprehensive IoT solution for agricultural environment control. Powered by an ESP32, the system reads data from multiple specialized sensors (Temperature, Soil moisture, Air humidity, and lighting levels). Instead of simple thresholds, it utilizes a Fuzzy Logic control system to make nuanced decisions, activating fans, heaters, or pumps proportionately to maintain ideal growing conditions. Data is logged and accessible via a responsive web dashboard.",
+    "youtubeId": null,
+    "gallery": null
+  },
+  {
+    "id": 4,
     "active": 1,
     "slug": "line-follower-robot",
     "category": "Robotics",
@@ -75,19 +88,6 @@
   {
     "id": 5,
     "active": 0,
-    "slug": "competition-robots",
-    "category": "Robotics",
-    "title": "Robotics Competition Robots",
-    "techStack": ["Systems Integration", "Automation"],
-    "description": "Designed and built two fully functional, competition-ready robots as part of Madagascar’s selected national team for Robotex International.",
-    "image": "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=800&q=80",
-    "longDescription": "Chosen to represent Madagascar globally, this project involved the end-to-end conceptualization, 3D modeling, electronics integration, and software development of two distinct competition robots. It required rigorous system testing to ensure reliability and compliance with international competition rules.",
-    "youtubeId": null,
-    "gallery": null
-  },
-  {
-    "id": 6,
-    "active": 0,
     "slug": "automatic-plant-watering",
     "category": "Automation & IoT",
     "title": "Automatic Plant Watering System",
@@ -96,19 +96,6 @@
     "achievements": "🥉 3rd place at the MADA ROBOT CONTEST",
     "image": "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=800&q=80",
     "longDescription": "Addressing the need for sustainable agriculture, this automated plant watering system monitors soil moisture levels in real-time. When humidity dips below a defined threshold, the microcontroller activates a localized water pump, ensuring optimal hydration without water waste.",
-    "youtubeId": null,
-    "gallery": null
-  },
-  {
-    "id": 7,
-    "active": 0,
-    "slug": "smart-greenhouse",
-    "category": "Automation & IoT",
-    "title": "Smart Greenhouse Control System",
-    "techStack": ["ESP32", "Fuzzy Logic", "IoT", "Web Dashboard"],
-    "description": "Developed an ESP32-based smart greenhouse controller utilizing a fuzzy logic control system for adaptive environmental regulation (Temperature, Soil moisture, Air humidity, Lighting). Features multi-sensor data acquisition, real-time actuator control, and a web-based dashboard.",
-    "image": "https://images.unsplash.com/photo-1595801362095-816cc142dce4?auto=format&fit=crop&w=800&q=80",
-    "longDescription": "A comprehensive IoT solution for agricultural environment control. Powered by an ESP32, the system reads data from multiple specialized sensors (Temperature, Soil moisture, Air humidity, and lighting levels). Instead of simple thresholds, it utilizes a Fuzzy Logic control system to make nuanced decisions, activating fans, heaters, or pumps proportionately to maintain ideal growing conditions. Data is logged and accessible via a responsive web dashboard.",
     "youtubeId": null,
     "gallery": null
   }
