@@ -1,0 +1,22 @@
+---
+import ProjectDetail from '../../../components/pages/ProjectDetail.astro';
+import projectsData from '../../../data/projects.json';
+
+export async function getStaticPaths() {
+  const langs = ['fr', 'tr'];
+  const paths = [];
+  for (const lang of langs) {
+    for (const project of projectsData.filter(p => p.active)) {
+      paths.push({
+        params: { lang, slug: project.slug },
+        props: { project },
+      });
+    }
+  }
+  return paths;
+}
+
+const { project } = Astro.props;
+const { lang } = Astro.params;
+---
+<ProjectDetail lang={lang} project={project} />

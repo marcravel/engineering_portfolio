@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../ProjectCard.astro';
+import projectsData from '../../data/projects.json';
+import profileImg from '../../assets/profile.jpeg';
+import { useTranslatedPath } from '../../i18n/ui';
+
+export interface Props {
+    lang: 'en' | 'fr' | 'tr';
+}
+const { lang } = Astro.props;
+const translatePath = useTranslatedPath(lang);
+
+const texts = {
+    en: {
+        portfolio: "Engineering Portfolio",
+        greeting: "Hi, I'm Marc.",
+        subtitle: "Electronics, Embedded Systems & Robotics",
+        intro: "I'm a 3rd-year Electrical and Electronics Engineering student at Selçuk University, working across robotics, computer vision, AI, and embedded systems. I'm mostly software-side (Python, C/C++, and Linux) but I get my hands on the hardware when needed.",
+        view_projects: "View Projects",
+        download_cv: "Download CV",
+        skills: "Skills Overview",
+        embedded: { title: "Embedded Systems", desc: "Microcontrollers, peripherals, timers, UART, SPI, I2C, and low-level C." },
+        electronics: { title: "Electronics", desc: "Analog & digital circuits, PCB prototyping, sensors, actuators, power stages." },
+        robotics: { title: "Robotics & Control", desc: "Line follower, maze solver, control systems, mechatronics integration." },
+        programming: { title: "Programming", desc: "C/C++, Python, basic AI/ML, scripting, tooling for engineering workflows." },
+        selected_projects: "Selected Projects",
+        view_all: "View All"
+    },
+    fr: {
+        portfolio: "Portfolio d'Ingénierie",
+        greeting: "Bonjour, je suis Marc.",
+        subtitle: "Électronique, Systèmes Embarqués & Robotique",
+        intro: "Je suis étudiant en 3ème année de génie électrique et électronique à l'Université de Selçuk, travaillant dans la robotique, la vision par ordinateur, l'IA et les systèmes embarqués. Je suis principalement orienté vers les logiciels (Python, C/C++ et Linux) mais je mets la main à la pâte avec le matériel quand c'est nécessaire.",
+        view_projects: "Voir les projets",
+        download_cv: "Télécharger CV",
+        skills: "Aperçu des compétences",
+        embedded: { title: "Systèmes Embarqués", desc: "Microcontrôleurs, périphériques, temporisateurs, UART, SPI, I2C et C bas niveau." },
+        electronics: { title: "Électronique", desc: "Circuits analogiques et numériques, prototypage de PCB, capteurs, actionneurs, étages de puissance." },
+        robotics: { title: "Robotique et Contrôle", desc: "Suiveur de ligne, robot labyrinthe, systèmes de contrôle, intégration mécatronique." },
+        programming: { title: "Programmation", desc: "C/C++, Python, IA/ML de base, scripts, outils pour flux de travail d'ingénierie." },
+        selected_projects: "Projets Sélectionnés",
+        view_all: "Voir tout"
+    },
+    tr: {
+        portfolio: "Mühendislik Portföyü",
+        greeting: "Merhaba, ben Marc.",
+        subtitle: "Elektronik, Gömülü Sistemler ve Robotik",
+        intro: "Selçuk Üniversitesi'nde 3. sınıf Elektrik ve Elektronik Mühendisliği öğrencisiyim, robotik, bilgisayarlı görme, yapay zeka ve gömülü sistemler üzerinde çalışıyorum. Çoğunlukla yazılım tarafındayım (Python, C/C++ ve Linux) ancak gerektiğinde donanımla da ilgileniyorum.",
+        view_projects: "Projeleri Gör",
+        download_cv: "CV İndir",
+        skills: "Yeteneklere Genel Bakış",
+        embedded: { title: "Gömülü Sistemler", desc: "Mikrodenetleyiciler, çevre birimleri, zamanlayıcılar, UART, SPI, I2C ve düşük seviye C." },
+        electronics: { title: "Elektronik", desc: "Analog ve dijital devreler, PCB prototipleme, sensörler, aktüatörler, güç katları." },
+        robotics: { title: "Robotik ve Kontrol", desc: "Çizgi izleyen, labirent çözen, kontrol sistemleri, mekatronik entegrasyonu." },
+        programming: { title: "Programlama", desc: "C/C++, Python, temel AI/ML, komut dosyası oluşturma, mühendislik iş akışları araçları." },
+        selected_projects: "Seçili Projeler",
+        view_all: "Tümünü Gör"
+    }
+};
+const t = texts[lang];
+---
+
+<BaseLayout title="Marc | Engineering Portfolio">
+    <!-- ===================== HERO SECTION ===================== -->
+    <header class="py-5 hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Text -->
+                <div class="col-lg-7">
+                    <p class="text-uppercase small text-muted mb-2">{t.portfolio}</p>
+                    <h1 class="display-5 fw-bold mb-3">
+                        {t.greeting}
+                    </h1>
+                    <h2 class="display-7 fw-light mb-3">
+                        {t.subtitle}
+                    </h2>
+                    <p class="lead mb-4">
+                        {t.intro}
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href={translatePath('/projects')} class="btn btn-primary">
+                            {t.view_projects}
+                        </a>
+                        <a href={`${import.meta.env.BASE_URL}/docs/cv.pdf`} class="btn btn-outline-secondary disabled"
+                            target="_blank">
+                            {t.download_cv}
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile image -->
+                <div class="col-lg-5 mt-5 mt-lg-0 d-flex justify-content-center">
+                    <div class="w-75 w-md-60 text-center">
+                        <img src={profileImg.src} class="img-fluid rounded-4 shadow-lg profile-img-hero"
+                            alt="Marc Ravelontsalama">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        @keyframes rotate3In {
+            0% {
+                transform: perspective(1000px) rotateY(90deg) scale(0.9);
+                opacity: 0;
+            }
+
+            100% {
+                transform: perspective(1000px) rotateY(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .profile-img-hero {
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15) !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: rotate3In 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .profile-img-hero:hover {
+            transform: perspective(1000px) translate3d(0, -5px, 15px);
+            box-shadow: 0 25px 45px rgba(30, 58, 138, 0.25) !important;
+        }
+    </style>
+
+    <!-- ===================== SKILLS SECTION ===================== -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="mb-4 section-title text-center">{t.skills}</h2>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{t.embedded.title}</h5>
+                            <p class="card-text small text-muted">{t.embedded.desc}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{t.electronics.title}</h5>
+                            <p class="card-text small text-muted">{t.electronics.desc}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{t.robotics.title}</h5>
+                            <p class="card-text small text-muted">{t.robotics.desc}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{t.programming.title}</h5>
+                            <p class="card-text small text-muted">{t.programming.desc}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PROJECTS PREVIEW ===================== -->
+    <section class="py-5 projects-preview-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="section-title mb-0">{t.selected_projects}</h2>
+                <a href={translatePath('/projects')} class="btn btn-sm btn-outline-primary">
+                    {t.view_all}
+                </a>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                {projectsData.filter(project => project.active).map(project => (
+                <ProjectCard project={project} lang={lang} />
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>

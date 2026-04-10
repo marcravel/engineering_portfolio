@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../ProjectCard.astro';
+import projectsData from '../../data/projects.json';
+
+export interface Props {
+    lang: 'en' | 'fr' | 'tr';
+}
+const { lang } = Astro.props;
+
+const texts = {
+    en: {
+        title: "Projects - Marc",
+        h1: "All Projects",
+        subtitle: "A comprehensive archive of my robotics, automation, and embedded systems work."
+    },
+    fr: {
+        title: "Projets - Marc",
+        h1: "Tous les projets",
+        subtitle: "Une archive complète de mes travaux en robotique, automatisation et systèmes embarqués."
+    },
+    tr: {
+        title: "Projeler - Marc",
+        h1: "Tüm Projeler",
+        subtitle: "Robotik, otomasyon ve gömülü sistemler çalışmalarımın kapsamlı bir arşivi."
+    }
+};
+
+const t = texts[lang];
+---
+
+<BaseLayout title={t.title}>
+    <section class="py-5">
+        <div class="container text-light">
+            <h1 class="display-4 fw-bold mb-3 section-title text-center">{t.h1}</h1>
+            <p class="text-center text-muted lead mb-5">{t.subtitle}</p>
+            
+            <div class="row g-4">
+                {projectsData.filter((project) => project.active).map((project) => (
+                    <ProjectCard project={project} lang={lang} />
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>

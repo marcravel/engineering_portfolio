@@ -1,0 +1,406 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export interface Props {
+    lang: 'en' | 'fr' | 'tr';
+}
+const { lang } = Astro.props;
+
+const texts = {
+    en: {
+        title: "About - Marc",
+        h1: "About Me",
+        profSummary: "Professional Summary",
+        profDesc: "I am an electrical and electronics engineering student with a strong foundation in designing and building systems at the intersection of Hardware, Embedded Systems, and Artificial Intelligence/Computer Vision. From programming robust microcontroller logic (PIC, STM32, ESP32) to developing advanced sensor architectures and automation scripts, I blend low-level electronics with high-level control algorithms to create intelligent, responsive solutions.",
+        techMatrix: "Technical Skills Matrix",
+        hwEmb: "Hardware & Embedded",
+        softAi: "Software, AI & Control",
+        toolsMulti: "Tools & Multimedia",
+        languages: "Languages",
+        langLvl: { pro: "Professional", fluent: "Fluent", native: "Native" },
+        eduHonors: "Education & Honors",
+        edu1: {
+            title: "Bachelor of Electrical and Electronics Engineering",
+            year: "2023 – Present • 3rd Year Student",
+            loc: "Faculty of Technology, Selçuk Üniversitesi | Konya, Türkiye",
+            badge: "🏆 Turkish Government Scholarship Awardee"
+        },
+        edu2: {
+            title: "High School Diploma (Scientific)",
+            year: "2017 – 2021",
+            loc: "Lycée Privé Saint Joseph | Antsirabe, Madagascar",
+            badge: "🎓 Magna Cum Laude (Mention Bien)"
+        },
+        experience: "Experiences",
+        exp1: {
+            title: "Programmer and Robotics Trainee",
+            year: "Nov 2021 – Jun 2022",
+            loc: "ITRAS Group | Antananarivo, Madagascar",
+            li1: "Developed optimized algorithms for path planning and control systems.",
+            li2: "Designed and created microcontroller-based circuit boards for controlling sensors, motors, and actuators.",
+            li3: "Built maze-solving and line-following robots demonstrating strong problem-solving and creative thinking."
+        },
+        courses: "Courses",
+        course1: {
+            title: "Modern Robotics, Course 1: Foundation of Robot Motion",
+            year: "Feb 2023",
+            loc: "MOOC | Northwestern University on Coursera",
+            li1: "Mastered fundamental robotics concepts (configuration space, motion representation, rigid body motion)",
+            li2: "Applied linear algebra principles for efficient matrix using Python",
+            li3: "Gained practical experience with CoppeliaSim robot simulator"
+        },
+        course2: {
+            title: "HTML, CSS, and Javascript for Web Developers",
+            year: "Jul 2023 - Aug 2023",
+            loc: "MOOC | Johns Hopkins University on Coursera",
+            li1: "Built responsive, mobile-friendly web pages using Bootstrap components and grid layouts"
+        },
+        course3: {
+            title: "English for Science, Technology, Engineering and Mathematics",
+            year: "May 2023",
+            loc: "MOOC | Online Professional English Network sponsored by the U.S. Department of State",
+            li1: "Enhanced language proficiency and understanding of STEM topics through a certified online course"
+        },
+        community: "Community Engagement",
+        com1: {
+            title: "Multimedia Coordinator",
+            year: "Since Dec 2025",
+            loc: "Malagasy Culture and Solidarity Association in Turkey",
+            li1: "Assuring the association's online presence and visibility",
+            li2: "Organizing events and activities to promote the association's mission and goals",
+            li3: "Building and maintaining relationships with members and stakeholders"
+        }
+    },
+    fr: {
+        title: "À propos - Marc",
+        h1: "À propos de moi",
+        profSummary: "Résumé Professionnel",
+        profDesc: "Je suis un étudiant en génie électrique et électronique avec une solide base dans la conception et la construction de systèmes à l'intersection du matériel, des systèmes embarqués et de l'intelligence artificielle / vision par ordinateur. De la programmation de la logique de microcontrôleur robuste (PIC, STM32, ESP32) au développement d'architectures de capteurs avancées et de scripts d'automatisation, je combine l'électronique de bas niveau avec des algorithmes de contrôle de haut niveau pour créer des solutions intelligentes et réactives.",
+        techMatrix: "Matrice de Compétences Techniques",
+        hwEmb: "Matériel & Embarqué",
+        softAi: "Logiciel, IA & Contrôle",
+        toolsMulti: "Outils & Multimédia",
+        languages: "Langues",
+        langLvl: { pro: "Professionnel", fluent: "Courant", native: "Maternel" },
+        eduHonors: "Éducation & Distinctions",
+        edu1: {
+            title: "Licence en Génie Électrique et Électronique",
+            year: "2023 – Présent • Étudiant en 3ème année",
+            loc: "Faculté de Technologie, Selçuk Üniversitesi | Konya, Turquie",
+            badge: "🏆 Boursier du Gouvernement Turc"
+        },
+        edu2: {
+            title: "Diplôme d'Études Secondaires (Scientifique)",
+            year: "2017 – 2021",
+            loc: "Lycée Privé Saint Joseph | Antsirabe, Madagascar",
+            badge: "🎓 Mention Bien"
+        },
+        experience: "Expériences",
+        exp1: {
+            title: "Stagiaire Programmeur et Robotique",
+            year: "Nov 2021 – Juin 2022",
+            loc: "Groupe ITRAS | Antananarivo, Madagascar",
+            li1: "Développement d'algorithmes optimisés pour la planification de trajectoire.",
+            li2: "Conception et création de circuits imprimés basés sur microcontrôleur pour le contrôle.",
+            li3: "Construction de robots résolveurs de labyrinthes et suiveurs de lignes."
+        },
+        courses: "Cours",
+        course1: {
+            title: "Robotique Moderne, Cours 1 : Fondation du mouvement des robots",
+            year: "Fév 2023",
+            loc: "MOOC | Université Northwestern sur Coursera",
+            li1: "Maîtrise des concepts fondamentaux de la robotique",
+            li2: "Application des principes d'algèbre linéaire en utilisant Python",
+            li3: "Acquisition d'une expérience pratique avec le simulateur CoppeliaSim"
+        },
+        course2: {
+            title: "HTML, CSS et Javascript pour les développeurs Web",
+            year: "Juil 2023 - Août 2023",
+            loc: "MOOC | Université Johns Hopkins sur Coursera",
+            li1: "Création de pages Web réactives à l'aide de composants Bootstrap"
+        },
+        course3: {
+            title: "Anglais pour les sciences, la technologie, l'ingénierie et les mathématiques",
+            year: "Mai 2023",
+            loc: "MOOC | Réseau professionnel d'anglais parrainé par le Département d'État américain",
+            li1: "Amélioration des compétences linguistiques"
+        },
+        community: "Engagement Communautaire",
+        com1: {
+            title: "Coordinateur Multimédia",
+            year: "Depuis Déc 2025",
+            loc: "Association de Culture et de Solidarité Malgache en Turquie",
+            li1: "Assurer la présence et la visibilité en ligne",
+            li2: "Organisation d'événements et d'activités",
+            li3: "Établir et maintenir des relations avec les membres"
+        }
+    },
+    tr: {
+        title: "Hakkımda - Marc",
+        h1: "Hakkımda",
+        profSummary: "Profesyonel Özet",
+        profDesc: "Donanım, Gömülü Sistemler ve Yapay Zeka/Bilgisayarlı Görme'nin kesişim noktasında sistem tasarlama ve kurma konusunda güçlü bir temele sahip bir elektrik ve elektronik mühendisliği öğrencisiyim. Gömülü mantığı (PIC, STM32, ESP32) programlamaktan gelişmiş sensör mimarileri geliştirmeye kadar akıllı, duyarlı çözümler yaratıyorum.",
+        techMatrix: "Teknik Yetenek Matrisi",
+        hwEmb: "Donanım ve Gömülü Sistemler",
+        softAi: "Yazılım, Yapay Zeka ve Kontrol",
+        toolsMulti: "Araçlar ve Multimedya",
+        languages: "Diller",
+        langLvl: { pro: "Profesyonel", fluent: "Akıcı", native: "Anadil" },
+        eduHonors: "Eğitim ve Başarılar",
+        edu1: {
+            title: "Elektrik ve Elektronik Mühendisliği Lisans",
+            year: "2023 – Günümüz • 3. Sınıf Öğrencisi",
+            loc: "Teknoloji Fakültesi, Selçuk Üniversitesi | Konya, Türkiye",
+            badge: "🏆 Türkiye Bursları Bursiyeri"
+        },
+        edu2: {
+            title: "Lise Diploması (Sayısal)",
+            year: "2017 – 2021",
+            loc: "Lycée Privé Saint Joseph | Antsirabe, Madagaskar",
+            badge: "🎓 Yüksek Onur Derecesi (Takdir)"
+        },
+        experience: "Deneyimler",
+        exp1: {
+            title: "Yazılım ve Robotik Stajyeri",
+            year: "Kas 2021 – Haz 2022",
+            loc: "ITRAS Group | Antananarivo, Madagaskar",
+            li1: "Yol planlaması ve kontrol sistemleri için optimize edilmiş algoritmalar geliştirdi.",
+            li2: "Sensörleri, motorları ve aktüatörleri kontrol etmek için devre kartları oluşturdu.",
+            li3: "Labirent çözen ve çizgi izleyen robotlar inşa etti."
+        },
+        courses: "Kurslar",
+        course1: {
+            title: "Modern Robotik, Kurs 1: Robot Hareketinin Temeli",
+            year: "Şub 2023",
+            loc: "MOOC | Northwestern University, Coursera",
+            li1: "Temel robotik kavramlarına (konfigürasyon uzayı) hakim olundu",
+            li2: "Doğrusal cebir ilkeleri Python kullanarak uygulandı",
+            li3: "CoppeliaSim robot simülatörü kullanıldı"
+        },
+        course2: {
+            title: "Web Geliştiricileri İçin HTML, CSS ve Javascript",
+            year: "Tem 2023 - Ağu 2023",
+            loc: "MOOC | Johns Hopkins University, Coursera",
+            li1: "Bootstrap bileşenleri kullanarak duyarlı web sayfaları oluşturuldu"
+        },
+        course3: {
+            title: "Mühendislik ve Matematik için İngilizce",
+            year: "May 2023",
+            loc: "MOOC | ABD Dışişleri Bakanlığı sponsorluğunda",
+            li1: "Çevrimiçi bir kurs aracılığıyla STEM konularının anlaşılması ve dil yeterliliği artırıldı"
+        },
+        community: "Topluluk Katılımı",
+        com1: {
+            title: "Multimedya Koordinatörü",
+            year: "Ara 2025'ten beri",
+            loc: "Türkiye'de Malgaş Kültür ve Dayanışma Derneği",
+            li1: "Derneğin çevrimiçi varlığının sağlanması",
+            li2: "Misyon ve hedefleri teşvik edici etkinlikleri organize etme",
+            li3: "Üyeler ve paydaşlarla ilişkiler kurma"
+        }
+    }
+};
+
+const t = texts[lang];
+---
+
+<BaseLayout title={t.title}>
+    <section class="py-5">
+        <div class="container text-light">
+            <h1 class="display-4 fw-bold mb-5 section-title">{t.h1}</h1>
+            
+            <div class="row g-5">
+                <!-- Left Column: Bio & Skills -->
+                <div class="col-lg-7">
+                    <!-- Professional Summary -->
+                    <div class="mb-5">
+                        <h3 class="h4 mb-3" style="color: var(--color-emerald);">{t.profSummary}</h3>
+                        <p class="lead" style="color: var(--color-text-muted);">
+                            {t.profDesc}
+                        </p>
+                    </div>
+
+                    <!-- Technical Skills Matrix -->
+                    <div class="mb-5">
+                        <h3 class="h4 mb-4" style="color: var(--color-emerald);">{t.techMatrix}</h3>
+                        
+                        <div class="mb-4">
+                            <h5 class="h6 text-uppercase text-secondary mb-2">{t.hwEmb}</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">PIC</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">STM32</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">ESP32</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">Arduino</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">PCB Design</span>
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2">Circuit Design</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="h6 text-uppercase text-secondary mb-2">{t.softAi}</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">C/C++</span>
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">Python</span>
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">OpenCV</span>
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">Fuzzy Logic</span>
+                                <span class="badge bg-dark-subtle border border-success text-success px-3 py-2">ROS2</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="h6 text-uppercase text-secondary mb-2">{t.toolsMulti}</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">Git</span>
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">HTML/CSS/JS</span>
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">Linux</span>
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">Video Editing</span>
+                                <span class="badge bg-dark-subtle border border-info text-info px-3 py-2">YouTube "Code & Copper" Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="mb-5">
+                        <h3 class="h4 mb-3" style="color: var(--color-emerald);">{t.languages}</h3>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex align-items-center text-light">
+                                <strong class="text-white">English</strong>
+                                <div class="flex-grow-1 border-bottom border-secondary mx-3" style="opacity: 0.3; border-bottom-style: dashed !important;"></div>
+                                <span>{t.langLvl.pro}</span>
+                            </div>
+                            <div class="d-flex align-items-center text-light">
+                                <strong class="text-white">French</strong>
+                                <div class="flex-grow-1 border-bottom border-secondary mx-3" style="opacity: 0.3; border-bottom-style: dashed !important;"></div>
+                                <span>{t.langLvl.fluent}</span>
+                            </div>
+                            <div class="d-flex align-items-center text-light">
+                                <strong class="text-white">Turkish</strong>
+                                <div class="flex-grow-1 border-bottom border-secondary mx-3" style="opacity: 0.3; border-bottom-style: dashed !important;"></div>
+                                <span>{t.langLvl.fluent}</span>
+                            </div>
+                            <div class="d-flex align-items-center text-light">
+                                <strong class="text-white">German</strong>
+                                <div class="flex-grow-1 border-bottom border-secondary mx-3" style="opacity: 0.3; border-bottom-style: dashed !important;"></div>
+                                <span>A1</span>
+                            </div>
+                            <div class="d-flex align-items-center text-light">
+                                <strong class="text-white">Malagasy</strong>
+                                <div class="flex-grow-1 border-bottom border-secondary mx-3" style="opacity: 0.3; border-bottom-style: dashed !important;"></div>
+                                <span>{t.langLvl.native}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Education & Experience -->
+                <div class="col-lg-5">
+                    <h3 class="h4 mb-4" style="color: var(--color-emerald);">{t.eduHonors}</h3>
+                    
+                    <!-- Education Card 1 -->
+                    <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">{t.edu1.title}</h5>
+                        <p class="text-success mb-2 small fw-semibold">{t.edu1.year}</p>
+                        <p class="text-light opacity-75 small mb-2">{t.edu1.loc}</p>
+                        <div class="mt-2">
+                            <span class="badge bg-success bg-opacity-25 text-success border border-success px-2 py-1">{t.edu1.badge}</span>
+                        </div>
+                    </div>
+
+                    <!-- Education Card 2 -->
+                    <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">{t.edu2.title}</h5>
+                        <p class="text-success mb-2 small fw-semibold">{t.edu2.year}</p>
+                        <p class="text-light opacity-75 small mb-2">{t.edu2.loc}</p>
+                        <div class="mt-2">
+                            <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary px-2 py-1">{t.edu2.badge}</span>
+                        </div>
+                    </div>
+
+                    <h3 class="h4 mb-4 mt-5" style="color: var(--color-emerald);">{t.experience}</h3>
+                    
+                    <!-- Experience Card 1 -->
+                    <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">{t.exp1.title}</h5>
+                        <p class="text-success mb-2 small fw-semibold">{t.exp1.year}</p>
+                        <p class="text-light opacity-75 small mb-3">{t.exp1.loc}</p>
+                        <ul class="small text-light opacity-75 mb-0 ps-3">
+                            <li class="mb-1">{t.exp1.li1}</li>
+                            <li class="mb-1">{t.exp1.li2}</li>
+                            <li>{t.exp1.li3}</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="h4 mb-4 mt-5" style="color: var(--color-emerald);">{t.courses}</h3>
+                    
+                    <!-- Courses card 1-->
+                    <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">{t.course1.title}</h5>
+                        <p class="text-success mb-2 small fw-semibold">{t.course1.year}</p>
+                        <p class="text-light opacity-75 small mb-3">{t.course1.loc}</p>
+                        <ul class="small text-light opacity-75 mb-0 ps-3">
+                            <li class="mb-1">{t.course1.li1}</li>
+                            <li class="mb-1">{t.course1.li2}</li>
+                            <li>{t.course1.li3}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Courses card 2-->
+                    <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">{t.course2.title}</h5>
+                        <p class="text-success mb-2 small fw-semibold">{t.course2.year}</p>
+                        <p class="text-light opacity-75 small mb-3">{t.course2.loc}</p>
+                        <ul class="small text-light opacity-75 mb-0 ps-3">
+                            <li class="mb-1">{t.course2.li1}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Courses card 3-->
+                     <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">{t.course3.title}</h5>
+                        <p class="text-success mb-2 small fw-semibold">{t.course3.year}</p>
+                        <p class="text-light opacity-75 small mb-3">{t.course3.loc}</p>
+                        <ul class="small text-light opacity-75 mb-0 ps-3">
+                            <li class="mb-1">{t.course3.li1}</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="h4 mb-4 mt-5" style="color: var(--color-emerald);">{t.community}</h3>
+                    
+                    <!-- Community card 1-->
+                    <div class="card bg-dark-subtle border-secondary mb-4 p-4 shadow-sm edu-card">
+                        <h5 class="text-white fw-bold mb-1">{t.com1.title}</h5>
+                        <p class="text-success mb-2 small fw-semibold">{t.com1.year}</p>
+                        <p class="text-light opacity-75 small mb-3">{t.com1.loc}</p>
+                        <ul class="small text-light opacity-75 mb-0 ps-3">
+                            <li class="mb-1">{t.com1.li1}</li>
+                            <li class="mb-1">{t.com1.li2}</li>
+                            <li class="mb-1">{t.com1.li3}</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+/* Hover Effects for Cards matching ProjectCards */
+.edu-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-dark-secondary) !important;
+}
+
+.edu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover) !important;
+    border-color: rgba(16, 185, 129, 0.3) !important;
+    border-width: 2px !important;
+}
+
+/* Base adjustment for the bg-dark-subtle utility to fit our theme better */
+.bg-dark-subtle {
+    background-color: var(--color-bg-dark-secondary) !important;
+}
+</style>

@@ -1,10 +1,16 @@
 ---
 import '../styles/global.css';
+import { getLangFromUrl, useTranslations, useTranslatedPath, getRouteFromUrl, languages, flags } from '../i18n/ui';
+
 const { title = "Marc | Engineering Portfolio" } = Astro.props;
 const currentPath = Astro.url.pathname;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const route = getRouteFromUrl(Astro.url);
 ---
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang={lang} data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -24,31 +30,75 @@ const currentPath = Astro.url.pathname;
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
         rel="stylesheet">
+        
+    <!-- Client-side Routing and Language Auto-Detection -->
+    <script is:inline>
+        (function() {
+            try {
+                const storedLang = localStorage.getItem('preferredLang');
+                const browserLang = navigator.language.split('-')[0];
+                const supportedLangs = ['en', 'fr', 'tr'];
+                const defaultLang = 'en';
+
+                const currentPath = window.location.pathname;
+                const basePath = '/engineering_portfolio';
+                let pathWithoutBase = currentPath.replace(basePath, '');
+                if(!pathWithoutBase.startsWith('/')) pathWithoutBase = '/' + pathWithoutBase;
+                
+                const currentDocLang = supportedLangs.find(l => pathWithoutBase.startsWith(`/${l}/`) || pathWithoutBase === `/${l}`) || defaultLang;
+
+                if (!storedLang) {
+                    const targetLang = supportedLangs.includes(browserLang) ? browserLang : defaultLang;
+                    if (targetLang !== defaultLang && currentDocLang === defaultLang && (pathWithoutBase === '/' || pathWithoutBase === '')) {
+                        localStorage.setItem('preferredLang', targetLang);
+                        window.location.replace(basePath + '/' + targetLang + '/');
+                    }
+                }
+            } catch(e) {}
+        })();
+    </script>
 </head>
 
 <body>
     <!-- ===================== NAVBAR ===================== -->
     <nav id="main-nav" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href={`${import.meta.env.BASE_URL}`}>Marc</a>
+            <a class="navbar-brand fw-bold" href={translatePath('/')}>Marc</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                 aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="mainNavbar">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
                     <li class="nav-item">
-                        <a class:list={['nav-link', { active: currentPath === import.meta.env.BASE_URL || currentPath === import.meta.env.BASE_URL + '/' }]} href={`${import.meta.env.BASE_URL}`}>Home</a>
+                        <a class:list={['nav-link', { active: route === '/' }]} href={translatePath('/')}>{t('nav.home')}</a>
                     </li>
                     <li class="nav-item">
-                        <a class:list={['nav-link', { active: currentPath.includes('/about') }]} href={`${import.meta.env.BASE_URL}/about`}>About</a>
+                        <a class:list={['nav-link', { active: route.includes('/about') }]} href={translatePath('/about')}>{t('nav.about')}</a>
                     </li>
                     <li class="nav-item">
-                        <a class:list={['nav-link', { active: currentPath.includes('/projects') }]} href={`${import.meta.env.BASE_URL}/projects`}>Projects</a>
+                        <a class:list={['nav-link', { active: route.includes('/projects') }]} href={translatePath('/projects')}>{t('nav.projects')}</a>
                     </li>
                     <li class="nav-item">
-                        <a class:list={['nav-link', { active: currentPath.includes('/contacts') }]} href={`${import.meta.env.BASE_URL}/contacts`}>Contact</a>
+                        <a class:list={['nav-link', { active: route.includes('/contacts') }]} href={translatePath('/contacts')}>{t('nav.contact')}</a>
+                    </li>
+                    
+                    <!-- Language Switcher -->
+                    <li class="nav-item dropdown ms-lg-3 mt-2 mt-lg-0">
+                        <a class="nav-link dropdown-toggle badge bg-secondary bg-opacity-25 text-light px-3 py-2 rounded-pill fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 60px;">
+                            {flags[lang]}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                            {Object.entries(languages).map(([code, name]) => (
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href={translatePath(route, code as keyof typeof languages)} onclick={`localStorage.setItem('preferredLang', '${code}')`}>
+                                        <span class="fs-5">{flags[code as keyof typeof languages]}</span>
+                                        <span>{name}</span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -65,10 +115,10 @@ const currentPath = Astro.url.pathname;
             </div>
             <div>
                 <a href="https://github.com/marcravel" target="_blank" rel="noopener noreferrer"
-                    class="text-decoration-none text-light-50 me-2">GitHub</a>
+                    class="text-decoration-none text-light-50 me-2">{t('footer.github')}</a>
                 <a href="https://www.linkedin.com/in/marc-anjaniaina-ravelontsalama/" target="_blank"
-                    rel="noopener noreferrer" class="text-decoration-none text-light-50 me-2">LinkedIn</a>
-                <a href={`${import.meta.env.BASE_URL}contacts`} class="text-decoration-none text-light-50">Contact</a>
+                    rel="noopener noreferrer" class="text-decoration-none text-light-50 me-2">{t('footer.linkedin')}</a>
+                <a href={translatePath('/contacts')} class="text-decoration-none text-light-50">{t('footer.contact')}</a>
             </div>
         </div>
     </footer>

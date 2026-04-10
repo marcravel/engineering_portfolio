@@ -1,38 +1,91 @@
 [
   {
-  "id": 1,
-  "active": 0,
-  "slug": "real-time-defect-detection",
-  "category": "AI & Computer Vision",
-  "title": "Real-Time Automated Defect Detection Pipeline",
-  "techStack": ["Python", "PyTorch", "OpenCV", "CNN Architecture", "System Profiling"],
-  "description": "Developed a real-time computer vision system for manufacturing quality control. Built an end-to-end pipeline from data augmentation to live webcam inference, emphasizing computational profiling for future edge deployment.",
-  "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-  "longDescription": "This project establishes a foundational architecture for industrial visual inspection. Utilizing a public dataset of manufacturing anomalies (such as PCB soldering defects or metal casting flaws), a custom Convolutional Neural Network (CNN) and YOLO-based models were trained using PyTorch. The system performs live inference via OpenCV. To ensure readiness for constrained embedded hardware, the project strictly profiles engineering metrics: tracking model footprint in megabytes, calculating floating-point operations per second (FLOPs), and benchmarking inference latency across CPU and GPU execution.",
-  "youtubeId": null,
-  "gallery": null
+    "id": 1,
+    "active": 0,
+    "slug": "real-time-defect-detection",
+    "category": {
+      "en": "AI & Computer Vision",
+      "fr": "IA & Vision par Ordinateur",
+      "tr": "Yapay Zeka ve Bilgisayarlı Görme"
+    },
+    "title": {
+      "en": "Real-Time Automated Defect Detection Pipeline",
+      "fr": "Pipeline de détection automatisée de défauts en temps réel",
+      "tr": "Gerçek Zamanlı Otomatik Hata Tespiti"
+    },
+    "techStack": [
+      "Python",
+      "PyTorch",
+      "OpenCV",
+      "CNN Architecture",
+      "System Profiling"
+    ],
+    "description": {
+      "en": "Developed a real-time computer vision system for manufacturing quality control. Built an end-to-end pipeline from data augmentation to live webcam inference, emphasizing computational profiling for future edge deployment.",
+      "fr": "Développement d'un système de vision par ordinateur en temps réel pour le contrôle qualité dans la fabrication. Construction d'un pipeline de l'augmentation des données à l'inférence par webcam.",
+      "tr": "Üretim kalite kontrolü için gerçek zamanlı bir bilgisayarlı görme sistemi geliştirildi. Veri artırmadan canlı web kamerası çıkarımına kadar uçtan uca bir boru hattı oluşturuldu."
+    },
+    "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+    "longDescription": "This project establishes a foundational architecture for industrial visual inspection. Utilizing a public dataset of manufacturing anomalies (such as PCB soldering defects or metal casting flaws), a custom Convolutional Neural Network (CNN) and YOLO-based models were trained using PyTorch. The system performs live inference via OpenCV. To ensure readiness for constrained embedded hardware, the project strictly profiles engineering metrics: tracking model footprint in megabytes, calculating floating-point operations per second (FLOPs), and benchmarking inference latency across CPU and GPU execution.",
+    "youtubeId": null,
+    "gallery": null
   },
   {
-  "id": 2,
-  "active": 0,
-  "slug": "ros2-autonomous-navigation",
-  "category": "Robotics & Autonomous Systems",
-  "title": "ROS2 Autonomous Navigation & SLAM System",
-  "techStack": ["ROS2", "Gazebo", "Nav2 Stack", "SLAM Toolbox", "URDF"],
-  "description": "Engineered an autonomous mobile robot simulation in ROS2 and Gazebo. Implemented full SLAM mapping, sensor simulation, and dynamic path planning.",
-  "image": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/6091875/starship-delivery-robot-029.0.jpg?quality=90&strip=all&crop=0%2C0%2C100%2C100&w=2400",
-  "longDescription": "This project demonstrates high-level robotic system architecture and autonomous navigation within a simulated environment. A differential drive robot was modeled using URDF and deployed in Gazebo, complete with simulated LiDAR and odometry sensors. Simultaneous Localization and Mapping (SLAM) was executed via slam_toolbox to generate accurate 2D occupancy grids. The ROS2 Nav2 stack was configured to handle global path planning (A*/Dijkstra) and local obstacle avoidance. The architecture focuses on node separation, topic communication, and system profiling using rqt_graph.",
-  "youtubeId": null,
-  "gallery": null
-},
-{
+    "id": 2,
+    "active": 0,
+    "slug": "ros2-autonomous-navigation",
+    "category": {
+      "en": "Robotics & Autonomous Systems",
+      "fr": "Robotique & Systèmes Autonomes",
+      "tr": "Robotik ve Otonom Sistemler"
+    },
+    "title": {
+      "en": "ROS2 Autonomous Navigation & SLAM System",
+      "fr": "Navigation Autonome ROS2 & Système SLAM",
+      "tr": "ROS2 Otonom Navigasyon ve SLAM Sistemi"
+    },
+    "techStack": [
+      "ROS2",
+      "Gazebo",
+      "Nav2 Stack",
+      "SLAM Toolbox",
+      "URDF"
+    ],
+    "description": {
+      "en": "Engineered an autonomous mobile robot simulation in ROS2 and Gazebo. Implemented full SLAM mapping, sensor simulation, and dynamic path planning.",
+      "fr": "Conception d'une simulation de robot mobile autonome dans ROS2 et Gazebo. Mappage SLAM complet, simulation de capteurs et planification de trajectoire dynamique.",
+      "tr": "ROS2 ve Gazebo'da otonom bir mobil robot simülasyonu tasarlandı. Tam SLAM haritalama, sensör simülasyonu ve dinamik yol planlaması uygulandı."
+    },
+    "image": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/6091875/starship-delivery-robot-029.0.jpg?quality=90&strip=all&crop=0%2C0%2C100%2C100&w=2400",
+    "longDescription": "This project demonstrates high-level robotic system architecture and autonomous navigation within a simulated environment. A differential drive robot was modeled using URDF and deployed in Gazebo, complete with simulated LiDAR and odometry sensors. Simultaneous Localization and Mapping (SLAM) was executed via slam_toolbox to generate accurate 2D occupancy grids. The ROS2 Nav2 stack was configured to handle global path planning (A*/Dijkstra) and local obstacle avoidance. The architecture focuses on node separation, topic communication, and system profiling using rqt_graph.",
+    "youtubeId": null,
+    "gallery": null
+  },
+  {
     "id": 3,
     "active": 0,
     "slug": "smart-greenhouse",
-    "category": "Automation & IoT",
-    "title": "Smart Greenhouse Control System",
-    "techStack": ["ESP32", "Fuzzy Logic", "IoT", "Web Dashboard"],
-    "description": "Developed an ESP32-based smart greenhouse controller utilizing a fuzzy logic control system for adaptive environmental regulation (Temperature, Soil moisture, Air humidity, Lighting). Features multi-sensor data acquisition, real-time actuator control, and a web-based dashboard.",
+    "category": {
+      "en": "Automation & IoT",
+      "fr": "Automatisation & IoT",
+      "tr": "Otomasyon ve Nesnelerin İnterneti"
+    },
+    "title": {
+      "en": "Smart Greenhouse Control System",
+      "fr": "Système de Contrôle Intelligent pour Serre",
+      "tr": "Akıllı Sera Kontrol Sistemi"
+    },
+    "techStack": [
+      "ESP32",
+      "Fuzzy Logic",
+      "IoT",
+      "Web Dashboard"
+    ],
+    "description": {
+      "en": "Developed an ESP32-based smart greenhouse controller utilizing a fuzzy logic control system for adaptive environmental regulation. Features a web-based dashboard.",
+      "fr": "Développement d'un contrôleur de serre intelligent basé sur ESP32 utilisant la logique floue pour une régulation environnementale adaptative.",
+      "tr": "Uyarlanabilir çevresel düzenleme için bulank mantık kullanan ESP32 tabanlı akıllı sera kontrol cihazı geliştirildi."
+    },
     "image": "https://images.unsplash.com/photo-1595801362095-816cc142dce4?auto=format&fit=crop&w=800&q=80",
     "longDescription": "A comprehensive IoT solution for agricultural environment control. Powered by an ESP32, the system reads data from multiple specialized sensors (Temperature, Soil moisture, Air humidity, and lighting levels). Instead of simple thresholds, it utilizes a Fuzzy Logic control system to make nuanced decisions, activating fans, heaters, or pumps proportionately to maintain ideal growing conditions. Data is logged and accessible via a responsive web dashboard.",
     "youtubeId": null,
@@ -42,13 +95,37 @@
     "id": 4,
     "active": 1,
     "slug": "line-follower-robot",
-    "category": "Robotics",
-    "title": "High-Speed Line Follower Robot",
-    "techStack": ["Embedded C", "MPLAB XC8", "Microcontrollers"],
-    "description": "Designed and programmed a fast autonomous line follower. Implemented efficient control logic for high-speed path tracking.",
-    "achievements": "🥇 1st place + 2 Gold Medals at the Madagascar Cup of Robotics",
+    "category": {
+      "en": "Robotics",
+      "fr": "Robotique",
+      "tr": "Robotik"
+    },
+    "title": {
+      "en": "High-Speed Line Follower Robot",
+      "fr": "Robot Suiveur de Ligne à Grande Vitesse",
+      "tr": "Yüksek Hızlı Çizgi İzleyen Robot"
+    },
+    "techStack": [
+      "Embedded C",
+      "MPLAB XC8",
+      "Microcontrollers"
+    ],
+    "description": {
+      "en": "Designed and programmed a fast autonomous line follower. Implemented efficient control logic for high-speed path tracking.",
+      "fr": "Conception et programmation d'un robot suiveur de ligne autonome rapide. Lmplementation d'une logique de contrôle efficace pour un suivi à grande vitesse.",
+      "tr": "Hızlı, otonom bir çizgi izleyici tasarlandı ve programlandı. Yüksek hızlı yol takibi için verimli kontrol mantığı uygulandı."
+    },
+    "achievements": {
+      "en": "🥇 1st place + 2 Gold Medals at the Madagascar Cup of Robotics",
+      "fr": "🥇 1ère place + 2 Médailles d'Or à la Coupe de Robotique de Madagascar",
+      "tr": "🥇 Madagaskar Robotik Kupası'nda 1.lik ve 2 Altın Madalya"
+    },
     "image": "img/projects/line-follower-robot/line-follower-bots.jpg",
-    "longDescription": "/docs/high_speed_line_follower.txt",
+    "longDescription": {
+      "en": "/docs/high_speed_line_follower.txt",
+      "fr": "/docs/high_speed_line_follower_fr.txt",
+      "tr": "/docs/high_speed_line_follower_tr.txt"
+    },
     "youtubeId": "dQw4w9WgXcQ",
     "gallery": [
       "img/projects/line-follower-robot/line-follower-bots.jpg",
@@ -73,27 +150,61 @@
     ]
   },
   {
-    "id": 4,
+    "id": 5,
     "active": 0,
     "slug": "maze-solver-robot",
-    "category": "Robotics",
-    "title": "Maze Solver Robot",
-    "techStack": ["Embedded Control", "Sensor Logic"],
-    "description": "Built an autonomous robot capable of navigating and solving maze paths. Developed navigation algorithms and sensor-based decision logic for real-time movement.",
+    "category": {
+      "en": "Robotics",
+      "fr": "Robotique",
+      "tr": "Robotik"
+    },
+    "title": {
+      "en": "Maze Solver Robot",
+      "fr": "Robot Résolveur de Labyrinthe",
+      "tr": "Labirent Çözen Robot"
+    },
+    "techStack": [
+      "Embedded Control",
+      "Sensor Logic"
+    ],
+    "description": {
+      "en": "Built an autonomous robot capable of navigating and solving maze paths. Developed navigation algorithms and sensor-based decision logic for real-time movement.",
+      "fr": "Construction d'un robot autonome capable de naviguer et de résoudre des labyrinthes. Développement d'algorithmes de navigation.",
+      "tr": "Labirent yollarında gezinebilen ve çözebilen otonom bir robot yapıldı. Gerçek zamanlı hareket için sensör tabanlı karar mantığı geliştirildi."
+    },
     "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
     "longDescription": "The Maze Solver Robot is an autonomous vehicle designed to find the shortest path from a starting point to the center of a maze. It relies on a combination of ultrasonic and infrared sensors for wall detection and distance measurement. The internal logic implements popular algorithms like Wall Follower or Flood Fill to guarantee a solution.",
     "youtubeId": null,
     "gallery": null
   },
   {
-    "id": 5,
+    "id": 6,
     "active": 0,
     "slug": "automatic-plant-watering",
-    "category": "Automation & IoT",
-    "title": "Automatic Plant Watering System",
-    "techStack": ["Control Logic", "Soil Moisture Sensing"],
-    "description": "Designed an automated irrigation system based on soil moisture sensing, implementing control logic for efficient water usage.",
-    "achievements": "🥉 3rd place at the MADA ROBOT CONTEST",
+    "category": {
+      "en": "Automation & IoT",
+      "fr": "Automatisation & IoT",
+      "tr": "Otomasyon ve Nesnelerin İnterneti"
+    },
+    "title": {
+      "en": "Automatic Plant Watering System",
+      "fr": "Système d'Arrosage Automatique",
+      "tr": "Otomatik Bitki Sulama Sistemi"
+    },
+    "techStack": [
+      "Control Logic",
+      "Soil Moisture Sensing"
+    ],
+    "description": {
+      "en": "Designed an automated irrigation system based on soil moisture sensing, implementing control logic for efficient water usage.",
+      "fr": "Conception d'un système d'irrigation automatisé basé sur la détection de l'humidité du sol.",
+      "tr": "Verimli su kullanımı için kontrol mantığı uygulayarak, toprak nemi algılamaya dayalı otomatik bir sulama sistemi tasarlandı."
+    },
+    "achievements": {
+      "en": "🥉 3rd place at the MADA ROBOT CONTEST",
+      "fr": "🥉 3ème place au MADA ROBOT CONTEST",
+      "tr": "🥉 MADA ROBOT YARIŞMASI'nda 3.lük"
+    },
     "image": "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?auto=format&fit=crop&w=800&q=80",
     "longDescription": "Addressing the need for sustainable agriculture, this automated plant watering system monitors soil moisture levels in real-time. When humidity dips below a defined threshold, the microcontroller activates a localized water pump, ensuring optimal hydration without water waste.",
     "youtubeId": null,

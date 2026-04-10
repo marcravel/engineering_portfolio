@@ -1,0 +1,15 @@
+Bu proje, Madagaskar'ın başkenti Antananarivo'da bulunan bir bilişim şirketi olan Itras Group'taki robotik stajımın bir parçasıydı. Şirket, mühendis adaylarının şirketteki deneyimli profesyonellerle birlikte robotik öğrenip pratik yapabileceği MTH (Malagasy Technology Hub) adlı bir robotik kulübü yönetmektedir.
+
+Mart 2022'de, STEM4GOOD Madagaskar adlı kuruluş 2022 Madagaskar Robotik Kupası'nı duyurdu. Yarışmaya MTH Robotik Kulübü olarak katıldık.
+
+Yarışma, robotun beyni olarak kullanılan mikrodenetleyiciye göre iki kategoriye ayrılmıştı: Arduino tabanlı çizgi izleyen ve Arduino dışı tabanlı çizgi izleyen. Her iki kategori için de robotlarımızı Pololu'nun Romi 2 tekerlekli şasisi üzerine inşa ettik ve bunu bir motor sürücüsü, motor başlıkları, güç devresi, pil terminalleri ve hassas hareket geri bildirimi için önceden monte edilmiş enkoderli motorları barındıran Romi 32U4 Kontrol Kartı ile eşleştirdik.
+
+Her iki robot da çizgi algılama sistemi olarak 4 mm aralıklı Yüksek Yoğunluklu (HD) QTR Dizileri kullandı. Bu yansıma sensörleri, beyaz zemin üzerindeki siyah bir çizgi gibi yüzey yansıtıcılığındaki değişiklikleri algılamak için mükemmel şekilde uygun hale getiren doğrusal bir kızılötesi yayıcı/fototransistör çifti dizisine sahiptir. Tamamen bağımsız çıkışlar ve kompakt, yüksek yoğunluklu boşluklandırmayla, rekabetçi hızlar için kritik olan hızlı ve doğru bir çizgi algılaması elde etmemizi sağladılar.
+
+Arduino tabanlı kategori için beyin olarak bir Arduino Mega kullandık, Arduino dışı kategori ise bir PIC16F1938 mikrodenetleyici ile desteklendi. Her iki robot da hız ve yönlendirme tepkisini ince bir şekilde ayarlamamıza olanak tanıyan bir PID algoritması kullanılarak kontrol edildi. Ayrıca sensör dizilerini barındıran baskılı devre kartlarını da (PCB) özel olarak tasarladık; PIC tabanlı robot durumunda, mikrodenetleyicinin kendisi de doğrudan bu karta entegre edildi.
+
+Her iki robot da kendi kategorilerinde hız rekoru kırarak bize iki Altın Madalya ve yarışmada genel klasmanda 1.lik kazandırdı.
+
+3.lük kazandığım önceki bir yarışmanın ardından, Itras Group bana robotik kulüpleri MTH'ye katılma şansı verdi ve 2022 Madagaskar Robotik Kupası da bu fırsatın bir sonucu olarak gerçekleşti.
+
+Şirketin mühendislerinin rehberliğinde hem elektronikte hem de düşük seviyeli programlamada sağlam bir temel kazandım. Elektron hareketlerinin temelleri ve devre tasarımından, PCB tasarımı ve düzeni tekniklerine, PID kontrol algoritmalarına ve labirent çözme stratejilerine kadar. Teknik bilginin ötesinde, bu proje mühendis olarak çalışma şeklimi de şekillendirdi: baskı altında ekip arkadaşlarımla yakından çalışmamı, donanım veya kod beklendiği gibi çalışmadığında eleştirel düşünmemi ve çözümler bulmak için hızlı bir şekilde yinelememi gerektirdi. Bana güvenilir çalışan bir şey inşa etmenin nadiren düz bir çizgi olduğunu; azmin, merakın ve iyi bir ekip çalışmasının büyük fark yarattığını öğretti.

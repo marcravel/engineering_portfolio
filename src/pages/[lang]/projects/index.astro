@@ -1,0 +1,13 @@
+---
+import ProjectsList from '../../../components/pages/ProjectsList.astro';
+
+export function getStaticPaths() {
+    return [
+        { params: { lang: 'fr' } },
+        { params: { lang: 'tr' } },
+    ];
+}
+
+const { lang } = Astro.params;
+---
+<ProjectsList lang={lang} />
