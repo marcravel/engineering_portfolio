@@ -15,18 +15,22 @@ import profileImg from '../assets/my_profile.jpg';
                 <div class="col-lg-7">
                     <p class="text-uppercase small text-muted mb-2">Engineering Portfolio</p>
                     <h1 class="display-5 fw-bold mb-3">
-                        Hi, I'm Marc.<br>
-                        Electronics, Embedded Systems & Robotics.
+                        Hi, I'm Marc.
                     </h1>
+                    <h2 class="display-7 fw-light mb-3">
+                        Electronics, Embedded Systems & Robotics
+                    </h2>
                     <p class="lead mb-4">
-                        I design and build systems that connect hardware, software, and automation:
-                        from microcontrollers and sensors to robotics and control.
+                        I'm a 3rd-year Electrical and Electronics Engineering student at Selçuk University, working
+                        across robotics, computer vision, AI, and embedded systems. I'm mostly software-side (Python,
+                        C/C++, and Linux) but I get my hands on the hardware when needed.
                     </p>
                     <div class="d-flex flex-wrap gap-2">
                         <a href={`${import.meta.env.BASE_URL}/projects`}class="btn btn-primary">
                             View Projects
                         </a>
-                        <a href={`${import.meta.env.BASE_URL}/docs/cv.pdf`} class="btn btn-outline-secondary disabled" target="_blank">
+                        <a href={`${import.meta.env.BASE_URL}/docs/cv.pdf`} class="btn btn-outline-secondary disabled"
+                            target="_blank">
                             Download CV
                         </a>
                     </div>
@@ -35,7 +39,8 @@ import profileImg from '../assets/my_profile.jpg';
                 <!-- Profile image -->
                 <div class="col-lg-5 mt-5 mt-lg-0 d-flex justify-content-center">
                     <div class="w-75 w-md-60 text-center">
-                        <img src={profileImg.src} class="img-fluid rounded-4 shadow-lg profile-img-hero" alt="Marc Ravelontsalama">
+                        <img src={profileImg.src} class="img-fluid rounded-4 shadow-lg profile-img-hero"
+                            alt="Marc Ravelontsalama">
                     </div>
                 </div>
             </div>
@@ -48,6 +53,7 @@ import profileImg from '../assets/my_profile.jpg';
             box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15) !important;
             transition: transform 0.3s ease;
         }
+
         .profile-img-hero:hover {
             transform: translateY(-5px);
         }
@@ -118,7 +124,7 @@ import profileImg from '../assets/my_profile.jpg';
 
             <div class="row g-4 justify-content-center">
                 {projectsData.filter(project => project.active).map(project => (
-                    <ProjectCard project={project} />
+                <ProjectCard project={project} />
                 ))}
             </div>
         </div>
