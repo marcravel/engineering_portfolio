@@ -5,10 +5,12 @@ import fs from 'fs/promises';
 import path from 'path';
 
 export async function getStaticPaths() {
-  return projectsData.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
+  return projectsData
+    .filter((project) => project.active)
+    .map((project) => ({
+      params: { slug: project.slug },
+      props: { project },
+    }));
 }
 
 const { project } = Astro.props;

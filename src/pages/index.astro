@@ -117,7 +117,7 @@ import profileImg from '../assets/my_profile.jpg';
             </div>
 
             <div class="row g-4 justify-content-center">
-                {projectsData.map(project => (
+                {projectsData.filter(project => project.active).map(project => (
                     <ProjectCard project={project} />
                 ))}
             </div>

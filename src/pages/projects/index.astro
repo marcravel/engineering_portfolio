@@ -11,7 +11,7 @@ import projectsData from '../../data/projects.json';
             <p class="text-center text-muted lead mb-5">A comprehensive archive of my robotics, automation, and embedded systems work.</p>
             
             <div class="row g-4">
-                {projectsData.map((project) => (
+                {projectsData.filter((project) => project.active).map((project) => (
                     <ProjectCard project={project} />
                 ))}
             </div>
