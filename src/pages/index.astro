@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PCBTrace from '../components/PCBTrace.astro';
 import projectsData from '../data/projects.json';
-import profileImg from '../assets/my_profile.jpg';
+import profileImg from '../assets/profile.jpeg';
 ---
 
 <BaseLayout title="Marc | Engineering Portfolio">
@@ -48,14 +48,29 @@ import profileImg from '../assets/my_profile.jpg';
     </header>
 
     <style>
+        @keyframes rotate3In {
+            0% {
+                transform: perspective(1000px) rotateY(90deg) scale(0.9);
+                opacity: 0;
+            }
+
+            100% {
+                transform: perspective(1000px) rotateY(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
         .profile-img-hero {
             /* Add any specific extra styling here, the shadow-lg and rounded-4 from bootstrap do most of the work */
             box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15) !important;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: rotate3In 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
         }
 
         .profile-img-hero:hover {
-            transform: translateY(-5px);
+            transform: perspective(1000px) translate3d(0, -5px, 15px);
+            box-shadow: 0 25px 45px rgba(30, 58, 138, 0.25) !important;
         }
     </style>
 
