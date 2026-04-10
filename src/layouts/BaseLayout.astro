@@ -64,12 +64,32 @@ const route = getRouteFromUrl(Astro.url);
     <nav id="main-nav" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href={translatePath('/')}>Marc</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            
+            <div class="d-flex align-items-center order-lg-2 ms-auto ms-lg-0">
+                <!-- Language Switcher outside collapse -->
+                <div class="dropdown">
+                    <a class="text-decoration-none dropdown-toggle badge bg-secondary bg-opacity-25 text-light px-3 py-2 rounded-pill fs-5 me-2 ms-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 60px; display: inline-block;">
+                        {flags[lang]}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark position-absolute">
+                        {Object.entries(languages).map(([code, name]) => (
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center gap-2" href={translatePath(route, code as keyof typeof languages)} onclick={`localStorage.setItem('preferredLang', '${code}')`}>
+                                    <span class="fs-5">{flags[code as keyof typeof languages]}</span>
+                                    <span>{name}</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
-            <div class="collapse navbar-collapse" id="mainNavbar">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse order-lg-1" id="mainNavbar">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
                     <li class="nav-item">
                         <a class:list={['nav-link', { active: route === '/' }]} href={translatePath('/')}>{t('nav.home')}</a>
@@ -82,23 +102,6 @@ const route = getRouteFromUrl(Astro.url);
                     </li>
                     <li class="nav-item">
                         <a class:list={['nav-link', { active: route.includes('/contacts') }]} href={translatePath('/contacts')}>{t('nav.contact')}</a>
-                    </li>
-                    
-                    <!-- Language Switcher -->
-                    <li class="nav-item dropdown ms-lg-3 mt-2 mt-lg-0">
-                        <a class="nav-link dropdown-toggle badge bg-secondary bg-opacity-25 text-light px-3 py-2 rounded-pill fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 60px;">
-                            {flags[lang]}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                            {Object.entries(languages).map(([code, name]) => (
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href={translatePath(route, code as keyof typeof languages)} onclick={`localStorage.setItem('preferredLang', '${code}')`}>
-                                        <span class="fs-5">{flags[code as keyof typeof languages]}</span>
-                                        <span>{name}</span>
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
                     </li>
                 </ul>
             </div>
