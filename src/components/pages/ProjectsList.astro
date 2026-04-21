@@ -15,17 +15,20 @@ const texts = {
     en: {
         title: "Projects - Marc",
         h1: "All Projects",
-        subtitle: "A comprehensive archive of my robotics, automation, and embedded systems work."
+        subtitle: "A comprehensive archive of my robotics, automation, and embedded systems work.",
+        in_development: "Additional systems in active development."
     },
     fr: {
         title: "Projets - Marc",
         h1: "Tous les projets",
-        subtitle: "Une archive complète de mes travaux en robotique, automatisation et systèmes embarqués."
+        subtitle: "Une archive complète de mes travaux en robotique, automatisation et systèmes embarqués.",
+        in_development: "Systèmes supplémentaires en cours de développement."
     },
     tr: {
         title: "Projeler - Marc",
         h1: "Tüm Projeler",
-        subtitle: "Robotik, otomasyon ve gömülü sistemler çalışmalarımın kapsamlı bir arşivi."
+        subtitle: "Robotik, otomasyon ve gömülü sistemler çalışmalarımın kapsamlı bir arşivi.",
+        in_development: "Geliştirilme aşamasında olan ek sistemler."
     }
 };
 
@@ -42,6 +45,11 @@ const t = texts[lang];
                 {activeProjects.map((project) => (
                     <ProjectCard project={project} lang={lang} />
                 ))}
+            </div>
+
+            <div class="mt-5 text-center d-flex align-items-center justify-content-center gap-2 animate-fade-up" style="animation-delay: 0.4s;">
+                <span style="display: inline-block; width: 8px; height: 8px; background-color: var(--color-accent-1); border-radius: 50%; box-shadow: 0 0 8px var(--color-accent-1); animation: pulseIndicator 2s infinite;"></span>
+                <p class="small text-muted mb-0 fst-italic">{t.in_development}</p>
             </div>
         </div>
     </section>
