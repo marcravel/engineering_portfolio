@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import fs from 'fs/promises';
-import path from 'path';
-import { useTranslatedPath } from '../../i18n/ui';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import fs from "fs/promises";
+import path from "path";
+import { useTranslatedPath } from "../../i18n/ui";
 
 export interface Props {
-    lang: 'en' | 'fr' | 'tr';
+    lang: "en" | "fr" | "tr";
     project: any;
 }
 const { lang, project } = Astro.props;
@@ -13,33 +13,52 @@ const translatePath = useTranslatedPath(lang);
 
 // Helper to determine the hero image URL with BASE_URL routing
 let heroImage = project.image;
-if (heroImage && !heroImage.startsWith('http')) {
-    const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
-        ? import.meta.env.BASE_URL 
-        : import.meta.env.BASE_URL + '/';
+if (heroImage && !heroImage.startsWith("http")) {
+    const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+        ? import.meta.env.BASE_URL
+        : import.meta.env.BASE_URL + "/";
     heroImage = `${baseUrl}${heroImage}`;
 }
 
-let descriptionContent = project.longDescription 
-    ? (typeof project.longDescription === 'object' ? project.longDescription[lang] : project.longDescription)
-    : (project.description[lang] || project.description.en);
-let isTextFile = typeof descriptionContent === 'string' && descriptionContent.endsWith('.txt');
+let descriptionContent = project.longDescription
+    ? typeof project.longDescription === "object"
+        ? project.longDescription[lang]
+        : project.longDescription
+    : project.description[lang] || project.description.en;
+let isTextFile =
+    typeof descriptionContent === "string" &&
+    descriptionContent.endsWith(".txt");
 if (isTextFile) {
     try {
-        const filePath = path.join(process.cwd(), 'public', descriptionContent.replace(/^\/+/, ''));
-        descriptionContent = await fs.readFile(filePath, 'utf-8');
+        const filePath = path.join(
+            process.cwd(),
+            "public",
+            descriptionContent.replace(/^\/+/, ""),
+        );
+        descriptionContent = await fs.readFile(filePath, "utf-8");
     } catch (err) {
         console.error("Failed to read description file:", err);
-        descriptionContent = project.description[lang] || project.description.en;
+        descriptionContent =
+            project.description[lang] || project.description.en;
     }
 }
 
-const descriptionParagraphs = (typeof descriptionContent === 'string' ? descriptionContent : '')
-    .split('\n')
-    .filter(p => p.trim() !== '');
+const descriptionParagraphs = (
+    typeof descriptionContent === "string" ? descriptionContent : ""
+)
+    .split("\n")
+    .filter((p) => p.trim() !== "");
 
-const t_back = { en: "Back to Projects", fr: "Retour aux projets", tr: "Projelere Dön" };
-const t_tech = { en: "Technologies Built With", fr: "Technologies Utilisées", tr: "Kullanılan Teknolojiler" };
+const t_back = {
+    en: "Back to Projects",
+    fr: "Retour aux projets",
+    tr: "Projelere Dön",
+};
+const t_tech = {
+    en: "Technologies Built With",
+    fr: "Technologies Utilisées",
+    tr: "Kullanılan Teknolojiler",
+};
 const t_gallery = { en: "Gallery", fr: "Galerie", tr: "Galeri" };
 const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
 ---
@@ -47,12 +66,24 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
 <BaseLayout title={`${project.title[lang]} - Marc Projects`}>
     <section class="py-5">
         <div class="container text-light">
-            
             <!-- Navigation Back -->
             <div class="mb-4">
-                <a href={translatePath('/projects')} class="text-decoration-none text-emerald d-inline-flex align-items-center gap-2 hover-opacity">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                <a
+                    href={translatePath("/projects")}
+                    class="text-decoration-none text-emerald d-inline-flex align-items-center gap-2 hover-opacity"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-arrow-left"
+                        viewBox="0 0 16 16"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                        ></path>
                     </svg>
                     {t_back[lang]}
                 </a>
@@ -61,147 +92,219 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
             <!-- Project Header -->
             <div class="mb-5">
                 <div class="mb-3">
-                    <span class="badge badge-emerald px-3 py-2 shadow-sm">{project.category[lang]}</span>
+                    <span class="badge badge-emerald px-3 py-2 shadow-sm"
+                        >{project.category[lang]}</span
+                    >
                 </div>
                 <h1 class="display-5 fw-bold mb-3">{project.title[lang]}</h1>
-                
-                {project.achievements && project.achievements[lang] && (
-                    <div class="d-inline-block p-2 px-3 rounded bg-dark bg-opacity-50 border border-secondary border-opacity-25 mb-4">
-                        <span class="fw-semibold" style="color: var(--color-gold);">
-                            {project.achievements[lang]}
-                        </span>
-                    </div>
-                )}
+
+                {
+                    project.achievements && project.achievements[lang] && (
+                        <div class="d-inline-block p-2 px-3 rounded bg-dark bg-opacity-50 border border-secondary border-opacity-25 mb-4">
+                            <span
+                                class="fw-semibold"
+                                style="color: var(--color-gold);"
+                            >
+                                {project.achievements[lang]}
+                            </span>
+                        </div>
+                    )
+                }
 
                 <!-- Technologies & Architecture right under title -->
                 <div class="mb-5">
-                    <h4 class="h6 text-uppercase mb-3" style="color: var(--color-emerald); letter-spacing: 1px;">{t_tech[lang]}</h4>
+                    <h4
+                        class="h6 text-uppercase mb-3"
+                        style="color: var(--color-emerald); letter-spacing: 1px;"
+                    >
+                        {t_tech[lang]}
+                    </h4>
                     <div class="d-flex flex-wrap gap-2">
-                        {project.techStack.map((tech) => (
-                            <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2 fs-6">{tech}</span>
-                        ))}
+                        {
+                            project.techStack.map((tech) => (
+                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2 fs-6">
+                                    {tech}
+                                </span>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
 
             <div class="row g-5">
-
                 <!-- Left Column: Gallery (Order 2 on Mobile, Order 2 on Desktop) -->
                 <div class="col-lg-5 order-2 order-lg-2">
-                    
                     <!-- Supplemental Gallery -->
-                    {project.gallery && project.gallery.length > 0 && (
-                        <div>
-                            <h3 class="h4 mb-4" style="color: var(--color-emerald);">{t_gallery[lang]}</h3>
-                            <div class="row g-3">
-                                {project.gallery.map((galleryImg) => {
-                                    // Handle correct routing for gallery images
-                                    let imgPath = galleryImg;
-                                    if (!imgPath.startsWith('http')) {
-                                        const bUrl = import.meta.env.BASE_URL.endsWith('/') 
-                                            ? import.meta.env.BASE_URL 
-                                            : import.meta.env.BASE_URL + '/';
-                                        imgPath = `${bUrl}${imgPath}`;
-                                    }
-                                    return (
-                                        <div class="col-6">
-                                            <div class="card bg-dark border-secondary overflow-hidden h-100 ratio ratio-4x3" style="cursor: pointer;">
-                                                <img src={imgPath} class="card-img h-100 w-100 gallery-image" style="object-fit: cover; transition: transform 0.3s ease;" alt="Project Gallery Image" loading="lazy" />
+                    {
+                        project.gallery && project.gallery.length > 0 && (
+                            <div>
+                                <h3
+                                    class="h4 mb-4"
+                                    style="color: var(--color-emerald);"
+                                >
+                                    {t_gallery[lang]}
+                                </h3>
+                                <div class="row g-3">
+                                    {project.gallery.map((galleryImg) => {
+                                        // Handle correct routing for gallery images
+                                        let imgPath = galleryImg;
+                                        if (!imgPath.startsWith("http")) {
+                                            const bUrl =
+                                                import.meta.env.BASE_URL.endsWith(
+                                                    "/",
+                                                )
+                                                    ? import.meta.env.BASE_URL
+                                                    : import.meta.env.BASE_URL +
+                                                      "/";
+                                            imgPath = `${bUrl}${imgPath}`;
+                                        }
+                                        return (
+                                            <div class="col-6">
+                                                <div
+                                                    class="card bg-dark border-secondary overflow-hidden h-100 ratio ratio-4x3"
+                                                    style="cursor: pointer;"
+                                                >
+                                                    <img
+                                                        src={imgPath}
+                                                        class="card-img h-100 w-100 gallery-image"
+                                                        style="object-fit: cover; transition: transform 0.3s ease;"
+                                                        alt="Project Gallery Image"
+                                                        loading="lazy"
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
-                                })}
+                                        );
+                                    })}
+                                </div>
                             </div>
-                        </div>
-                    )}
-
+                        )
+                    }
                 </div>
 
                 <!-- Right Column: Media Hero & Description (Order 1 on Mobile, Order 1 on Desktop) -->
                 <div class="col-lg-7 order-1 order-lg-1">
-                    
                     <!-- Media Hero (YouTube or Image) -->
-                    <div class="mb-5 rounded overflow-hidden shadow-lg border border-secondary border-opacity-25 bg-dark">
-                        {project.youtubeId ? (
-                            <div class="ratio ratio-16x9">
-                                <iframe 
-                                    src={`https://www.youtube.com/embed/${project.youtubeId}?rel=0`} 
-                                    title="Technical hardware overview of the project" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen
-                                ></iframe>
-                            </div>
-                        ) : (
-                            heroImage && (
-                                <img src={heroImage} alt={project.title[lang]} class="img-fluid w-100" style="object-fit: cover; max-height: 500px;" />
+                    <div
+                        class="mb-5 rounded overflow-hidden shadow-lg border border-secondary border-opacity-25 bg-dark"
+                    >
+                        {
+                            project.youtubeId ? (
+                                <div class="ratio ratio-16x9">
+                                    <iframe
+                                        src={`https://www.youtube.com/embed/${project.youtubeId}?rel=0`}
+                                        title="Technical hardware overview of the project"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                    />
+                                </div>
+                            ) : (
+                                heroImage && (
+                                    <img
+                                        src={heroImage}
+                                        alt={project.title[lang]}
+                                        class="img-fluid w-100"
+                                        style="object-fit: cover; max-height: 500px;"
+                                    />
+                                )
                             )
-                        )}
+                        }
                     </div>
 
                     <!-- Long Description -->
                     <div class="mb-5">
-                        <h3 class="h4 mb-4" style="color: var(--color-emerald);">{t_overview[lang]}</h3>
-                        <div class="lead text-light opacity-75" style="line-height: 1.8;">
-                            {descriptionParagraphs.map(paragraph => (
-                                <p>{paragraph}</p>
-                            ))}
+                        <h3
+                            class="h4 mb-4"
+                            style="color: var(--color-emerald);"
+                        >
+                            {t_overview[lang]}
+                        </h3>
+                        <div
+                            class="lead text-light opacity-75"
+                            style="line-height: 1.8;"
+                        >
+                            {
+                                descriptionParagraphs.map((paragraph) => (
+                                    <p>{paragraph}</p>
+                                ))
+                            }
                         </div>
                     </div>
-
                 </div>
             </div>
 
             <!-- Image Modal -->
-            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content bg-transparent border-0">
-                  <div class="modal-header border-0 pb-0 position-absolute top-0 end-0 z-3">
-                    <button type="button" class="btn-close btn-close-white bg-dark bg-opacity-50 p-3 m-2 rounded-circle shadow-sm" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body p-0 text-center d-flex justify-content-center align-items-center" style="min-height: 50vh;">
-                    <img id="modalImage" src="" class="img-fluid rounded shadow" style="max-height: 90vh; object-fit: contain;" alt="Large project image view">
-                  </div>
+            <div
+                class="modal fade"
+                id="imageModal"
+                tabindex="-1"
+                aria-labelledby="imageModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content bg-transparent border-0">
+                        <div
+                            class="modal-header border-0 pb-0 position-absolute top-0 end-0 z-3"
+                        >
+                            <button
+                                type="button"
+                                class="btn-close btn-close-white bg-dark bg-opacity-50 p-3 m-2 rounded-circle shadow-sm"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div
+                            class="modal-body p-0 text-center d-flex justify-content-center align-items-center"
+                            style="min-height: 50vh;"
+                        >
+                            <img
+                                id="modalImage"
+                                src=""
+                                class="img-fluid rounded shadow"
+                                style="max-height: 90vh; object-fit: contain;"
+                                alt="Large project image view"
+                            />
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-
         </div>
     </section>
 </BaseLayout>
 
 <style>
-/* Base adjustment for the bg-dark-subtle utility */
-.bg-dark-subtle {
-    background-color: var(--color-bg-dark-secondary) !important;
-}
+    /* Base adjustment for the bg-dark-subtle utility */
+    .bg-dark-subtle {
+        background-color: var(--color-bg-dark-secondary) !important;
+    }
 
-.text-emerald {
-    color: var(--color-emerald) !important;
-}
+    .text-emerald {
+        color: var(--color-emerald) !important;
+    }
 
-.hover-opacity:hover {
-    opacity: 0.8;
-}
+    .hover-opacity:hover {
+        opacity: 0.8;
+    }
 
-.gallery-image:hover {
-    transform: scale(1.05);
-}
+    .gallery-image:hover {
+        transform: scale(1.05);
+    }
 </style>
 
 <script>
     // Initialize image modal functionality
-    document.addEventListener('DOMContentLoaded', () => {
-        const galleryImages = document.querySelectorAll('.gallery-image');
-        const modalImage = document.getElementById('modalImage');
-        
+    document.addEventListener("DOMContentLoaded", () => {
+        const galleryImages = document.querySelectorAll(".gallery-image");
+        const modalImage = document.getElementById("modalImage");
+
         // Need to check if bootstrap is available (it should be from BaseLayout)
         let imageModal = null;
-        if (typeof window.bootstrap !== 'undefined') {
-            imageModal = new window.bootstrap.Modal(document.getElementById('imageModal'));
+        if (typeof window.bootstrap !== "undefined") {
+            imageModal = new window.bootstrap.Modal(
+                document.getElementById("imageModal"),
+            );
         }
 
-        galleryImages.forEach(img => {
-            img.addEventListener('click', function() {
+        galleryImages.forEach((img) => {
+            img.addEventListener("click", function () {
                 if (modalImage && imageModal) {
                     modalImage.src = this.src;
                     imageModal.show();
