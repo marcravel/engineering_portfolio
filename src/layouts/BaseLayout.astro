@@ -10,7 +10,7 @@ const translatePath = useTranslatedPath(lang);
 const route = getRouteFromUrl(Astro.url);
 ---
 <!DOCTYPE html>
-<html lang={lang} data-bs-theme="dark">
+<html lang={lang}>
 
 <head>
     <meta charset="UTF-8">
@@ -20,16 +20,7 @@ const route = getRouteFromUrl(Astro.url);
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
 
-    <!-- Bootstrap 5 CSS (CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
-        rel="stylesheet">
+    <!-- Google Fonts are now imported in global.css -->
         
     <!-- Client-side Routing and Language Auto-Detection -->
     <script is:inline>
@@ -59,90 +50,182 @@ const route = getRouteFromUrl(Astro.url);
     </script>
 </head>
 
-<body>
+<body class="d-flex flex-column">
     <!-- ===================== NAVBAR ===================== -->
-    <nav id="main-nav" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href={translatePath('/')}>Marc</a>
-            
-            <div class="d-flex align-items-center order-lg-2 ms-auto ms-lg-0">
-                <!-- Language Switcher outside collapse -->
-                <div class="dropdown">
-                    <a class="text-decoration-none dropdown-toggle badge bg-secondary bg-opacity-25 text-light px-3 py-2 rounded-pill fs-5 me-2 ms-lg-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 60px; display: inline-block;">
-                        {flags[lang]}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark position-absolute">
-                        {Object.entries(languages).map(([code, name]) => (
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center gap-2" href={translatePath(route, code as keyof typeof languages)} onclick={`localStorage.setItem('preferredLang', '${code}')`}>
-                                    <span class="fs-5">{flags[code as keyof typeof languages]}</span>
-                                    <span>{name}</span>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-
-            <div class="collapse navbar-collapse order-lg-1" id="mainNavbar">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-                    <li class="nav-item">
+    <header class="navbar-wrapper">
+        <div class="container py-3">
+            <nav id="main-nav" class="glass d-flex align-items-center justify-content-between px-4 py-2">
+                <a class="fw-bold fs-4 text-decoration-none gradient-text" href={translatePath('/')} style="font-family: var(--font-display);">Marc</a>
+                
+                <!-- Desktop Menu -->
+                <ul class="nav-links d-none lg-d-flex align-items-center gap-4 m-0" style="list-style: none;">
+                    <li>
                         <a class:list={['nav-link', { active: route === '/' }]} href={translatePath('/')}>{t('nav.home')}</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a class:list={['nav-link', { active: route.includes('/about') }]} href={translatePath('/about')}>{t('nav.about')}</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a class:list={['nav-link', { active: route.includes('/projects') }]} href={translatePath('/projects')}>{t('nav.projects')}</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a class:list={['nav-link', { active: route.includes('/contacts') }]} href={translatePath('/contacts')}>{t('nav.contact')}</a>
                     </li>
                 </ul>
+
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Language Switcher -->
+                    <div class="dropdown-wrapper position-relative">
+                        <button id="langToggle" class="btn btn-outline py-2 px-3 badge d-flex align-items-center gap-2 m-0" style="font-size: 1rem; border-radius: 99px;">
+                            {flags[lang]}
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                        <div id="langMenu" class="dropdown-menu glass position-absolute d-none flex-column mt-2 p-2" style="right: 0; min-width: 120px; z-index: 1000;">
+                            {Object.entries(languages).map(([code, name]) => (
+                                <a class="dropdown-item d-flex align-items-center gap-2 p-2 text-decoration-none" href={translatePath(route, code as keyof typeof languages)} onclick={`localStorage.setItem('preferredLang', '${code}')`}>
+                                    <span>{flags[code as keyof typeof languages]}</span>
+                                    <span>{name}</span>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobileMenuToggle" class="btn btn-outline p-2 lg-d-none" aria-label="Toggle navigation" style="border-radius: 8px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                    </button>
+                </div>
+            </nav>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="glass mt-2 p-3 d-none flex-column gap-3 lg-d-none animate-fade-up">
+                <a class:list={['nav-link', { active: route === '/' }]} href={translatePath('/')}>{t('nav.home')}</a>
+                <a class:list={['nav-link', { active: route.includes('/about') }]} href={translatePath('/about')}>{t('nav.about')}</a>
+                <a class:list={['nav-link', { active: route.includes('/projects') }]} href={translatePath('/projects')}>{t('nav.projects')}</a>
+                <a class:list={['nav-link', { active: route.includes('/contacts') }]} href={translatePath('/contacts')}>{t('nav.contact')}</a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <slot />
+    <main class="flex-grow-1">
+        <slot />
+    </main>
 
     <!-- ===================== FOOTER ===================== -->
-    <footer class="py-4 footer-section bg-dark text-light mt-auto">
-        <div class="container text-center small">
-            <div class="mb-2">
+    <footer class="py-5 mt-auto glass" style="border-radius: 0; border-bottom: none; border-left: none; border-right: none;">
+        <div class="container text-center small text-muted">
+            <div class="mb-3">
                 © <span id="currentYear"></span> Marc — Engineering Portfolio
             </div>
-            <div>
+            <div class="d-flex justify-content-center gap-4">
                 <a href="https://github.com/marcravel" target="_blank" rel="noopener noreferrer"
-                    class="text-decoration-none text-light-50 me-2">{t('footer.github')}</a>
+                    class="text-decoration-none hover-accent">{t('footer.github')}</a>
                 <a href="https://www.linkedin.com/in/marc-anjaniaina-ravelontsalama/" target="_blank"
-                    rel="noopener noreferrer" class="text-decoration-none text-light-50 me-2">{t('footer.linkedin')}</a>
-                <a href={translatePath('/contacts')} class="text-decoration-none text-light-50">{t('footer.contact')}</a>
+                    rel="noopener noreferrer" class="text-decoration-none hover-accent">{t('footer.linkedin')}</a>
+                <a href={translatePath('/contacts')} class="text-decoration-none hover-accent">{t('footer.contact')}</a>
             </div>
         </div>
     </footer>
 
+    <style>
+        .navbar-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-link {
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            position: relative;
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--color-text-primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, var(--color-accent-1), var(--color-accent-2));
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .hover-accent:hover {
+            color: var(--color-accent-1);
+        }
+
+        .dropdown-item {
+            color: var(--color-text-secondary);
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--color-text-primary);
+        }
+        
+        .flex-grow-1 {
+            flex-grow: 1;
+        }
+    </style>
+
     <!-- ===================== SCRIPTS ===================== -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
     <script src="/assets/js/main.js" is:inline></script>
     <script is:inline>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Transparent to Glassy Navbar Logic
+        // Custom UI interactions
         document.addEventListener("DOMContentLoaded", function () {
-            const el_navbar = document.getElementById('main-nav');
-            if (el_navbar) {
-                window.addEventListener('scroll', function () {
-                    if (window.scrollY > 10) {
-                        el_navbar.classList.add('scrolled');
+            // Mobile Menu
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    if (mobileMenu.classList.contains('d-none')) {
+                        mobileMenu.classList.remove('d-none');
+                        mobileMenu.classList.add('d-flex');
                     } else {
-                        el_navbar.classList.remove('scrolled');
+                        mobileMenu.classList.add('d-none');
+                        mobileMenu.classList.remove('d-flex');
+                    }
+                });
+            }
+
+            // Language Dropdown
+            const langToggle = document.getElementById('langToggle');
+            const langMenu = document.getElementById('langMenu');
+            
+            if (langToggle && langMenu) {
+                langToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (langMenu.classList.contains('d-none')) {
+                        langMenu.classList.remove('d-none');
+                        langMenu.classList.add('d-flex');
+                    } else {
+                        langMenu.classList.add('d-none');
+                        langMenu.classList.remove('d-flex');
+                    }
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', () => {
+                    if (!langMenu.classList.contains('d-none')) {
+                        langMenu.classList.add('d-none');
+                        langMenu.classList.remove('d-flex');
                     }
                 });
             }

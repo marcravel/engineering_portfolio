@@ -8,6 +8,9 @@ export interface Props {
 }
 const { lang } = Astro.props;
 
+const activeProjects = projectsData.filter((project) => project.active);
+const gridClassDesktop = activeProjects.length === 2 ? 'lg-grid-cols-2' : 'lg-grid-cols-3';
+
 const texts = {
     en: {
         title: "Projects - Marc",
@@ -30,13 +33,13 @@ const t = texts[lang];
 ---
 
 <BaseLayout title={t.title}>
-    <section class="py-5">
-        <div class="container text-light">
-            <h1 class="display-4 fw-bold mb-3 section-title text-center">{t.h1}</h1>
+    <section class="section">
+        <div class="container animate-fade-up">
+            <h1 class="section-title"><span>{t.h1}</span></h1>
             <p class="text-center text-muted lead mb-5">{t.subtitle}</p>
             
-            <div class="row g-4">
-                {projectsData.filter((project) => project.active).map((project) => (
+            <div class={`grid grid-cols-1 md-grid-cols-2 ${gridClassDesktop} gap-4 mt-5`}>
+                {activeProjects.map((project) => (
                     <ProjectCard project={project} lang={lang} />
                 ))}
             </div>

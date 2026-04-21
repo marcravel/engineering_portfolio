@@ -53,9 +53,9 @@ const parsedLongDescription = (
     .map((p) => {
         const trimmed = p.trim();
         if (subtitleRegex.test(trimmed)) {
-            return `<h3 class="h4 mb-4 mt-4" style="color: var(--color-emerald);">${trimmed}</h3>`;
+            return `<h3 class="mb-3 mt-5" style="color: var(--color-accent-1); font-size: 1.5rem;">${trimmed}</h3>`;
         }
-        return `<p>${trimmed}</p>`;
+        return `<p class="mb-3 text-muted">${trimmed}</p>`;
     })
     .join("");
 
@@ -74,20 +74,19 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
 ---
 
 <BaseLayout title={`${project.title[lang]} - Marc Projects`}>
-    <section class="py-5">
-        <div class="container text-light">
+    <section class="section">
+        <div class="container animate-fade-up">
             <!-- Navigation Back -->
-            <div class="mb-4">
+            <div class="mb-5">
                 <a
                     href={translatePath("/projects")}
-                    class="text-decoration-none text-emerald d-inline-flex align-items-center gap-2 hover-opacity"
+                    class="text-decoration-none d-inline-flex align-items-center gap-2" style="color: var(--color-accent-1);"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
+                        width="20"
+                        height="20"
                         fill="currentColor"
-                        class="bi bi-arrow-left"
                         viewBox="0 0 16 16"
                     >
                         <path
@@ -95,25 +94,24 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                             d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                         ></path>
                     </svg>
-                    {t_back[lang]}
+                    <span style="font-weight: 500;">{t_back[lang]}</span>
                 </a>
             </div>
 
             <!-- Project Header -->
-            <div class="mb-5">
-                <div class="mb-3">
-                    <span class="badge badge-emerald px-3 py-2 shadow-sm"
-                        >{project.category[lang]}</span
-                    >
+            <div class="mb-5 text-center">
+                <div class="mb-4">
+                    <span class="badge px-4 py-2" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.5); color: #fff; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">
+                        {project.category[lang]}
+                    </span>
                 </div>
-                <h1 class="display-5 fw-bold mb-3">{project.title[lang]}</h1>
+                <h1 class="mb-4 gradient-text" style="font-size: 3rem;">{project.title[lang]}</h1>
 
                 {
                     project.achievements && project.achievements[lang] && (
-                        <div class="d-inline-block p-2 px-3 rounded bg-dark bg-opacity-50 border border-secondary border-opacity-25 mb-4">
+                        <div class="d-inline-block p-3 rounded glass mb-5" style="border-left: 3px solid var(--color-accent-2);">
                             <span
-                                class="fw-semibold"
-                                style="color: var(--color-gold);"
+                                style="color: var(--color-text-primary); font-weight: 600;"
                             >
                                 {project.achievements[lang]}
                             </span>
@@ -122,17 +120,17 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                 }
 
                 <!-- Technologies & Architecture right under title -->
-                <div class="mb-5">
+                <div class="mb-5 d-flex flex-column align-items-center">
                     <h4
-                        class="h6 text-uppercase mb-3"
-                        style="color: var(--color-emerald); letter-spacing: 1px;"
+                        class="text-uppercase mb-3 small fw-bold"
+                        style="color: var(--color-text-secondary); letter-spacing: 2px;"
                     >
                         {t_tech[lang]}
                     </h4>
-                    <div class="d-flex flex-wrap gap-2">
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
                         {
                             project.techStack.map((tech) => (
-                                <span class="badge bg-dark-subtle border border-secondary text-light px-3 py-2 fs-6">
+                                <span class="badge px-3 py-2" style="background: var(--color-bg-elevated); border: 1px solid var(--color-border); font-size: 0.9rem;">
                                     {tech}
                                 </span>
                             ))
@@ -141,20 +139,19 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                 </div>
             </div>
 
-            <div class="row g-5">
-                <!-- Left Column: Gallery (Order 2 on Mobile, Order 2 on Desktop) -->
-                <div class="col-lg-5 order-2 order-lg-2">
-                    <!-- Supplemental Gallery -->
+            <div class="grid grid-cols-1 lg-grid-cols-3 gap-5">
+                <!-- Left Column: Gallery -->
+                <div class="order-2 lg-order-2">
                     {
                         project.gallery && project.gallery.length > 0 && (
-                            <div>
+                            <div class="glass p-4 sticky-top" style="top: 100px;">
                                 <h3
-                                    class="h4 mb-4"
-                                    style="color: var(--color-emerald);"
+                                    class="mb-4"
+                                    style="color: var(--color-text-primary); font-size: 1.5rem;"
                                 >
                                     {t_gallery[lang]}
                                 </h3>
-                                <div class="row g-3">
+                                <div class="grid grid-cols-2 gap-3">
                                     {project.gallery.map((galleryImg) => {
                                         // Handle correct routing for gallery images
                                         let imgPath = galleryImg;
@@ -169,19 +166,17 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                                             imgPath = `${bUrl}${imgPath}`;
                                         }
                                         return (
-                                            <div class="col-6">
-                                                <div
-                                                    class="card bg-dark border-secondary overflow-hidden h-100 ratio ratio-4x3"
-                                                    style="cursor: pointer;"
-                                                >
-                                                    <img
-                                                        src={imgPath}
-                                                        class="card-img h-100 w-100 gallery-image"
-                                                        style="object-fit: cover; transition: transform 0.3s ease;"
-                                                        alt="Project Gallery Image"
-                                                        loading="lazy"
-                                                    />
-                                                </div>
+                                            <div
+                                                class="glass overflow-hidden"
+                                                style="cursor: pointer; aspect-ratio: 1; padding: 0;"
+                                            >
+                                                <img
+                                                    src={imgPath}
+                                                    class="h-100 w-100 gallery-image"
+                                                    style="object-fit: cover; transition: transform 0.3s ease; display: block;"
+                                                    alt="Project Gallery Image"
+                                                    loading="lazy"
+                                                />
                                             </div>
                                         );
                                     })}
@@ -191,16 +186,17 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                     }
                 </div>
 
-                <!-- Right Column: Media Hero & Description (Order 1 on Mobile, Order 1 on Desktop) -->
-                <div class="col-lg-7 order-1 order-lg-1">
+                <!-- Right Column: Media Hero & Description -->
+                <div class="lg-grid-col-span-2 order-1 lg-order-1" style="grid-column: span 2;">
                     <!-- Media Hero (YouTube or Image) -->
                     <div
-                        class="mb-5 rounded overflow-hidden shadow-lg border border-secondary border-opacity-25 bg-dark"
+                        class="mb-5 glass overflow-hidden p-0"
                     >
                         {
                             project.youtubeId ? (
-                                <div class="ratio ratio-16x9">
+                                <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
                                     <iframe
+                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
                                         src={`https://www.youtube.com/embed/${project.youtubeId}?rel=0`}
                                         title="Technical hardware overview of the project"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -212,8 +208,8 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                                     <img
                                         src={heroImage}
                                         alt={project.title[lang]}
-                                        class="img-fluid w-100"
-                                        style="object-fit: cover; max-height: 500px;"
+                                        class="w-100"
+                                        style="object-fit: cover; max-height: 500px; display: block;"
                                     />
                                 )
                             )
@@ -221,52 +217,25 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                     </div>
 
                     <!-- Long Description -->
-                    <div class="mb-5">
+                    <div class="mb-5 glass p-4 md-p-5">
                         <h3
-                            class="h4 mb-4"
-                            style="color: var(--color-emerald);"
+                            class="mb-4 gradient-text"
+                            style="font-size: 2rem;"
                         >
                             {t_overview[lang]}
                         </h3>
-                        <div class="project-details lead text-light opacity-75" style="line-height: 1.8;">
+                        <div class="project-details" style="line-height: 1.8; font-size: 1.1rem;">
                             <span set:html={parsedLongDescription} />
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Image Modal -->
-            <div
-                class="modal fade"
-                id="imageModal"
-                tabindex="-1"
-                aria-labelledby="imageModalLabel"
-                aria-hidden="true"
-            >
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                    <div class="modal-content bg-transparent border-0">
-                        <div
-                            class="modal-header border-0 pb-0 position-absolute top-0 end-0 z-3"
-                        >
-                            <button
-                                type="button"
-                                class="btn-close btn-close-white bg-dark bg-opacity-50 p-3 m-2 rounded-circle shadow-sm"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div
-                            class="modal-body p-0 text-center d-flex justify-content-center align-items-center"
-                            style="min-height: 50vh;"
-                        >
-                            <img
-                                id="modalImage"
-                                src=""
-                                class="img-fluid rounded shadow"
-                                style="max-height: 90vh; object-fit: contain;"
-                                alt="Large project image view"
-                            />
-                        </div>
-                    </div>
+            <!-- Custom Modal -->
+            <div id="customImageModal" class="custom-modal">
+                <div class="custom-modal-content">
+                    <span class="custom-modal-close">&times;</span>
+                    <img id="customModalImage" src="" alt="Large project image view" />
                 </div>
             </div>
         </div>
@@ -274,45 +243,108 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
 </BaseLayout>
 
 <style>
-    /* Base adjustment for the bg-dark-subtle utility */
-    .bg-dark-subtle {
-        background-color: var(--color-bg-dark-secondary) !important;
+    .order-1 { order: 1; }
+    .order-2 { order: 2; }
+    @media (min-width: 1024px) {
+        .lg-order-1 { order: 1; }
+        .lg-order-2 { order: 2; }
     }
-
-    .text-emerald {
-        color: var(--color-emerald) !important;
-    }
-
-    .hover-opacity:hover {
-        opacity: 0.8;
+    
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 10;
     }
 
     .gallery-image:hover {
-        transform: scale(1.05);
+        transform: scale(1.1);
+    }
+    
+    /* Custom Modal Styles */
+    .custom-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(5px);
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .custom-modal.show {
+        display: flex;
+        opacity: 1;
+    }
+    
+    .custom-modal-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+    }
+    
+    .custom-modal-content img {
+        max-width: 100%;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    
+    .custom-modal-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+    
+    .custom-modal-close:hover {
+        color: var(--color-accent-1);
     }
 </style>
 
 <script>
-    // Initialize image modal functionality
     document.addEventListener("DOMContentLoaded", () => {
         const galleryImages = document.querySelectorAll(".gallery-image");
-        const modalImage = document.getElementById("modalImage");
-
-        // Need to check if bootstrap is available (it should be from BaseLayout)
-        let imageModal = null;
-        if (typeof window.bootstrap !== "undefined") {
-            imageModal = new window.bootstrap.Modal(
-                document.getElementById("imageModal"),
-            );
-        }
+        const modal = document.getElementById("customImageModal");
+        const modalImg = document.getElementById("customModalImage");
+        const closeBtn = document.querySelector(".custom-modal-close");
 
         galleryImages.forEach((img) => {
             img.addEventListener("click", function () {
-                if (modalImage && imageModal) {
-                    modalImage.src = this.src;
-                    imageModal.show();
+                if (modal && modalImg) {
+                    modalImg.src = this.src;
+                    modal.classList.add("show");
+                    document.body.style.overflow = "hidden"; // Prevent scrolling
                 }
             });
         });
+
+        const closeModal = () => {
+            if (modal) {
+                modal.classList.remove("show");
+                document.body.style.overflow = "auto";
+            }
+        };
+
+        if (closeBtn) closeBtn.addEventListener("click", closeModal);
+        
+        if (modal) {
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
     });
 </script>

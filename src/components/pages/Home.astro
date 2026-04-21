@@ -1,99 +1,166 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectCard from '../ProjectCard.astro';
-import projectsData from '../../data/projects.json';
-import profileImg from '../../assets/profile.jpeg';
-import { useTranslatedPath } from '../../i18n/ui';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../ProjectCard.astro";
+import projectsData from "../../data/projects.json";
+import profileImg from "../../assets/profile.jpeg";
+import { useTranslatedPath } from "../../i18n/ui";
 
 export interface Props {
-    lang: 'en' | 'fr' | 'tr';
+    lang: "en" | "fr" | "tr";
 }
 const { lang } = Astro.props;
 const translatePath = useTranslatedPath(lang);
 
+const activeProjects = projectsData.filter((project) => project.active);
+const gridClassDesktop =
+    activeProjects.length === 2 ? "lg-grid-cols-2" : "lg-grid-cols-3";
+
 const texts = {
     en: {
-        portfolio: "Engineering Portfolio",
+        portfolio: "👋 Welcome to my engineering portfolio",
         greeting: "Hi, I'm Marc.",
         subtitle: "Electronics, Embedded Systems & Robotics",
         intro: "I'm a 3rd-year Electrical and Electronics Engineering student at Selçuk University, working across robotics, computer vision, AI, and embedded systems. I'm mostly software-side (Python, C/C++, and Linux) but I get my hands on the hardware when needed.",
         view_projects: "View Projects",
         download_cv: "Download CV",
         skills: "Skills Overview",
-        embedded: { title: "Embedded Systems", desc: "Microcontrollers, peripherals, timers, UART, SPI, I2C, and low-level C." },
-        electronics: { title: "Electronics", desc: "Analog & digital circuits, PCB prototyping, sensors, actuators, power stages." },
-        robotics: { title: "Robotics & Control", desc: "Line follower, maze solver, control systems, mechatronics integration." },
-        programming: { title: "Programming", desc: "C/C++, Python, basic AI/ML, scripting, tooling for engineering workflows." },
+        programming: {
+            title: "Programming",
+            desc: "C/C++, Python, OpenCV, PyTorch. AI/ML workflows, scripting, Linux tooling.",
+        },
+        embedded: {
+            title: "Embedded Systems",
+            desc: "STM32, ESP32, PIC — bare-metal & HAL. UART, SPI, I²C, timers, interrupts, low-level C firmware.",
+        },
+        electronics: {
+            title: "Electronics",
+            desc: "Analog & digital circuit design, PCB prototyping, sensor/actuator interfacing, power stages.",
+        },
+        robotics: {
+            title: "Robotics & Control",
+            desc: "Autonomous systems, PID control, mechatronics integration. Competition experience.",
+        },
         selected_projects: "Selected Projects",
-        view_all: "View All"
+        view_all: "View All",
     },
     fr: {
-        portfolio: "Portfolio d'Ingénierie",
+        portfolio: "👋 Bienvenue sur mon portfolio d'ingénierie",
         greeting: "Bonjour, je suis Marc.",
         subtitle: "Électronique, Systèmes Embarqués & Robotique",
         intro: "Je suis étudiant en 3ème année de génie électrique et électronique à l'Université de Selçuk, travaillant dans la robotique, la vision par ordinateur, l'IA et les systèmes embarqués. Je suis principalement orienté vers les logiciels (Python, C/C++ et Linux) mais je mets la main à la pâte avec le matériel quand c'est nécessaire.",
         view_projects: "Voir les projets",
         download_cv: "Télécharger CV",
         skills: "Aperçu des compétences",
-        embedded: { title: "Systèmes Embarqués", desc: "Microcontrôleurs, périphériques, temporisateurs, UART, SPI, I2C et C bas niveau." },
-        electronics: { title: "Électronique", desc: "Circuits analogiques et numériques, prototypage de PCB, capteurs, actionneurs, étages de puissance." },
-        robotics: { title: "Robotique et Contrôle", desc: "Suiveur de ligne, robot labyrinthe, systèmes de contrôle, intégration mécatronique." },
-        programming: { title: "Programmation", desc: "C/C++, Python, IA/ML de base, scripts, outils pour flux de travail d'ingénierie." },
+        programming: {
+            title: "Programmation",
+            desc: "C/C++, Python, OpenCV, PyTorch. Workflows IA/ML, scripts, outils Linux.",
+        },
+        embedded: {
+            title: "Systèmes Embarqués",
+            desc: "STM32, ESP32, PIC — bare-metal & HAL. UART, SPI, I²C, timers, interruptions, firmware C bas niveau.",
+        },
+        electronics: {
+            title: "Électronique",
+            desc: "Conception de circuits, prototypage PCB, interfaçage capteurs/actionneurs, étages de puissance.",
+        },
+        robotics: {
+            title: "Robotique & Contrôle",
+            desc: "Systèmes autonomes, contrôle PID, intégration mécatronique. Expérience en compétition.",
+        },
         selected_projects: "Projets Sélectionnés",
-        view_all: "Voir tout"
+        view_all: "Voir tout",
     },
     tr: {
-        portfolio: "Mühendislik Portföyü",
+        portfolio: "👋 Mühendislik portföyüme hoş geldiniz",
         greeting: "Merhaba, ben Marc.",
         subtitle: "Elektronik, Gömülü Sistemler ve Robotik",
         intro: "Selçuk Üniversitesi'nde 3. sınıf Elektrik ve Elektronik Mühendisliği öğrencisiyim, robotik, bilgisayarlı görme, yapay zeka ve gömülü sistemler üzerinde çalışıyorum. Çoğunlukla yazılım tarafındayım (Python, C/C++ ve Linux) ancak gerektiğinde donanımla da ilgileniyorum.",
         view_projects: "Projeleri Gör",
         download_cv: "CV İndir",
         skills: "Yeteneklere Genel Bakış",
-        embedded: { title: "Gömülü Sistemler", desc: "Mikrodenetleyiciler, çevre birimleri, zamanlayıcılar, UART, SPI, I2C ve düşük seviye C." },
-        electronics: { title: "Elektronik", desc: "Analog ve dijital devreler, PCB prototipleme, sensörler, aktüatörler, güç katları." },
-        robotics: { title: "Robotik ve Kontrol", desc: "Çizgi izleyen, labirent çözen, kontrol sistemleri, mekatronik entegrasyonu." },
-        programming: { title: "Programlama", desc: "C/C++, Python, temel AI/ML, komut dosyası oluşturma, mühendislik iş akışları araçları." },
+        programming: {
+            title: "Programlama",
+            desc: "C/C++, Python, OpenCV, PyTorch. YZ/ML iş akışları, betik, Linux araçları.",
+        },
+        embedded: {
+            title: "Gömülü Sistemler",
+            desc: "STM32, ESP32, PIC — bare-metal & HAL. UART, SPI, I²C, zamanlayıcılar, kesme, düşük seviye C.",
+        },
+        electronics: {
+            title: "Elektronik",
+            desc: "Devre tasarımı, PCB prototipleme, sensör/aktüatör arayüzü, güç katları.",
+        },
+        robotics: {
+            title: "Robotik & Kontrol",
+            desc: "Otonom sistemler, PID kontrol, mekatronik entegrasyon. Yarışma deneyimi.",
+        },
         selected_projects: "Seçili Projeler",
-        view_all: "Tümünü Gör"
-    }
+        view_all: "Tümünü Gör",
+    },
 };
 const t = texts[lang];
 ---
 
 <BaseLayout title="Marc | Engineering Portfolio">
     <!-- ===================== HERO SECTION ===================== -->
-    <header class="py-5 hero-section">
-        <div class="container">
-            <div class="row align-items-center">
+    <header
+        class="section pb-5"
+        style="min-height: 80vh; display: flex; align-items: center;"
+    >
+        <div class="container w-100">
+            <div
+                class="grid grid-cols-1 md-grid-cols-2 align-items-center gap-5"
+            >
                 <!-- Text -->
-                <div class="col-lg-7">
-                    <p class="text-uppercase small text-muted mb-2">{t.portfolio}</p>
-                    <h1 class="display-5 fw-bold mb-3">
-                        {t.greeting}
+                <div class="animate-fade-up">
+                    <div
+                        class="d-inline-block mb-3 px-3 py-2 small"
+                        style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 9999px; font-weight: 500; color: var(--color-text-primary);"
+                    >
+                        {t.portfolio}
+                    </div>
+                    <h1 class="mb-3" style="font-size: 4rem;">
+                        <span class="gradient-text">{t.greeting}</span>
                     </h1>
-                    <h2 class="display-7 fw-light mb-3">
+                    <h2
+                        class="mb-4 fw-light"
+                        style="font-size: 1.75rem; color: var(--color-text-secondary);"
+                    >
                         {t.subtitle}
                     </h2>
-                    <p class="lead mb-4">
+                    <p class="lead mb-5">
                         {t.intro}
                     </p>
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href={translatePath('/projects')} class="btn btn-primary">
+                    <div class="d-flex flex-wrap gap-3">
+                        <a
+                            href={translatePath("/projects")}
+                            class="btn btn-primary"
+                        >
                             {t.view_projects}
                         </a>
-                        <a href={`${import.meta.env.BASE_URL}/docs/cv.pdf`} class="btn btn-outline-secondary disabled"
-                            target="_blank">
+                        <a
+                            href={`${import.meta.env.BASE_URL}/docs/cv.pdf`}
+                            class="btn btn-outline disabled"
+                            target="_blank"
+                            style="opacity: 0.5; pointer-events: none;"
+                        >
                             {t.download_cv}
                         </a>
                     </div>
                 </div>
 
                 <!-- Profile image -->
-                <div class="col-lg-5 mt-5 mt-lg-0 d-flex justify-content-center">
-                    <div class="w-75 w-md-60 text-center">
-                        <img src={profileImg.src} class="img-fluid rounded-4 shadow-lg profile-img-hero"
-                            alt="Marc Ravelontsalama">
+                <div class="d-flex justify-content-center">
+                    <div
+                        class="glass p-2 floating-container"
+                        style="border-radius: 24px; max-width: 400px; width: 100%;"
+                    >
+                        <img
+                            src={profileImg.src}
+                            class="img-fluid profile-img-hero w-100"
+                            alt="Marc Ravelontsalama"
+                            style="border-radius: 16px; display: block;"
+                        />
                     </div>
                 </div>
             </div>
@@ -103,88 +170,145 @@ const t = texts[lang];
     <style>
         @keyframes rotate3In {
             0% {
-                transform: perspective(1000px) rotateY(90deg) scale(0.9);
+                transform: perspective(1200px) rotateY(-30deg) rotateX(15deg)
+                    translateZ(-100px) scale(0.9);
                 opacity: 0;
+                box-shadow: 0 0 0 rgba(59, 130, 246, 0);
             }
 
             100% {
-                transform: perspective(1000px) rotateY(0deg) scale(1);
+                transform: perspective(1000px) rotateY(-8deg) rotateX(5deg)
+                    scale(1.05);
                 opacity: 1;
+                box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
             }
         }
 
-        .profile-img-hero {
-            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15) !important;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: rotate3In 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
+        @keyframes floating3D {
+            0%,
+            100% {
+                transform: translateY(0) rotateY(0deg) rotateX(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotateY(3deg) rotateX(-2deg);
+            }
         }
 
-        .profile-img-hero:hover {
-            transform: perspective(1000px) translate3d(0, -5px, 15px);
-            box-shadow: 0 25px 45px rgba(30, 58, 138, 0.25) !important;
+        .floating-container {
+            animation: floating3D 6s ease-in-out 1.5s infinite;
+            will-change: transform;
+        }
+
+        .profile-img-hero {
+            animation: rotate3In 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+                both;
+            transform-origin: center;
+            backface-visibility: hidden;
+            transform: perspective(1000px) rotateY(-8deg) rotateX(5deg)
+                scale(1.05);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
         }
     </style>
 
     <!-- ===================== SKILLS SECTION ===================== -->
-    <section class="py-5">
+    <section class="section py-5">
         <div class="container">
-            <h2 class="mb-4 section-title text-center">{t.skills}</h2>
+            <h2 class="mb-5 section-title"><span>{t.skills}</span></h2>
 
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{t.embedded.title}</h5>
-                            <p class="card-text small text-muted">{t.embedded.desc}</p>
-                        </div>
-                    </div>
+            <div
+                class="grid grid-cols-1 md-grid-cols-2 lg-grid-cols-4 gap-4 animate-fade-up"
+                style="animation-delay: 0.2s;"
+            >
+                <div
+                    class="glass p-4 h-100"
+                    style="transition: transform 0.3s; cursor: default;"
+                    onmouseover="this.style.transform='translateY(-5px)'"
+                    onmouseout="this.style.transform='translateY(0)'"
+                >
+                    <h5
+                        class="mb-3"
+                        style="color: var(--color-accent-1); font-weight: 700;"
+                    >
+                        {t.programming.title}
+                    </h5>
+                    <p class="small text-muted mb-0">{t.programming.desc}</p>
                 </div>
 
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{t.electronics.title}</h5>
-                            <p class="card-text small text-muted">{t.electronics.desc}</p>
-                        </div>
-                    </div>
+                <div
+                    class="glass p-4 h-100"
+                    style="transition: transform 0.3s; cursor: default;"
+                    onmouseover="this.style.transform='translateY(-5px)'"
+                    onmouseout="this.style.transform='translateY(0)'"
+                >
+                    <h5
+                        class="mb-3"
+                        style="color: var(--color-accent-2); font-weight: 700;"
+                    >
+                        {t.embedded.title}
+                    </h5>
+                    <p class="small text-muted mb-0">{t.embedded.desc}</p>
                 </div>
 
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{t.robotics.title}</h5>
-                            <p class="card-text small text-muted">{t.robotics.desc}</p>
-                        </div>
-                    </div>
+                <div
+                    class="glass p-4 h-100"
+                    style="transition: transform 0.3s; cursor: default;"
+                    onmouseover="this.style.transform='translateY(-5px)'"
+                    onmouseout="this.style.transform='translateY(0)'"
+                >
+                    <h5
+                        class="mb-3"
+                        style="color: var(--color-accent-1); font-weight: 700;"
+                    >
+                        {t.electronics.title}
+                    </h5>
+                    <p class="small text-muted mb-0">{t.electronics.desc}</p>
                 </div>
 
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{t.programming.title}</h5>
-                            <p class="card-text small text-muted">{t.programming.desc}</p>
-                        </div>
-                    </div>
+                <div
+                    class="glass p-4 h-100"
+                    style="transition: transform 0.3s; cursor: default;"
+                    onmouseover="this.style.transform='translateY(-5px)'"
+                    onmouseout="this.style.transform='translateY(0)'"
+                >
+                    <h5
+                        class="mb-3"
+                        style="color: var(--color-accent-2); font-weight: 700;"
+                    >
+                        {t.robotics.title}
+                    </h5>
+                    <p class="small text-muted mb-0">{t.robotics.desc}</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ===================== PROJECTS PREVIEW ===================== -->
-    <section class="py-5 projects-preview-section">
+    <section class="section py-5 mb-5">
         <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="section-title mb-0">{t.selected_projects}</h2>
-                <a href={translatePath('/projects')} class="btn btn-sm btn-outline-primary">
-                    {t.view_all}
+            <div
+                class="d-flex flex-wrap justify-content-between align-items-center mb-5 gap-3"
+            >
+                <h2 class="section-title mb-0" style="margin-bottom: 0;">
+                    <span>{t.selected_projects}</span>
+                </h2>
+                <a
+                    href={translatePath("/projects")}
+                    class="btn btn-outline"
+                    style="padding: 0.5rem 1.25rem;"
+                >
+                    <span class="gradient-text">{t.view_all}</span>
                 </a>
             </div>
 
-            <div class="row g-4 justify-content-center">
-                {projectsData.filter(project => project.active).map(project => (
-                <ProjectCard project={project} lang={lang} />
-                ))}
+            <div
+                class={`grid grid-cols-1 md-grid-cols-2 ${gridClassDesktop} gap-4 animate-fade-up`}
+                style="animation-delay: 0.3s;"
+            >
+                {
+                    activeProjects.map((project) => (
+                        <ProjectCard project={project} lang={lang} />
+                    ))
+                }
             </div>
         </div>
     </section>
