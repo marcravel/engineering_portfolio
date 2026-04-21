@@ -1,6 +1,3 @@
-Robot d'Arrosage Agricole Automatisé (MRC 2021)
-
-Aperçu du Projet
 Développement d'un système d'arrosage agricole autonome pour le Mada Robot Contest (MRC) 2021, sous le thème "Pourquoi la Robotique". Le système automatise l'irrigation en vérifiant les niveaux d'humidité du sol toutes les 24 heures et en activant conditionnellement une pompe à eau basée sur des données en temps réel.
 
 Rôle et Responsabilités

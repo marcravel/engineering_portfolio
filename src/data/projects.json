@@ -205,7 +205,7 @@
       "fr": "🥉 3ème place au MADA ROBOT CONTEST",
       "tr": "🥉 MADA ROBOT YARIŞMASI'nda 3.lük"
     },
-    "image": "../public/img/projects/automatic-watering-system/mrc2021.png",
+    "image": "img/projects/automatic-watering-system/mrc2021.png",
     "longDescription": {
       "en": "/docs/automatic_plant_watering.txt",
       "fr": "/docs/automatic_plant_watering_fr.txt",
