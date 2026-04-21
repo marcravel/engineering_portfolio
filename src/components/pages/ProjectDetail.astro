@@ -43,11 +43,21 @@ if (isTextFile) {
     }
 }
 
-const descriptionParagraphs = (
+const subtitleRegex = /^(Project Overview|Role & Responsibilities|System Architecture|Results & Recognition|Aperçu du Projet|Rôle et Responsabilités|Architecture du Système|Résultats et Reconnaissance|Proje Özeti|Rol ve Sorumluluklar|Sistem Mimarisi|Sonuçlar ve Başarılar):?$/i;
+
+const parsedLongDescription = (
     typeof descriptionContent === "string" ? descriptionContent : ""
 )
     .split("\n")
-    .filter((p) => p.trim() !== "");
+    .filter((p) => p.trim() !== "")
+    .map((p) => {
+        const trimmed = p.trim();
+        if (subtitleRegex.test(trimmed)) {
+            return `<h3 class="h4 mb-4 mt-4" style="color: var(--color-emerald);">${trimmed}</h3>`;
+        }
+        return `<p>${trimmed}</p>`;
+    })
+    .join("");
 
 const t_back = {
     en: "Back to Projects",
@@ -218,15 +228,8 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                         >
                             {t_overview[lang]}
                         </h3>
-                        <div
-                            class="lead text-light opacity-75"
-                            style="line-height: 1.8;"
-                        >
-                            {
-                                descriptionParagraphs.map((paragraph) => (
-                                    <p>{paragraph}</p>
-                                ))
-                            }
+                        <div class="project-details lead text-light opacity-75" style="line-height: 1.8;">
+                            <span set:html={parsedLongDescription} />
                         </div>
                     </div>
                 </div>
