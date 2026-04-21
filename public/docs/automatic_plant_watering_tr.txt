@@ -1,0 +1,28 @@
+Otomatik Tarımsal Sulama Robotu (MRC 2021)
+
+Proje Özeti
+"Neden Robotik" teması altında düzenlenen Mada Robot Yarışması (MRC) 2021 için otonom bir tarımsal sulama sisteminin geliştirilmesi. Sistem, toprak nem seviyelerini her 24 saatte bir kontrol ederek ve gerçek zamanlı verilere dayanarak bir su pompasını koşullu olarak etkinleştirerek sulamayı otomatikleştirir.
+
+Rol ve Sorumluluklar
+
+Ketrika Takımı'nı kurdu ve tüm üyeleri dahil etti.
+
+Baş programcı ve elektronik teknisyeni olarak görev yaptı.
+
+Donanım entegrasyonunu tasarladı ve kontrol mantığını geliştirdi.
+
+Sistem Mimarisi
+
+Mikrodenetleyici: Arduino platformu.
+
+Sensörler ve Aktüatörler: Toprak nem sensörü ve özel bir rezervuardan su çeken otomatik su pompası.
+
+Kullanıcı Arayüzü: Sistem durum mesajları için entegre LCD ekran.
+
+Durum Göstergeleri: Mevcut çalışma modunu gösteren LED sistemi (Kırmızı: nem test aşaması, Mavi: aktif mahsul sulama aşaması).
+
+Sonuçlar ve Başarılar
+
+Ödül: 3.'lük Ödülü.
+
+Değerlendirme: Jüri, robotun fiziksel donanım uygulamasının ve gerçek dünyadaki tarımsal faydalarını gösteren kapsamlı video sunumunun ikili değerlendirmesine dayanarak bu dereceyi verdi.

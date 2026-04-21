@@ -1,0 +1,28 @@
+Robot d'Arrosage Agricole Automatisé (MRC 2021)
+
+Aperçu du Projet
+Développement d'un système d'arrosage agricole autonome pour le Mada Robot Contest (MRC) 2021, sous le thème "Pourquoi la Robotique". Le système automatise l'irrigation en vérifiant les niveaux d'humidité du sol toutes les 24 heures et en activant conditionnellement une pompe à eau basée sur des données en temps réel.
+
+Rôle et Responsabilités
+
+A fondé l'équipe Ketrika et recruté tous les membres.
+
+A agi en tant que programmeur principal et technicien en électronique.
+
+A conçu l'intégration matérielle et développé la logique de contrôle.
+
+Architecture du Système
+
+Microcontrôleur : Plateforme Arduino.
+
+Capteurs et Actionneurs : Capteur d'humidité du sol et pompe à eau automatisée puisant dans un réservoir dédié.
+
+Interface Utilisateur : Écran LCD intégré pour les messages d'état du système.
+
+Indicateurs d'État : Système LED indiquant le mode de fonctionnement actuel (Rouge : phase de test d'humidité, Bleu : phase d'arrosage actif des cultures).
+
+Résultats et Reconnaissance
+
+Prix : 3ème Prix.
+
+Évaluation : Le jury a attribué ce classement sur la base d'une double évaluation de l'exécution technique physique du robot et de la présentation vidéo complète démontrant ses avantages agricoles dans le monde réel.

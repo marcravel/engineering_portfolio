@@ -206,7 +206,11 @@
       "tr": "🥉 MADA ROBOT YARIŞMASI'nda 3.lük"
     },
     "image": "../public/img/projects/automatic-watering-system/mrc2021.png",
-    "longDescription": "Addressing the need for sustainable agriculture, this automated plant watering system monitors soil moisture levels in real-time. When humidity dips below a defined threshold, the microcontroller activates a localized water pump, ensuring optimal hydration without water waste.",
+    "longDescription": {
+      "en": "/docs/automatic_plant_watering.txt",
+      "fr": "/docs/automatic_plant_watering_fr.txt",
+      "tr": "/docs/automatic_plant_watering_tr.txt"
+    },
     "youtubeId": "K-mv0HUHN_M",
     "gallery": null
   }

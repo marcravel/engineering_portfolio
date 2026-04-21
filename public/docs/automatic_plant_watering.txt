@@ -1,0 +1,25 @@
+Development of an autonomous agricultural watering system for the Mada Robot Contest (MRC) 2021, operating under the competition theme "Why Robotics." The system automates irrigation by polling soil moisture levels every 24 hours and conditionally activating a water pump based on real-time data.
+
+Role & Responsibilities
+
+Founded Team Ketrika and recruited all personnel.
+
+Served as the primary programmer and electronic technician.
+
+Engineered the hardware integration and developed the control logic.
+
+System Architecture
+
+Microcontroller: Arduino platform.
+
+Sensors & Actuators: Soil moisture sensor and automated water pump drawing from a dedicated reservoir.
+
+User Interface: Integrated LCD screen for system status messages.
+
+Status Indicators: LED system indicating current operation mode (Red: moisture testing phase, Blue: active crop watering phase).
+
+Results & Recognition
+
+Award: 3rd Prize.
+
+Evaluation: The jury awarded the placement based on a dual assessment of the robot's physical technical execution and the comprehensive video presentation demonstrating its real-world agricultural benefits.
