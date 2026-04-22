@@ -43,12 +43,11 @@ const texts = {
         },
         courses: "Courses",
         course1: {
-            title: "Modern Robotics, Course 1: Foundation of Robot Motion",
-            year: "Feb 2023",
-            loc: "MOOC | Northwestern University on Coursera",
-            li1: "Mastered fundamental robotics concepts (configuration space, motion representation, rigid body motion)",
-            li2: "Applied linear algebra principles for efficient matrix using Python",
-            li3: "Gained practical experience with CoppeliaSim robot simulator",
+            title: "Introduction to Deep Learning",
+            year: "Apr 2026",
+            loc: "Online Course | BTK Akademi",
+            li1: "Mastered fundamental deep learning concepts including ANNs, CNNs, RNNs, and LSTMs",
+            li2: "Gained knowledge of deep learning tools, programming languages, and real-world applications",
         },
         course2: {
             title: "HTML, CSS, and Javascript for Web Developers",
@@ -61,6 +60,14 @@ const texts = {
             year: "May 2023",
             loc: "MOOC | Online Professional English Network sponsored by the U.S. Department of State",
             li1: "Enhanced language proficiency and understanding of STEM topics through a certified online course",
+        },
+        course4: {
+            title: "Modern Robotics, Course 1: Foundation of Robot Motion",
+            year: "Feb 2023",
+            loc: "MOOC | Northwestern University on Coursera",
+            li1: "Mastered fundamental robotics concepts (configuration space, motion representation, rigid body motion)",
+            li2: "Applied linear algebra principles for efficient matrix using Python",
+            li3: "Gained practical experience with CoppeliaSim robot simulator",
         },
         community: "Community Engagement",
         com1: {
@@ -119,12 +126,11 @@ const texts = {
         },
         courses: "Cours",
         course1: {
-            title: "Robotique Moderne, Cours 1 : Fondation du mouvement des robots",
-            year: "Fév 2023",
-            loc: "MOOC | Université Northwestern sur Coursera",
-            li1: "Maîtrise des concepts fondamentaux de la robotique",
-            li2: "Application des principes d'algèbre linéaire en utilisant Python",
-            li3: "Acquisition d'une expérience pratique avec le simulateur CoppeliaSim",
+            title: "Introduction au Deep Learning",
+            year: "Avr 2026",
+            loc: "Formation en ligne | BTK Akademi",
+            li1: "Maîtrise des concepts fondamentaux du deep learning, y compris les ANNs, CNNs, RNNs et LSTMs",
+            li2: "Acquisition de connaissances sur les outils de deep learning, les langages de programmation et les applications du monde réel",
         },
         course2: {
             title: "HTML, CSS et Javascript pour les développeurs Web",
@@ -137,6 +143,14 @@ const texts = {
             year: "Mai 2023",
             loc: "MOOC | Réseau professionnel d'anglais parrainé par le Département d'État américain",
             li1: "Amélioration des compétences linguistiques",
+        },
+        course4: {
+            title: "Robotique Moderne, Cours 1 : Fondation du mouvement des robots",
+            year: "Fév 2023",
+            loc: "MOOC | Université Northwestern sur Coursera",
+            li1: "Maîtrise des concepts fondamentaux de la robotique",
+            li2: "Application des principes d'algèbre linéaire en utilisant Python",
+            li3: "Acquisition d'une expérience pratique avec le simulateur CoppeliaSim",
         },
         community: "Engagement Communautaire",
         com1: {
@@ -191,12 +205,11 @@ const texts = {
         },
         courses: "Kurslar",
         course1: {
-            title: "Modern Robotik, Kurs 1: Robot Hareketinin Temeli",
-            year: "Şub 2023",
-            loc: "MOOC | Northwestern University, Coursera",
-            li1: "Temel robotik kavramlarına (konfigürasyon uzayı) hakim olundu",
-            li2: "Doğrusal cebir ilkeleri Python kullanarak uygulandı",
-            li3: "CoppeliaSim robot simülatörü kullanıldı",
+            title: "Derin Öğrenmeye Giriş",
+            year: "Nis 2026",
+            loc: "Çevrim İçi Eğitim | BTK Akademi",
+            li1: "Temel derin öğrenme kavramları (ANNs, CNNs, RNNs, LSTMs) ve yaygın teknikler öğrenildi",
+            li2: "Derin öğrenme geliştirmek için gerekli programlama dilleri, araçlar ve gerçek hayattaki kullanım alanları hakkında bilgi sahibi olundu",
         },
         course2: {
             title: "Web Geliştiricileri İçin HTML, CSS ve Javascript",
@@ -209,6 +222,14 @@ const texts = {
             year: "May 2023",
             loc: "MOOC | ABD Dışişleri Bakanlığı sponsorluğunda",
             li1: "Çevrimiçi bir kurs aracılığıyla STEM konularının anlaşılması ve dil yeterliliği artırıldı",
+        },
+        course4: {
+            title: "Modern Robotik, Kurs 1: Robot Hareketinin Temeli",
+            year: "Şub 2023",
+            loc: "MOOC | Northwestern University, Coursera",
+            li1: "Temel robotik kavramlarına (konfigürasyon uzayı) hakim olundu",
+            li2: "Doğrusal cebir ilkeleri Python kullanarak uygulandı",
+            li3: "CoppeliaSim robot simülatörü kullanıldı",
         },
         community: "Topluluk Katılımı",
         com1: {
@@ -586,8 +607,7 @@ const t = texts[lang];
                             style="color: var(--color-text-secondary); line-height: 1.6;"
                         >
                             <li class="mb-2">{t.course1.li1}</li>
-                            <li class="mb-2">{t.course1.li2}</li>
-                            <li>{t.course1.li3}</li>
+                            <li>{t.course1.li2}</li>
                         </ul>
                     </div>
 
@@ -620,7 +640,7 @@ const t = texts[lang];
                     </div>
 
                     <!-- Courses card 3-->
-                    <div class="glass p-4 mb-5 edu-card">
+                    <div class="glass p-4 mb-4 edu-card">
                         <h5
                             class="fw-bold mb-2"
                             style="color: var(--color-text-primary);"
@@ -644,6 +664,36 @@ const t = texts[lang];
                             style="color: var(--color-text-secondary); line-height: 1.6;"
                         >
                             <li class="mb-2">{t.course3.li1}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Courses card 4-->
+                    <div class="glass p-4 mb-5 edu-card">
+                        <h5
+                            class="fw-bold mb-2"
+                            style="color: var(--color-text-primary);"
+                        >
+                            {t.course4.title}
+                        </h5>
+                        <p
+                            class="mb-2 small fw-bold"
+                            style="color: var(--color-accent-1);"
+                        >
+                            {t.course4.year}
+                        </p>
+                        <p
+                            class="small mb-4"
+                            style="color: var(--color-text-secondary);"
+                        >
+                            {t.course4.loc}
+                        </p>
+                        <ul
+                            class="small mb-0 ps-3"
+                            style="color: var(--color-text-secondary); line-height: 1.6;"
+                        >
+                            <li class="mb-2">{t.course4.li1}</li>
+                            <li class="mb-2">{t.course4.li2}</li>
+                            <li>{t.course4.li3}</li>
                         </ul>
                     </div>
 
