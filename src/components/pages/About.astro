@@ -6,6 +6,9 @@ export interface Props {
 }
 const { lang } = Astro.props;
 
+// Toggle for Turkish Scholarship badge
+const showScholarship = false;
+
 const courseLinks = {
     course1:
         "https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=XV1hBaa9oN",
@@ -512,13 +515,15 @@ const t = texts[lang];
                         >
                             {t.edu1.loc}
                         </p>
-                        <div class="mt-2">
-                            <span
-                                class="badge px-3 py-2"
-                                style="background: rgba(59, 130, 246, 0.1); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3);"
-                                >{t.edu1.badge}</span
-                            >
-                        </div>
+                        {showScholarship && (
+                            <div class="mt-2">
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="background: rgba(59, 130, 246, 0.1); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3);"
+                                    >{t.edu1.badge}</span
+                                >
+                            </div>
+                        )}
                     </div>
 
                     <!-- Education Card 2 -->
