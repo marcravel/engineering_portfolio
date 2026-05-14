@@ -76,7 +76,7 @@ const texts = {
         portfolio: "👋 Mühendislik portföyüme hoş geldiniz",
         greeting: "Merhaba, ben Marc.",
         subtitle: "Elektronik, Gömülü Sistemler ve Robotik",
-        intro: "Selçuk Üniversitesi'nde 3. sınıf Elektrik ve Elektronik Mühendisliği öğrencisiyim, robotik, bilgisayarlı görme, yapay zeka ve gömülü sistemler üzerinde çalışıyorum. Çoğunlukla yazılım tarafındayım (Python, C/C++ ve Linux) ancak gerektiğinde donanımla da ilgileniyorum.",
+        intro: "Selçuk Üniversitesi'nde 3. sınıf Elektrik ve Elektronik Mühendisliği öğrencisiyim, robotik, görüntü işleme, yapay zeka ve gömülü sistemler üzerinde çalışıyorum. Çoğunlukla yazılım tarafındayım (Python, C/C++ ve Linux) ancak gerektiğinde donanımla da ilgileniyorum.",
         view_projects: "Projeleri Gör",
         download_cv: "CV İndir",
         skills: "Yeteneklere Genel Bakış",
@@ -314,9 +314,16 @@ const t = texts[lang];
                 }
             </div>
 
-            <div class="mt-5 text-center d-flex align-items-center justify-content-center gap-2 animate-fade-up" style="animation-delay: 0.4s;">
-                <span style="display: inline-block; width: 8px; height: 8px; background-color: var(--color-accent-1); border-radius: 50%; box-shadow: 0 0 8px var(--color-accent-1); animation: pulseIndicator 2s infinite;"></span>
-                <p class="small text-muted mb-0 fst-italic">{t.in_development}</p>
+            <div
+                class="mt-5 text-center d-flex align-items-center justify-content-center gap-2 animate-fade-up"
+                style="animation-delay: 0.4s;"
+            >
+                <span
+                    style="display: inline-block; width: 8px; height: 8px; background-color: var(--color-accent-1); border-radius: 50%; box-shadow: 0 0 8px var(--color-accent-1); animation: pulseIndicator 2s infinite;"
+                ></span>
+                <p class="small text-muted mb-0 fst-italic">
+                    {t.in_development}
+                </p>
             </div>
         </div>
     </section>
