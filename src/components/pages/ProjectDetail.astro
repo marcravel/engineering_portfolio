@@ -230,16 +230,16 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                     </div>
                 </div>
             </div>
-
-            <!-- Custom Modal -->
-            <div id="customImageModal" class="custom-modal">
-                <div class="custom-modal-content">
-                    <span class="custom-modal-close">&times;</span>
-                    <img id="customModalImage" src="" alt="Large project image view" />
-                </div>
-            </div>
         </div>
     </section>
+
+    <!-- Custom Modal -->
+    <div id="customImageModal" class="custom-modal">
+        <div class="custom-modal-content">
+            <span class="custom-modal-close">&times;</span>
+            <img id="customModalImage" src="" alt="Large project image view" />
+        </div>
+    </div>
 </BaseLayout>
 
 <style>
@@ -314,37 +314,35 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const galleryImages = document.querySelectorAll(".gallery-image");
-        const modal = document.getElementById("customImageModal");
-        const modalImg = document.getElementById("customModalImage");
-        const closeBtn = document.querySelector(".custom-modal-close");
+    const galleryImages = document.querySelectorAll(".gallery-image");
+    const modal = document.getElementById("customImageModal");
+    const modalImg = document.getElementById("customModalImage");
+    const closeBtn = document.querySelector(".custom-modal-close");
 
-        galleryImages.forEach((img) => {
-            img.addEventListener("click", function () {
-                if (modal && modalImg) {
-                    modalImg.src = this.src;
-                    modal.classList.add("show");
-                    document.body.style.overflow = "hidden"; // Prevent scrolling
-                }
-            });
-        });
-
-        const closeModal = () => {
-            if (modal) {
-                modal.classList.remove("show");
-                document.body.style.overflow = "auto";
+    galleryImages.forEach((img) => {
+        img.addEventListener("click", function () {
+            if (modal && modalImg) {
+                modalImg.src = this.src;
+                modal.classList.add("show");
+                document.body.style.overflow = "hidden"; // Prevent scrolling
             }
-        };
-
-        if (closeBtn) closeBtn.addEventListener("click", closeModal);
-        
-        if (modal) {
-            modal.addEventListener("click", (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-        }
+        });
     });
+
+    const closeModal = () => {
+        if (modal) {
+            modal.classList.remove("show");
+            document.body.style.overflow = "auto";
+        }
+    };
+
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
 </script>
