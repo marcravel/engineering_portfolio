@@ -211,6 +211,14 @@ const t = texts[lang];
                 scale(1.05);
             box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
         }
+
+        .skill-card {
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
     </style>
 
     <!-- ===================== SKILLS SECTION ===================== -->
@@ -223,10 +231,8 @@ const t = texts[lang];
                 style="animation-delay: 0.2s;"
             >
                 <div
-                    class="glass p-4 h-100"
-                    style="transition: transform 0.3s; cursor: default;"
-                    onmouseover="this.style.transform='translateY(-5px)'"
-                    onmouseout="this.style.transform='translateY(0)'"
+                    class="glass p-4 h-100 skill-card"
+                    style="cursor: default;"
                 >
                     <h5
                         class="mb-3"
@@ -238,10 +244,8 @@ const t = texts[lang];
                 </div>
 
                 <div
-                    class="glass p-4 h-100"
-                    style="transition: transform 0.3s; cursor: default;"
-                    onmouseover="this.style.transform='translateY(-5px)'"
-                    onmouseout="this.style.transform='translateY(0)'"
+                    class="glass p-4 h-100 skill-card"
+                    style="cursor: default;"
                 >
                     <h5
                         class="mb-3"
@@ -253,10 +257,8 @@ const t = texts[lang];
                 </div>
 
                 <div
-                    class="glass p-4 h-100"
-                    style="transition: transform 0.3s; cursor: default;"
-                    onmouseover="this.style.transform='translateY(-5px)'"
-                    onmouseout="this.style.transform='translateY(0)'"
+                    class="glass p-4 h-100 skill-card"
+                    style="cursor: default;"
                 >
                     <h5
                         class="mb-3"
@@ -268,10 +270,8 @@ const t = texts[lang];
                 </div>
 
                 <div
-                    class="glass p-4 h-100"
-                    style="transition: transform 0.3s; cursor: default;"
-                    onmouseover="this.style.transform='translateY(-5px)'"
-                    onmouseout="this.style.transform='translateY(0)'"
+                    class="glass p-4 h-100 skill-card"
+                    style="cursor: default;"
                 >
                     <h5
                         class="mb-3"
