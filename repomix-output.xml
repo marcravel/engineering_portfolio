@@ -1,0 +1,3431 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.github/workflows/deploy.yml
+.gitignore
+astro.config.mjs
+package.json
+public/docs/automatic_plant_watering_fr.txt
+public/docs/automatic_plant_watering_tr.txt
+public/docs/automatic_plant_watering.txt
+public/docs/cv.pdf
+public/docs/high_speed_line_follower_fr.txt
+public/docs/high_speed_line_follower_tr.txt
+public/docs/high_speed_line_follower.txt
+public/favicon.svg
+public/img/projects/automatic-watering-system/mrc2021.png
+public/img/projects/line-follower-robot/1.jpg
+public/img/projects/line-follower-robot/2.jpg
+public/img/projects/line-follower-robot/3.jpg
+public/img/projects/line-follower-robot/4.jpg
+public/img/projects/line-follower-robot/arduino-line-follower-bot.jpg
+public/img/projects/line-follower-robot/comp1.jpg
+public/img/projects/line-follower-robot/comp2.jpg
+public/img/projects/line-follower-robot/comp3.jpg
+public/img/projects/line-follower-robot/cup.jpg
+public/img/projects/line-follower-robot/line-follower-bots.jpg
+public/img/projects/line-follower-robot/pic-line-follower-bot.jpg
+public/img/projects/line-follower-robot/pod.jpg
+public/img/projects/line-follower-robot/pod1.jpg
+public/img/projects/line-follower-robot/pod2.jpg
+public/img/projects/line-follower-robot/pod3.jpg
+public/img/projects/line-follower-robot/pod4.jpg
+public/img/projects/line-follower-robot/result.jpg
+public/img/projects/line-follower-robot/result1.jpg
+public/img/projects/line-follower-robot/result2.jpg
+public/img/projects/line-follower-robot/work.jpg
+public/img/projects/line-follower-robot/work1.jpg
+public/img/projects/line-follower-robot/work2.jpg
+public/img/projects/line-follower-robot/work3.jpg
+public/img/projects/line-follower-robot/work4.jpg
+README.md
+src/assets/profile.jpeg
+src/components/pages/About.astro
+src/components/pages/Contacts.astro
+src/components/pages/Home.astro
+src/components/pages/ProjectDetail.astro
+src/components/pages/ProjectsList.astro
+src/components/ProjectCard.astro
+src/data/projects.json
+src/i18n/ui.ts
+src/layouts/BaseLayout.astro
+src/pages/[lang]/about.astro
+src/pages/[lang]/contacts.astro
+src/pages/[lang]/index.astro
+src/pages/[lang]/projects/[slug].astro
+src/pages/[lang]/projects/index.astro
+src/pages/about.astro
+src/pages/contacts.astro
+src/pages/index.astro
+src/pages/projects/[slug].astro
+src/pages/projects/index.astro
+src/styles/global.css
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".github/workflows/deploy.yml">
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+        # The action automatically detects if you used npm or pnpm based on your lockfile.
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+</file>
+
+<file path=".gitignore">
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+</file>
+
+<file path="package.json">
+{
+  "name": "astro-temp",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.17.1"
+  }
+}
+</file>
+
+<file path="public/docs/automatic_plant_watering.txt">
+Development of an autonomous agricultural watering system for the Mada Robot Contest (MRC) 2021, operating under the competition theme "Why Robotics." The system automates irrigation by polling soil moisture levels every 24 hours and conditionally activating a water pump based on real-time data.
+
+Role & Responsibilities
+
+Founded Team Ketrika and recruited all personnel.
+
+Served as the primary programmer and electronic technician.
+
+Engineered the hardware integration and developed the control logic.
+
+System Architecture
+
+Microcontroller: Arduino platform.
+
+Sensors & Actuators: Soil moisture sensor and automated water pump drawing from a dedicated reservoir.
+
+User Interface: Integrated LCD screen for system status messages.
+
+Status Indicators: LED system indicating current operation mode (Red: moisture testing phase, Blue: active crop watering phase).
+
+Results & Recognition
+
+Award: 3rd Prize.
+
+Evaluation: The jury awarded the placement based on a dual assessment of the robot's physical technical execution and the comprehensive video presentation demonstrating its real-world agricultural benefits.
+</file>
+
+<file path="README.md">
+# Astro Starter Kit: Minimal
+
+```sh
+npm create astro@latest -- --template minimal
+```
+
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+
+## 🚀 Project Structure
+
+Inside of your Astro project, you'll see the following folders and files:
+
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
+
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+
+Any static assets, like images, can be placed in the `public/` directory.
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+</file>
+
+<file path="src/i18n/ui.ts">
+export const languages = {
+  en: 'English',
+  fr: 'Français',
+  tr: 'Türkçe',
+};
+
+export const flags = {
+  en: '🇬🇧',
+  fr: '🇫🇷',
+  tr: '🇹🇷',
+};
+
+export const defaultLang = 'en';
+
+export const ui = {
+  en: {
+    'nav.home': 'Home',
+    'nav.about': 'About',
+    'nav.projects': 'Projects',
+    'nav.contact': 'Contact',
+    'footer.github': 'GitHub',
+    'footer.linkedin': 'LinkedIn',
+    'footer.contact': 'Contact',
+  },
+  fr: {
+    'nav.home': 'Accueil',
+    'nav.about': 'À propos',
+    'nav.projects': 'Projets',
+    'nav.contact': 'Contact',
+    'footer.github': 'GitHub',
+    'footer.linkedin': 'LinkedIn',
+    'footer.contact': 'Contact',
+  },
+  tr: {
+    'nav.home': 'Ana Sayfa',
+    'nav.about': 'Hakkında',
+    'nav.projects': 'Projeler',
+    'nav.contact': 'İletişim',
+    'footer.github': 'GitHub',
+    'footer.linkedin': 'LinkedIn',
+    'footer.contact': 'İletişim',
+  },
+} as const;
+
+export function getLangFromUrl(url: URL) {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  let path = url.pathname;
+  if (path.startsWith(base)) {
+    path = path.slice(base.length);
+  }
+  if (!path.startsWith('/')) path = '/' + path;
+
+  const segments = path.split('/');
+  const lang = segments[1];
+  if (lang in ui) return lang as keyof typeof ui;
+  return defaultLang;
+}
+
+export function useTranslations(lang: keyof typeof ui) {
+  return function t(key: keyof typeof ui[typeof defaultLang]) {
+    return ui[lang][key] || ui[defaultLang][key];
+  }
+}
+
+export function useTranslatedPath(lang: keyof typeof ui) {
+  return function translatePath(path: string, l: string = lang) {
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+    let normalizedPath = path.startsWith('/') ? path : '/' + path;
+    if (normalizedPath === '/') normalizedPath = '';
+
+    if (l === defaultLang) {
+      return `${base}${normalizedPath}` || base + '/';
+    }
+    return `${base}/${l}${normalizedPath}` || base + '/' + l + '/';
+  }
+}
+
+export function getRouteFromUrl(url: URL): string {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  let path = url.pathname;
+  if (path.startsWith(base)) {
+    path = path.slice(base.length);
+  }
+  if (!path.startsWith('/')) path = '/' + path;
+
+  const segments = path.split('/');
+  if (segments[1] in ui) {
+    // Remove language segment
+    segments.splice(1, 1);
+    const remaining = segments.join('/');
+    return remaining === '' ? '/' : remaining;
+  }
+  return path;
+}
+</file>
+
+<file path="src/pages/[lang]/about.astro">
+---
+import About from '../../components/pages/About.astro';
+
+export function getStaticPaths() {
+    return [
+        { params: { lang: 'fr' } },
+        { params: { lang: 'tr' } }
+    ];
+}
+
+const { lang } = Astro.params;
+---
+<About lang={lang} />
+</file>
+
+<file path="src/pages/[lang]/contacts.astro">
+---
+import Contacts from '../../components/pages/Contacts.astro';
+
+export function getStaticPaths() {
+    return [
+        { params: { lang: 'fr' } },
+        { params: { lang: 'tr' } }
+    ];
+}
+
+const { lang } = Astro.params;
+---
+<Contacts lang={lang} />
+</file>
+
+<file path="src/pages/[lang]/index.astro">
+---
+import Home from '../../components/pages/Home.astro';
+
+export function getStaticPaths() {
+    return [
+        { params: { lang: 'fr' } },
+        { params: { lang: 'tr' } }
+    ];
+}
+
+const { lang } = Astro.params;
+---
+<Home lang={lang} />
+</file>
+
+<file path="src/pages/[lang]/projects/[slug].astro">
+---
+import ProjectDetail from '../../../components/pages/ProjectDetail.astro';
+import projectsData from '../../../data/projects.json';
+
+export async function getStaticPaths() {
+  const langs = ['fr', 'tr'];
+  const paths = [];
+  for (const lang of langs) {
+    for (const project of projectsData.filter(p => p.active)) {
+      paths.push({
+        params: { lang, slug: project.slug },
+        props: { project },
+      });
+    }
+  }
+  return paths;
+}
+
+const { project } = Astro.props;
+const { lang } = Astro.params;
+---
+<ProjectDetail lang={lang} project={project} />
+</file>
+
+<file path="src/pages/[lang]/projects/index.astro">
+---
+import ProjectsList from '../../../components/pages/ProjectsList.astro';
+
+export function getStaticPaths() {
+    return [
+        { params: { lang: 'fr' } },
+        { params: { lang: 'tr' } },
+    ];
+}
+
+const { lang } = Astro.params;
+---
+<ProjectsList lang={lang} />
+</file>
+
+<file path="tsconfig.json">
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}
+</file>
+
+<file path="public/docs/automatic_plant_watering_fr.txt">
+Développement d'un système d'arrosage agricole autonome pour le Mada Robot Contest (MRC) 2021, sous le thème "Pourquoi la Robotique". Le système automatise l'irrigation en vérifiant les niveaux d'humidité du sol toutes les 24 heures et en activant conditionnellement une pompe à eau basée sur des données en temps réel.
+
+Rôle et Responsabilités
+
+A fondé l'équipe Ketrika et recruté tous les membres.
+
+A agi en tant que programmeur principal et technicien en électronique.
+
+A conçu l'intégration matérielle et développé la logique de contrôle.
+
+Architecture du Système
+
+Microcontrôleur : Plateforme Arduino.
+
+Capteurs et Actionneurs : Capteur d'humidité du sol et pompe à eau automatisée puisant dans un réservoir dédié.
+
+Interface Utilisateur : Écran LCD intégré pour les messages d'état du système.
+
+Indicateurs d'État : Système LED indiquant le mode de fonctionnement actuel (Rouge : phase de test d'humidité, Bleu : phase d'arrosage actif des cultures).
+
+Résultats et Reconnaissance
+
+Prix : 3ème Prix.
+
+Évaluation : Le jury a attribué ce classement sur la base d'une double évaluation de l'exécution technique physique du robot et de la présentation vidéo complète démontrant ses avantages agricoles dans le monde réel.
+</file>
+
+<file path="public/docs/automatic_plant_watering_tr.txt">
+"Neden Robotik" teması altında düzenlenen Mada Robot Yarışması (MRC) 2021 için otonom bir tarımsal sulama sisteminin geliştirilmesi. Sistem, toprak nem seviyelerini her 24 saatte bir kontrol ederek ve gerçek zamanlı verilere dayanarak bir su pompasını koşullu olarak etkinleştirerek sulamayı otomatikleştirir.
+
+Rol ve Sorumluluklar
+
+Ketrika Takımı'nı kurdu ve tüm üyeleri dahil etti.
+
+Baş programcı ve elektronik teknisyeni olarak görev yaptı.
+
+Donanım entegrasyonunu tasarladı ve kontrol mantığını geliştirdi.
+
+Sistem Mimarisi
+
+Mikrodenetleyici: Arduino platformu.
+
+Sensörler ve Aktüatörler: Toprak nem sensörü ve özel bir rezervuardan su çeken otomatik su pompası.
+
+Kullanıcı Arayüzü: Sistem durum mesajları için entegre LCD ekran.
+
+Durum Göstergeleri: Mevcut çalışma modunu gösteren LED sistemi (Kırmızı: nem test aşaması, Mavi: aktif mahsul sulama aşaması).
+
+Sonuçlar ve Başarılar
+
+Ödül: 3.'lük Ödülü.
+
+Değerlendirme: Jüri, robotun fiziksel donanım uygulamasının ve gerçek dünyadaki tarımsal faydalarını gösteren kapsamlı video sunumunun ikili değerlendirmesine dayanarak bu dereceyi verdi.
+</file>
+
+<file path="public/docs/high_speed_line_follower_fr.txt">
+Développement de deux robots suiveurs de ligne à grande vitesse avec le club de robotique MTH pour la Coupe de Robotique de Madagascar 2022. Le projet comprenait un robot basé sur Arduino et un robot non basé sur Arduino. Ce travail faisait partie d'un apprentissage en robotique au sein du groupe Itras.
+
+Rôle et Responsabilités
+
+Conception de circuits imprimés (PCB) sur mesure pour les matrices de capteurs et intégration des microcontrôleurs directement sur les cartes.
+
+Programmation de code C bas niveau et d'algorithmes de contrôle PID.
+
+Collaboration en équipe sous pression pour résoudre les problèmes matériels et optimiser la vitesse des robots.
+
+Architecture du Système
+
+Microcontrôleurs : Arduino Mega et PIC16F1938.
+
+Châssis : Châssis à 2 roues Pololu Romi associé à la carte de contrôle Romi 32U4 et à des encodeurs de moteur.
+
+Capteurs : Matrices QTR haute densité (HD) avec un pas de 4 mm pour une détection précise des lignes.
+
+Logique de Contrôle : Algorithme PID personnalisé pour une réponse précise en matière de vitesse et de direction.
+
+Résultats et Reconnaissance
+
+Prix : 1ère place au classement général et deux médailles d'or.
+
+Évaluation : Les deux robots ont établi de nouveaux records de vitesse dans leurs catégories de microcontrôleurs respectives.
+</file>
+
+<file path="public/docs/high_speed_line_follower_tr.txt">
+Madagaskar Robotik Kupası 2022 için MTH Robotik Kulübü ile iki adet yüksek hızlı çizgi izleyen robotun geliştirilmesi. Proje, bir Arduino tabanlı ve bir Arduino tabanlı olmayan robotu içeriyordu. Bu çalışma, Itras Group'taki robotik stajının bir parçasıydı.
+
+Rol ve Sorumluluklar
+
+Sensör dizileri için özel PCB'ler tasarlandı ve mikrodenetleyiciler doğrudan kartlara entegre edildi.
+
+Düşük seviyeli C kodu ve PID kontrol algoritmaları programlandı.
+
+Donanım sorunlarını gidermek ve robot hızını optimize etmek için baskı altında bir ekiple işbirliği yapıldı.
+
+Sistem Mimarisi
+
+Mikrodenetleyiciler: Arduino Mega ve PIC16F1938.
+
+Şasi: Romi 32U4 Kontrol Kartı ve motor enkoderleri ile eşleştirilmiş Pololu Romi 2 tekerlekli şasi.
+
+Sensörler: Hassas çizgi tespiti için 4 mm aralıklı Yüksek Yoğunluklu (HD) QTR Dizileri.
+
+Kontrol Mantığı: İnce ayarlı hız ve yönlendirme tepkisi için özel PID algoritması.
+
+Sonuçlar ve Başarılar
+
+Ödül: Genel Klasmanda 1.'lik ve iki Altın Madalya.
+
+Değerlendirme: Her iki robot da kendi mikrodenetleyici kategorilerinde yeni hız rekorları kırdı.
+</file>
+
+<file path="public/docs/high_speed_line_follower.txt">
+Development of two high-speed line follower robots with the MTH Robotics Club for the Madagascar Cup of Robotics 2022. The project included one Arduino-based robot and one non-Arduino robot. This work was part of a robotics apprenticeship at Itras Group.
+
+Role & Responsibilities
+
+Designed custom PCBs for the sensor arrays and integrated the microcontrollers directly onto the boards.
+
+Programmed low-level C code and PID control algorithms.
+
+Collaborated with a team under pressure to troubleshoot hardware and optimize robot speed.
+
+System Architecture
+
+Microcontrollers: Arduino Mega and PIC16F1938.
+
+Chassis: Pololu Romi 2-wheeled chassis paired with the Romi 32U4 Control Board and motor encoders.
+
+Sensors: High-Density (HD) QTR Arrays with 4 mm pitch for precise line detection.
+
+Control Logic: Custom PID algorithm for fine-tuned speed and steering response.
+
+Results & Recognition
+
+Award: 1st Place Overall and two Gold Medals.
+
+Evaluation: Both robots set new speed records in their respective microcontroller categories.
+</file>
+
+<file path="public/favicon.svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="20" fill="#121212" />
+  <path d="M 25 75 L 25 35 L 50 60 L 75 35 L 75 75" fill="none" stroke="#3b82f6" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</file>
+
+<file path="src/components/pages/Contacts.astro">
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslatedPath } from '../../i18n/ui';
+
+export interface Props {
+    lang: 'en' | 'fr' | 'tr';
+}
+const { lang } = Astro.props;
+const translatePath = useTranslatedPath(lang);
+
+const texts = {
+    en: {
+        title: "Contact - Marc",
+        h1: "Get in Touch",
+        subtitle: "Always open to discussing embedded systems, AI, or potential internship opportunities. Feel free to reach out.",
+        sendMessage: "Send a Message",
+        success: "Thanks for reaching out! I'll get back to you shortly.",
+        nameLabel: "Name",
+        namePlaceholder: "John Doe",
+        emailLabel: "Email",
+        emailPlaceholder: "john@example.com",
+        subjectLabel: "Subject",
+        subjectPlaceholder: "Project Inquiry / Collaboration",
+        messageLabel: "Message",
+        messagePlaceholder: "Hello Marc, I laid out a PCB and need...",
+        submitBtn: "Send Message",
+        connect: "Connect",
+        linkedinDesc: "Connect professionally"
+    },
+    fr: {
+        title: "Contact - Marc",
+        h1: "Contactez-moi",
+        subtitle: "Toujours disposé à échanger sur les systèmes embarqués, l'IA ou de potentielles opportunités de stage. N'hésitez pas à me contacter.",
+        sendMessage: "Envoyer un message",
+        success: "Merci de m'avoir contacté ! Je vous répondrai sous peu.",
+        nameLabel: "Nom",
+        namePlaceholder: "Jean Dupont",
+        emailLabel: "E-mail",
+        emailPlaceholder: "jean@exemple.com",
+        subjectLabel: "Sujet",
+        subjectPlaceholder: "Demande de projet / Collaboration",
+        messageLabel: "Message",
+        messagePlaceholder: "Bonjour Marc, j'ai besoin de...",
+        submitBtn: "Envoyer",
+        connect: "Réseaux",
+        linkedinDesc: "Connexion professionnelle"
+    },
+    tr: {
+        title: "İletişim - Marc",
+        h1: "İletişime Geçin",
+        subtitle: "Gömülü sistemler, yapay zeka veya potansiyel staj fırsatları üzerine konuşmaya her zaman açığım. İletişime geçmekten çekinmeyin.",
+        sendMessage: "Mesaj Gönder",
+        success: "Ulaştığınız için teşekkürler! Kısa süre içinde size döneceğim.",
+        nameLabel: "İsim",
+        namePlaceholder: "Ahmet Yılmaz",
+        emailLabel: "E-posta",
+        emailPlaceholder: "ahmet@ornek.com",
+        subjectLabel: "Konu",
+        subjectPlaceholder: "Proje İncelemesi / İşbirliği",
+        messageLabel: "Mesaj",
+        messagePlaceholder: "Merhaba Marc, bir PCB tasarımı yapıyorum...",
+        submitBtn: "Mesaj Gönder",
+        connect: "Bağlantılar",
+        linkedinDesc: "Profesyonel bağlantı kurun"
+    }
+};
+
+const t = texts[lang];
+---
+
+<BaseLayout title={t.title}>
+    <section class="section">
+        <div class="container animate-fade-up">
+            <h1 class="section-title"><span>{t.h1}</span></h1>
+            <p class="text-center text-muted lead mb-5">{t.subtitle}</p>
+            
+            <div class="grid grid-cols-1 md-grid-cols-2 lg-grid-cols-3 gap-5 mt-5">
+                
+                <!-- Contact Form Column -->
+                <div class="lg-grid-col-span-2" style="grid-column: span 1;">
+                    <style>
+                        @media (min-width: 1024px) {
+                            .lg-grid-col-span-2 { grid-column: span 2 !important; }
+                        }
+                    </style>
+                    <div class="glass p-4 p-md-5">
+                        <h3 class="mb-4" style="color: var(--color-accent-1); font-size: 1.5rem;">{t.sendMessage}</h3>
+                        
+                        <!-- Web3Forms Integration -->
+                        <div class="glass p-3 mb-4 d-none" id="formSuccessMessage" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10b981;">
+                            {t.success}
+                        </div>
+                        <form id="contactForm">
+                            <!-- Access Key -->
+                            <input type="hidden" name="access_key" value="cb44b232-2433-4145-8f06-9e7f37d1b760">
+                            
+                            <div class="grid grid-cols-1 md-grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <label for="name" class="form-label text-muted small">{t.nameLabel}</label>
+                                    <input type="text" name="name" id="name" class="form-control glass" required placeholder={t.namePlaceholder}>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label text-muted small">{t.emailLabel}</label>
+                                    <input type="email" name="email" id="email" class="form-control glass" required placeholder={t.emailPlaceholder}>
+                                </div>
+                                <div class="form-group md-col-span-2" style="grid-column: 1 / -1;">
+                                    <label for="subject" class="form-label text-muted small">{t.subjectLabel}</label>
+                                    <input type="text" name="subject" id="subject" class="form-control glass" required placeholder={t.subjectPlaceholder}>
+                                </div>
+                                <div class="form-group md-col-span-2" style="grid-column: 1 / -1;">
+                                    <label for="message" class="form-label text-muted small">{t.messageLabel}</label>
+                                    <textarea name="message" id="message" rows="5" class="form-control glass" required placeholder={t.messagePlaceholder}></textarea>
+                                </div>
+                                
+                                <!-- Honeypot Spam Protection -->
+                                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                                
+                                <div class="form-group md-col-span-2 mt-4" style="grid-column: 1 / -1;">
+                                    <button type="submit" id="submitButton" class="btn btn-primary w-100 py-3">{t.submitBtn}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Social Links Column -->
+                <div>
+                    <div class="d-flex flex-column gap-4 h-100 justify-content-center">
+                        <h3 class="mb-2 d-none lg-d-block" style="color: var(--color-accent-2); font-size: 1.5rem;">{t.connect}</h3>
+                        
+                        <!-- Email Card -->
+                        <a href="mailto:marc.anjaniaina@gmail.com" class="text-decoration-none">
+                            <div class="glass p-3 social-card d-flex align-items-center gap-3">
+                                <div class="icon-box d-flex justify-content-center align-items-center" style="width: 48px; height: 48px; background: rgba(59, 130, 246, 0.1); border-radius: 12px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--color-accent-1)" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold" style="color: var(--color-text-primary);">Email</h6>
+                                    <small class="text-muted">marc.anjaniaina@gmail.com</small>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- LinkedIn Card -->
+                        <a href="https://www.linkedin.com/in/marc-anjaniaina-ravelontsalama/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                            <div class="glass p-3 social-card d-flex align-items-center gap-3">
+                                <div class="icon-box d-flex justify-content-center align-items-center" style="width: 48px; height: 48px; background: rgba(59, 130, 246, 0.1); border-radius: 12px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-accent-1)" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold" style="color: var(--color-text-primary);">LinkedIn</h6>
+                                    <small class="text-muted">{t.linkedinDesc}</small>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- GitHub Card -->
+                        <a href="https://github.com/marcravel" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                            <div class="glass p-3 social-card d-flex align-items-center gap-3">
+                                <div class="icon-box d-flex justify-content-center align-items-center" style="width: 48px; height: 48px; background: rgba(59, 130, 246, 0.1); border-radius: 12px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="var(--color-accent-1)" class="bi bi-github" viewBox="0 0 16 16">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold" style="color: var(--color-text-primary);">GitHub</h6>
+                                    <small class="text-muted">marcravel</small>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- YouTube Card -->
+                        <a href="https://www.youtube.com/@Code-Copper" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                            <div class="glass p-3 social-card d-flex align-items-center gap-3">
+                                <div class="icon-box d-flex justify-content-center align-items-center" style="width: 48px; height: 48px; background: rgba(59, 130, 246, 0.1); border-radius: 12px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--color-accent-1)" class="bi bi-youtube" viewBox="0 0 16 16">
+                                        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172 1.886.22 3.404.049 1.518.049 3.024-.029 3.42a2.01 2.01 0 0 1-1.415 1.42c-1.123.3-5.288.332-6.11.335h-.089c-.822-.003-4.987-.033-6.11-.335a2.01 2.01 0 0 1-1.415-1.42c-.101-.38-.172-1.886-.22-3.404-.049-1.518-.049-3.024.029-3.42a2.01 2.01 0 0 1 1.415-1.42c1.123-.3 5.288-.332 6.11-.335M5.525 6.525v2.95l2.95-1.475-2.95-1.475z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold" style="color: var(--color-text-primary);">YouTube</h6>
+                                    <small class="text-muted">Code & Copper</small>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+/* Form Styling */
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    color: var(--color-text-primary);
+    background-color: transparent;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-accent-1);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+/* Unified Hover Effects for Social Cards */
+.social-card {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.social-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent-1);
+}
+</style>
+
+<script>
+    const contactForm = document.getElementById('contactForm');
+    const submitButton = document.getElementById('submitButton');
+    const successMessage = document.getElementById('formSuccessMessage');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // UI Feedback: Button disabled state
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.innerHTML = 'Sending...';
+            submitButton.disabled = true;
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    contactForm.reset();
+                    successMessage.classList.remove('d-none');
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.classList.add('d-none');
+                    }, 5000);
+                } else {
+                    console.error('Form submission failed.');
+                }
+            } catch (error) {
+                console.error('Error submitting form', error);
+            } finally {
+                // Restore Button state
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+            }
+        });
+    }
+</script>
+</file>
+
+<file path="src/components/pages/ProjectsList.astro">
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../ProjectCard.astro';
+import projectsData from '../../data/projects.json';
+
+export interface Props {
+    lang: 'en' | 'fr' | 'tr';
+}
+const { lang } = Astro.props;
+
+const activeProjects = projectsData.filter((project) => project.active);
+const gridClassDesktop = activeProjects.length === 2 ? 'lg-grid-cols-2' : 'lg-grid-cols-3';
+
+const texts = {
+    en: {
+        title: "Projects - Marc",
+        h1: "All Projects",
+        subtitle: "A comprehensive archive of my robotics, automation, and embedded systems work.",
+        in_development: "Additional systems in active development."
+    },
+    fr: {
+        title: "Projets - Marc",
+        h1: "Tous les projets",
+        subtitle: "Une archive complète de mes travaux en robotique, automatisation et systèmes embarqués.",
+        in_development: "Systèmes supplémentaires en cours de développement."
+    },
+    tr: {
+        title: "Projeler - Marc",
+        h1: "Tüm Projeler",
+        subtitle: "Robotik, otomasyon ve gömülü sistemler çalışmalarımın kapsamlı bir arşivi.",
+        in_development: "Geliştirilme aşamasında olan ek sistemler."
+    }
+};
+
+const t = texts[lang];
+---
+
+<BaseLayout title={t.title}>
+    <section class="section">
+        <div class="container animate-fade-up">
+            <h1 class="section-title"><span>{t.h1}</span></h1>
+            <p class="text-center text-muted lead mb-5">{t.subtitle}</p>
+            
+            <div class={`grid grid-cols-1 md-grid-cols-2 ${gridClassDesktop} gap-4 mt-5`}>
+                {activeProjects.map((project) => (
+                    <ProjectCard project={project} lang={lang} />
+                ))}
+            </div>
+
+            <div class="mt-5 text-center d-flex align-items-center justify-content-center gap-2 animate-fade-up" style="animation-delay: 0.4s;">
+                <span style="display: inline-block; width: 8px; height: 8px; background-color: var(--color-accent-1); border-radius: 50%; box-shadow: 0 0 8px var(--color-accent-1); animation: pulseIndicator 2s infinite;"></span>
+                <p class="small text-muted mb-0 fst-italic">{t.in_development}</p>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+</file>
+
+<file path="src/pages/contacts.astro">
+---
+import Contacts from '../components/pages/Contacts.astro';
+---
+<Contacts lang="en" />
+</file>
+
+<file path="astro.config.mjs">
+import { defineConfig } from 'astro/config';
+
+export default defineConfig({
+  // Replace with your actual GitHub username
+  site: 'https://marcravel.github.io/engineering_portfolio', 
+  
+  // IF your repository is named something like "portfolio" instead of "username.github.io", 
+  // you MUST include the base property matching the repo name exactly:
+  base: '/engineering_portfolio', 
+
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fr', 'tr'],
+    routing: {
+        prefixDefaultLocale: false
+    }
+  }
+});
+</file>
+
+<file path="src/components/pages/Home.astro">
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../ProjectCard.astro";
+import projectsData from "../../data/projects.json";
+import profileImg from "../../assets/profile.jpeg";
+import { useTranslatedPath } from "../../i18n/ui";
+
+export interface Props {
+    lang: "en" | "fr" | "tr";
+}
+const { lang } = Astro.props;
+const translatePath = useTranslatedPath(lang);
+
+const activeProjects = projectsData.filter((project) => project.active);
+const gridClassDesktop =
+    activeProjects.length === 2 ? "lg-grid-cols-2" : "lg-grid-cols-3";
+
+const texts = {
+    en: {
+        portfolio: "👋 Welcome to my engineering portfolio",
+        greeting: "Hi, I'm Marc.",
+        subtitle: "Electronics, Embedded Systems & Robotics",
+        intro: "I'm a 3rd-year Electrical and Electronics Engineering student at Selçuk University, working across robotics, computer vision, AI, and embedded systems. I'm mostly software-side (Python, C/C++, and Linux) but I get my hands on the hardware when needed.",
+        view_projects: "View Projects",
+        download_cv: "Download CV",
+        skills: "Skills Overview",
+        programming: {
+            title: "Programming",
+            desc: "C/C++, Python, OpenCV, PyTorch. AI/ML workflows, scripting, Linux tooling.",
+        },
+        embedded: {
+            title: "Embedded Systems",
+            desc: "STM32, ESP32, PIC — bare-metal & HAL. UART, SPI, I²C, timers, interrupts, low-level C firmware.",
+        },
+        electronics: {
+            title: "Electronics",
+            desc: "Analog & digital circuit design, PCB prototyping, sensor/actuator interfacing, power stages.",
+        },
+        robotics: {
+            title: "Robotics & Control",
+            desc: "Autonomous systems, PID control, mechatronics integration. Competition experience.",
+        },
+        selected_projects: "Selected Projects",
+        view_all: "View All",
+        in_development: "Additional systems in active development.",
+    },
+    fr: {
+        portfolio: "👋 Bienvenue sur mon portfolio d'ingénierie",
+        greeting: "Bonjour, je suis Marc.",
+        subtitle: "Électronique, Systèmes Embarqués & Robotique",
+        intro: "Je suis étudiant en 3ème année de génie électrique et électronique à l'Université de Selçuk, travaillant dans la robotique, la vision par ordinateur, l'IA et les systèmes embarqués. Je suis principalement orienté vers les logiciels (Python, C/C++ et Linux) mais je mets la main à la pâte avec le matériel quand c'est nécessaire.",
+        view_projects: "Voir les projets",
+        download_cv: "Télécharger CV",
+        skills: "Aperçu des compétences",
+        programming: {
+            title: "Programmation",
+            desc: "C/C++, Python, OpenCV, PyTorch. Workflows IA/ML, scripts, outils Linux.",
+        },
+        embedded: {
+            title: "Systèmes Embarqués",
+            desc: "STM32, ESP32, PIC — bare-metal & HAL. UART, SPI, I²C, timers, interruptions, firmware C bas niveau.",
+        },
+        electronics: {
+            title: "Électronique",
+            desc: "Conception de circuits, prototypage PCB, interfaçage capteurs/actionneurs, étages de puissance.",
+        },
+        robotics: {
+            title: "Robotique & Contrôle",
+            desc: "Systèmes autonomes, contrôle PID, intégration mécatronique. Expérience en compétition.",
+        },
+        selected_projects: "Projets Sélectionnés",
+        view_all: "Voir tout",
+        in_development: "Systèmes supplémentaires en cours de développement.",
+    },
+    tr: {
+        portfolio: "👋 Mühendislik portföyüme hoş geldiniz",
+        greeting: "Merhaba, ben Marc.",
+        subtitle: "Elektronik, Gömülü Sistemler ve Robotik",
+        intro: "Selçuk Üniversitesi'nde 3. sınıf Elektrik ve Elektronik Mühendisliği öğrencisiyim, robotik, görüntü işleme, yapay zeka ve gömülü sistemler üzerinde çalışıyorum. Çoğunlukla yazılım tarafındayım (Python, C/C++ ve Linux) ancak gerektiğinde donanımla da ilgileniyorum.",
+        view_projects: "Projeleri Gör",
+        download_cv: "CV İndir",
+        skills: "Yeteneklere Genel Bakış",
+        programming: {
+            title: "Programlama",
+            desc: "C/C++, Python, OpenCV, PyTorch. YZ/ML iş akışları, betik, Linux araçları.",
+        },
+        embedded: {
+            title: "Gömülü Sistemler",
+            desc: "STM32, ESP32, PIC — bare-metal & HAL. UART, SPI, I²C, zamanlayıcılar, kesme, düşük seviye C.",
+        },
+        electronics: {
+            title: "Elektronik",
+            desc: "Devre tasarımı, PCB prototipleme, sensör/aktüatör arayüzü, güç katları.",
+        },
+        robotics: {
+            title: "Robotik & Kontrol",
+            desc: "Otonom sistemler, PID kontrol, mekatronik entegrasyon. Yarışma deneyimi.",
+        },
+        selected_projects: "Seçili Projeler",
+        view_all: "Tümünü Gör",
+        in_development: "Geliştirilme aşamasında olan ek sistemler.",
+    },
+};
+const t = texts[lang];
+---
+
+<BaseLayout title="Marc | Engineering Portfolio">
+    <!-- ===================== HERO SECTION ===================== -->
+    <header
+        class="section pb-5"
+        style="min-height: 80vh; display: flex; align-items: center;"
+    >
+        <div class="container w-100">
+            <div
+                class="grid grid-cols-1 md-grid-cols-2 align-items-center gap-5"
+            >
+                <!-- Text -->
+                <div class="animate-fade-up">
+                    <div
+                        class="d-inline-block mb-3 px-3 py-2 small"
+                        style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 9999px; font-weight: 500; color: var(--color-text-primary);"
+                    >
+                        {t.portfolio}
+                    </div>
+                    <h1 class="mb-3" style="font-size: 4rem;">
+                        <span class="gradient-text">{t.greeting}</span>
+                    </h1>
+                    <h2
+                        class="mb-4 fw-light"
+                        style="font-size: 1.75rem; color: var(--color-text-secondary);"
+                    >
+                        {t.subtitle}
+                    </h2>
+                    <p class="lead mb-5">
+                        {t.intro}
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a
+                            href={translatePath("/projects")}
+                            class="btn btn-primary"
+                        >
+                            {t.view_projects}
+                        </a>
+                        <a
+                            href={`${import.meta.env.BASE_URL}/docs/cv.pdf`}
+                            class="btn btn-outline disabled"
+                            target="_blank"
+                            style="opacity: 0.5; pointer-events: none;"
+                        >
+                            {t.download_cv}
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile image -->
+                <div class="d-flex justify-content-center">
+                    <div
+                        class="glass p-2 floating-container"
+                        style="border-radius: 24px; max-width: 400px; width: 100%;"
+                    >
+                        <img
+                            src={profileImg.src}
+                            class="img-fluid profile-img-hero w-100"
+                            alt="Marc Ravelontsalama"
+                            style="border-radius: 16px; display: block;"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        @keyframes rotate3In {
+            0% {
+                transform: perspective(1200px) rotateY(-30deg) rotateX(15deg)
+                    translateZ(-100px) scale(0.9);
+                opacity: 0;
+                box-shadow: 0 0 0 rgba(59, 130, 246, 0);
+            }
+
+            100% {
+                transform: perspective(1000px) rotateY(-8deg) rotateX(5deg)
+                    scale(1.05);
+                opacity: 1;
+                box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+            }
+        }
+
+        @keyframes floating3D {
+            0%,
+            100% {
+                transform: translateY(0) rotateY(0deg) rotateX(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotateY(3deg) rotateX(-2deg);
+            }
+        }
+
+        .floating-container {
+            animation: floating3D 6s ease-in-out 1.5s infinite;
+            will-change: transform;
+        }
+
+        .profile-img-hero {
+            animation: rotate3In 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+                both;
+            transform-origin: center;
+            backface-visibility: hidden;
+            transform: perspective(1000px) rotateY(-8deg) rotateX(5deg)
+                scale(1.05);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+
+    <!-- ===================== SKILLS SECTION ===================== -->
+    <section class="section py-5">
+        <div class="container">
+            <h2 class="mb-5 section-title"><span>{t.skills}</span></h2>
+
+            <div
+                class="grid grid-cols-1 md-grid-cols-2 lg-grid-cols-4 gap-4 animate-fade-up"
+                style="animation-delay: 0.2s;"
+            >
+                <div
+                    class="glass p-4 h-100"
+                    style="transition: transform 0.3s; cursor: default;"
+                    onmouseover="this.style.transform='translateY(-5px)'"
+                    onmouseout="this.style.transform='translateY(0)'"
+                >
+                    <h5
+                        class="mb-3"
+                        style="color: var(--color-accent-1); font-weight: 700;"
+                    >
+                        {t.programming.title}
+                    </h5>
+                    <p class="small text-muted mb-0">{t.programming.desc}</p>
+                </div>
+
+                <div
+                    class="glass p-4 h-100"
+                    style="transition: transform 0.3s; cursor: default;"
+                    onmouseover="this.style.transform='translateY(-5px)'"
+                    onmouseout="this.style.transform='translateY(0)'"
+                >
+                    <h5
+                        class="mb-3"
+                        style="color: var(--color-accent-2); font-weight: 700;"
+                    >
+                        {t.embedded.title}
+                    </h5>
+                    <p class="small text-muted mb-0">{t.embedded.desc}</p>
+                </div>
+
+                <div
+                    class="glass p-4 h-100"
+                    style="transition: transform 0.3s; cursor: default;"
+                    onmouseover="this.style.transform='translateY(-5px)'"
+                    onmouseout="this.style.transform='translateY(0)'"
+                >
+                    <h5
+                        class="mb-3"
+                        style="color: var(--color-accent-1); font-weight: 700;"
+                    >
+                        {t.electronics.title}
+                    </h5>
+                    <p class="small text-muted mb-0">{t.electronics.desc}</p>
+                </div>
+
+                <div
+                    class="glass p-4 h-100"
+                    style="transition: transform 0.3s; cursor: default;"
+                    onmouseover="this.style.transform='translateY(-5px)'"
+                    onmouseout="this.style.transform='translateY(0)'"
+                >
+                    <h5
+                        class="mb-3"
+                        style="color: var(--color-accent-2); font-weight: 700;"
+                    >
+                        {t.robotics.title}
+                    </h5>
+                    <p class="small text-muted mb-0">{t.robotics.desc}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PROJECTS PREVIEW ===================== -->
+    <section class="section py-5 mb-5">
+        <div class="container">
+            <div
+                class="d-flex flex-wrap justify-content-between align-items-center mb-5 gap-3"
+            >
+                <h2 class="section-title mb-0" style="margin-bottom: 0;">
+                    <span>{t.selected_projects}</span>
+                </h2>
+                <a
+                    href={translatePath("/projects")}
+                    class="btn btn-outline"
+                    style="padding: 0.5rem 1.25rem;"
+                >
+                    <span class="gradient-text">{t.view_all}</span>
+                </a>
+            </div>
+
+            <div
+                class={`grid grid-cols-1 md-grid-cols-2 ${gridClassDesktop} gap-4 animate-fade-up`}
+                style="animation-delay: 0.3s;"
+            >
+                {
+                    activeProjects.map((project) => (
+                        <ProjectCard project={project} lang={lang} />
+                    ))
+                }
+            </div>
+
+            <div
+                class="mt-5 text-center d-flex align-items-center justify-content-center gap-2 animate-fade-up"
+                style="animation-delay: 0.4s;"
+            >
+                <span
+                    style="display: inline-block; width: 8px; height: 8px; background-color: var(--color-accent-1); border-radius: 50%; box-shadow: 0 0 8px var(--color-accent-1); animation: pulseIndicator 2s infinite;"
+                ></span>
+                <p class="small text-muted mb-0 fst-italic">
+                    {t.in_development}
+                </p>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+</file>
+
+<file path="src/pages/about.astro">
+---
+import About from '../components/pages/About.astro';
+---
+<About lang="en" />
+</file>
+
+<file path="src/pages/projects/index.astro">
+---
+import ProjectsList from '../../components/pages/ProjectsList.astro';
+---
+<ProjectsList lang="en" />
+</file>
+
+<file path="src/components/pages/About.astro">
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export interface Props {
+    lang: "en" | "fr" | "tr";
+}
+const { lang } = Astro.props;
+
+// Toggle for Turkish Scholarship badge
+const showScholarship = false;
+
+const courseLinks = {
+    course1:
+        "https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=XV1hBaa9oN",
+    course2: "https://www.coursera.org/verify/HC796LSS9QRM",
+    course3:
+        "https://api.badgr.io/public/assertions/JkBrRzqfSDaWcRq_v04m2w?identity__email=marc.anjaniaina%40gmail.com",
+    course4: "https://coursera.org/verify/XQCPABZTSJMW",
+};
+
+const texts = {
+    en: {
+        title: "About - Marc",
+        h1: "About Me",
+        profSummary: "Professional Summary",
+        profDesc:
+            "3rd-year Electrical and Electronics Engineering student specializing in software-driven systems. I focus primarily on Artificial Intelligence, Computer Vision, and high-level control algorithms, supported by a practical foundation in embedded hardware. I am currently building personal projects in these domains and actively seeking internship opportunities.",
+        techMatrix: "Technical Skills Matrix",
+        hwEmb: "Hardware & Embedded",
+        softAi: "Software, AI & Control",
+        toolsMulti: "Tools & Multimedia",
+        languages: "Languages",
+        langLvl: { pro: "Professional", fluent: "Fluent", native: "Native" },
+        eduHonors: "Education & Honors",
+        edu1: {
+            title: "Bachelor of Electrical and Electronics Engineering",
+            year: "2023 – Present • 3rd Year Student",
+            loc: "Faculty of Technology, Selçuk Üniversitesi | Konya, Türkiye",
+            badge: "🏆 Turkish Government Scholarship Awardee",
+        },
+        edu2: {
+            title: "High School Diploma (Scientific)",
+            year: "2017 – 2021",
+            loc: "Lycée Privé Saint Joseph | Antsirabe, Madagascar",
+            badge: "🎓 Magna Cum Laude (Mention Bien)",
+        },
+        experience: "Experiences",
+        exp1: {
+            title: "Programmer and Robotics Trainee",
+            year: "Nov 2021 – Jun 2022",
+            loc: "ITRAS Group | Antananarivo, Madagascar",
+            li1: "Developed optimized algorithms for path planning and control systems.",
+            li2: "Designed and created microcontroller-based circuit boards for controlling sensors, motors, and actuators.",
+            li3: "Built maze-solving and line-following robots demonstrating strong problem-solving and creative thinking.",
+        },
+        courses: "Courses",
+        certTitle: "View Certificate",
+        course1: {
+            title: "Introduction to Deep Learning",
+            year: "Apr 2026",
+            loc: "Online Course | BTK Akademi",
+            li1: "Mastered fundamental deep learning concepts including ANNs, CNNs, RNNs, and LSTMs",
+            li2: "Gained knowledge of deep learning tools, programming languages, and real-world applications",
+        },
+        course2: {
+            title: "Modern Robotics, Course 1: Foundation of Robot Motion",
+            year: "Mar 2024",
+            loc: "MOOC | Northwestern University on Coursera",
+            li1: "Mastered fundamental robotics concepts (configuration space, motion representation, rigid body motion)",
+            li2: "Applied linear algebra principles for efficient matrix using Python",
+            li3: "Gained practical experience with CoppeliaSim robot simulator",
+        },
+        course3: {
+            title: "HTML, CSS, and Javascript for Web Developers",
+            year: "Jul 2023 - Aug 2023",
+            loc: "MOOC | Johns Hopkins University on Coursera",
+            li1: "Built responsive, mobile-friendly web pages using Bootstrap components and grid layouts",
+        },
+        course4: {
+            title: "English for Science, Technology, Engineering and Mathematics",
+            year: "May 2023",
+            loc: "MOOC | Online Professional English Network sponsored by the U.S. Department of State",
+            li1: "Enhanced language proficiency and understanding of STEM topics through a certified online course",
+        },
+        community: "Community Involvement",
+        com1: {
+            title: "Multimedia Coordinator",
+            year: "Since Dec 2025",
+            loc: "Malagasy Culture and Solidarity Association in Turkey",
+            li1: "Assuring the association's online presence and visibility",
+            li2: "Organizing events and activities to promote the association's mission and goals",
+            li3: "Building and maintaining relationships with members and stakeholders",
+        },
+        com2: {
+            title: "Graphic Designer",
+            year: "Since Dec 2025",
+            loc: "Afrokonya",
+            li1: "Designed promotional videos, posters, and invitations for events using Adobe Premiere Pro and Photoshop.",
+            li2: "Conducted field shoots (photography and videography) for events and organized social media sharing processes.",
+        },
+    },
+    fr: {
+        title: "À propos - Marc",
+        h1: "À propos de moi",
+        profSummary: "Résumé Professionnel",
+        profDesc:
+            "Étudiant en 3ème année de Génie Électrique et Électronique, spécialisé dans les systèmes axés sur les logiciels. Je me concentre principalement sur l'intelligence artificielle, la vision par ordinateur et les algorithmes de contrôle, en m'appuyant sur une base pratique en matériel embarqué. Je développe actuellement des projets personnels dans ces domaines et recherche activement des opportunités de stage.",
+        techMatrix: "Matrice de Compétences Techniques",
+        hwEmb: "Matériel & Embarqué",
+        softAi: "Logiciel, IA & Contrôle",
+        toolsMulti: "Outils & Multimédia",
+        languages: "Langues",
+        langLvl: {
+            pro: "Professionnel",
+            fluent: "Courant",
+            native: "Maternel",
+        },
+        eduHonors: "Éducation & Distinctions",
+        edu1: {
+            title: "Licence en Génie Électrique et Électronique",
+            year: "2023 – Présent • Étudiant en 3ème année",
+            loc: "Faculté de Technologie, Selçuk Üniversitesi | Konya, Turquie",
+            badge: "🏆 Boursier du Gouvernement Turc",
+        },
+        edu2: {
+            title: "Diplôme d'Études Secondaires (Scientifique)",
+            year: "2017 – 2021",
+            loc: "Lycée Privé Saint Joseph | Antsirabe, Madagascar",
+            badge: "🎓 Mention Bien",
+        },
+        experience: "Expériences",
+        exp1: {
+            title: "Stagiaire Programmeur et Robotique",
+            year: "Nov 2021 – Juin 2022",
+            loc: "Groupe ITRAS | Antananarivo, Madagascar",
+            li1: "Développement d'algorithmes optimisés pour la planification de trajectoire.",
+            li2: "Conception et création de circuits imprimés basés sur microcontrôleur pour le contrôle.",
+            li3: "Construction de robots résolveurs de labyrinthes et suiveurs de lignes.",
+        },
+        courses: "Cours",
+        certTitle: "Voir le certificat",
+        course1: {
+            title: "Introduction au Deep Learning",
+            year: "Avr 2026",
+            loc: "Formation en ligne | BTK Akademi",
+            li1: "Maîtrise des concepts fondamentaux du deep learning, y compris les ANNs, CNNs, RNNs et LSTMs",
+            li2: "Acquisition de connaissances sur les outils de deep learning, les langages de programmation et les applications du monde réel",
+        },
+        course2: {
+            title: "Robotique Moderne, Cours 1 : Fondation du mouvement des robots",
+            year: "Mars 2024",
+            loc: "MOOC | Université Northwestern sur Coursera",
+            li1: "Maîtrise des concepts fondamentaux de la robotique",
+            li2: "Application des principes d'algèbre linéaire en utilisant Python",
+            li3: "Acquisition d'une expérience pratique avec le simulateur CoppeliaSim",
+        },
+        course3: {
+            title: "HTML, CSS et Javascript pour les développeurs Web",
+            year: "Juil 2023 - Août 2023",
+            loc: "MOOC | Université Johns Hopkins sur Coursera",
+            li1: "Création de pages Web réactives à l'aide de composants Bootstrap",
+        },
+        course4: {
+            title: "Anglais pour les sciences, la technologie, l'ingénierie et les mathématiques",
+            year: "Mai 2023",
+            loc: "MOOC | Réseau professionnel d'anglais parrainé par le Département d'État américain",
+            li1: "Amélioration des compétences linguistiques",
+        },
+        community: "Engagement Communautaire",
+        com1: {
+            title: "Coordinateur Multimédia",
+            year: "Depuis Déc 2025",
+            loc: "Association de Culture et de Solidarité Malgache en Turquie",
+            li1: "Assurer la présence et la visibilité en ligne",
+            li2: "Organisation d'événements et d'activités",
+            li3: "Établir et maintenir des relations avec les membres",
+        },
+        com2: {
+            title: "Designer Graphique",
+            year: "Depuis Déc 2025",
+            loc: "Afrokonya",
+            li1: "Conception de vidéos promotionnelles, d'affiches et d'invitations pour des événements à l'aide d'Adobe Premiere Pro et Photoshop.",
+            li2: "Réalisation de prises de vue sur le terrain (photographie et vidéo) lors d'événements et organisation des processus de partage sur les réseaux sociaux.",
+        },
+    },
+    tr: {
+        title: "Hakkımda - Marc",
+        h1: "Hakkımda",
+        profSummary: "Profesyonel Özet",
+        profDesc:
+            "Yazılım odaklı sistemlerde uzmanlaşan 3. sınıf Elektrik-Elektronik Mühendisliği öğrencisiyim. Temel gömülü donanım bilgisiyle desteklenen Yapay Zeka, Görüntü İşleme ve yüksek seviyeli kontrol algoritmalarına odaklanıyorum. Şu anda bu alanlarda kişisel projeler geliştiriyor ve aktif olarak staj fırsatları arıyorum.",
+        techMatrix: "Teknik Yetenek Matrisi",
+        hwEmb: "Donanım ve Gömülü Sistemler",
+        softAi: "Yazılım, Yapay Zeka ve Kontrol",
+        toolsMulti: "Araçlar ve Multimedya",
+        languages: "Diller",
+        langLvl: { pro: "Profesyonel", fluent: "Akıcı", native: "Anadil" },
+        eduHonors: "Eğitim ve Başarılar",
+        edu1: {
+            title: "Elektrik ve Elektronik Mühendisliği Lisans",
+            year: "2023 – Günümüz • 3. Sınıf Öğrencisi",
+            loc: "Teknoloji Fakültesi, Selçuk Üniversitesi | Konya, Türkiye",
+            badge: "🏆 Türkiye Bursları Bursiyeri",
+        },
+        edu2: {
+            title: "Lise Diploması (Sayısal)",
+            year: "2017 – 2021",
+            loc: "Lycée Privé Saint Joseph | Antsirabe, Madagaskar",
+            badge: "🎓 Yüksek Onur Derecesi (Takdir)",
+        },
+        experience: "Deneyimler",
+        exp1: {
+            title: "Yazılım ve Robotik Stajyeri",
+            year: "Kas 2021 – Haz 2022",
+            loc: "ITRAS Group | Antananarivo, Madagaskar",
+            li1: "Yol planlaması ve kontrol sistemleri için optimize edilmiş algoritmalar geliştirdi.",
+            li2: "Sensörleri, motorları ve aktüatörleri kontrol etmek için devre kartları oluşturdu.",
+            li3: "Labirent çözen ve çizgi izleyen robotlar inşa etti.",
+        },
+        courses: "Kurslar",
+        certTitle: "Sertifikayı Görüntüle",
+        course1: {
+            title: "Derin Öğrenmeye Giriş",
+            year: "Nis 2026",
+            loc: "Çevrim İçi Eğitim | BTK Akademi",
+            li1: "Temel derin öğrenme kavramları (ANNs, CNNs, RNNs, LSTMs) ve yaygın teknikler öğrenildi",
+            li2: "Derin öğrenme geliştirmek için gerekli programlama dilleri, araçlar ve gerçek hayattaki kullanım alanları hakkında bilgi sahibi olundu",
+        },
+        course2: {
+            title: "Modern Robotik, Kurs 1: Robot Hareketinin Temeli",
+            year: "Mar 2024",
+            loc: "MOOC | Northwestern University, Coursera",
+            li1: "Temel robotik kavramlarına (konfigürasyon uzayı) hakim olundu",
+            li2: "Doğrusal cebir ilkeleri Python kullanarak uygulandı",
+            li3: "CoppeliaSim robot simülatörü kullanıldı",
+        },
+        course3: {
+            title: "Web Geliştiricileri İçin HTML, CSS ve Javascript",
+            year: "Tem 2023 - Ağu 2023",
+            loc: "MOOC | Johns Hopkins University, Coursera",
+            li1: "Bootstrap bileşenleri kullanarak duyarlı web sayfaları oluşturuldu",
+        },
+        course4: {
+            title: "Mühendislik ve Matematik için İngilizce",
+            year: "May 2023",
+            loc: "MOOC | ABD Dışişleri Bakanlığı sponsorluğunda",
+            li1: "Çevrimiçi bir kurs aracılığıyla STEM konularının anlaşılması ve dil yeterliliği artırıldı",
+        },
+        community: "Topluluk Katılımı",
+        com1: {
+            title: "Multimedya Koordinatörü",
+            year: "Ara 2025'ten beri",
+            loc: "Türkiye'de Malgaş Kültür ve Dayanışma Derneği",
+            li1: "Derneğin çevrimiçi varlığının sağlanması",
+            li2: "Misyon ve hedefleri teşvik edici etkinlikleri organize etme",
+            li3: "Üyeler ve paydaşlarla ilişkiler kurma",
+        },
+        com2: {
+            title: "Grafik Tasarımcı",
+            year: "Ara 2025'ten beri",
+            loc: "Afrokonya",
+            li1: "Adobe Premiere Pro ve Photoshop kullanılarak etkinlikler için tanıtım videoları, afişler ve davetiyeler tasarlandı.",
+            li2: "Etkinliklerin saha çekimleri (fotoğraf ve video) gerçekleştirildi ve sosyal medya paylaşım süreçleri organize edildi.",
+        },
+    },
+};
+
+const t = texts[lang];
+---
+
+<BaseLayout title={t.title}>
+    <section class="section">
+        <div class="container animate-fade-up">
+            <h1 class="section-title"><span>{t.h1}</span></h1>
+
+            <div class="grid grid-cols-1 md-grid-cols-2 lg-grid-cols-2 gap-5">
+                <!-- Left Column: Bio & Skills -->
+                <div>
+                    <!-- Professional Summary -->
+                    <div class="glass p-4 p-md-5 mb-5">
+                        <h3
+                            class="mb-3"
+                            style="color: var(--color-accent-1); font-size: 1.5rem;"
+                        >
+                            {t.profSummary}
+                        </h3>
+                        <p
+                            class="lead"
+                            style="color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.8;"
+                        >
+                            {t.profDesc}
+                        </p>
+                    </div>
+
+                    <!-- Technical Skills Matrix -->
+                    <div class="glass p-4 p-md-5 mb-5">
+                        <h3
+                            class="mb-4"
+                            style="color: var(--color-accent-2); font-size: 1.5rem;"
+                        >
+                            {t.techMatrix}
+                        </h3>
+
+                        <div class="mb-4">
+                            <h5
+                                class="text-uppercase mb-3 small fw-bold"
+                                style="color: var(--color-text-secondary); letter-spacing: 1px;"
+                            >
+                                {t.hwEmb}
+                            </h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge px-3 py-2">PIC</span>
+                                <span class="badge px-3 py-2">STM32</span>
+                                <span class="badge px-3 py-2">ESP32</span>
+                                <span class="badge px-3 py-2">Arduino</span>
+                                <span class="badge px-3 py-2">PCB Design</span>
+                                <span class="badge px-3 py-2"
+                                    >Circuit Design</span
+                                >
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5
+                                class="text-uppercase mb-3 small fw-bold"
+                                style="color: var(--color-text-secondary); letter-spacing: 1px;"
+                            >
+                                {t.softAi}
+                            </h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(59, 130, 246, 0.5); color: #60a5fa;"
+                                    >C/C++</span
+                                >
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(59, 130, 246, 0.5); color: #60a5fa;"
+                                    >Python</span
+                                >
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(59, 130, 246, 0.5); color: #60a5fa;"
+                                    >OpenCV</span
+                                >
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(59, 130, 246, 0.5); color: #60a5fa;"
+                                    >Fuzzy Logic</span
+                                >
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(59, 130, 246, 0.5); color: #60a5fa;"
+                                    >ROS2</span
+                                >
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5
+                                class="text-uppercase mb-3 small fw-bold"
+                                style="color: var(--color-text-secondary); letter-spacing: 1px;"
+                            >
+                                {t.toolsMulti}
+                            </h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc;"
+                                    >Git</span
+                                >
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc;"
+                                    >HTML/CSS/JS</span
+                                >
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc;"
+                                    >Linux</span
+                                >
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc;"
+                                    >Video Editing</span
+                                >
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc;"
+                                    >YouTube "Code & Copper" Management</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="glass p-4 p-md-5 mb-5">
+                        <h3
+                            class="mb-4"
+                            style="color: var(--color-accent-1); font-size: 1.5rem;"
+                        >
+                            {t.languages}
+                        </h3>
+                        <div class="d-flex flex-column gap-3">
+                            <div
+                                class="d-flex align-items-center justify-content-between"
+                            >
+                                <strong
+                                    style="color: var(--color-text-primary);"
+                                    >English</strong
+                                >
+                                <div
+                                    style="flex-grow: 1; border-bottom: 1px dashed rgba(255,255,255,0.1); margin: 0 1rem;"
+                                >
+                                </div>
+                                <span
+                                    style="color: var(--color-text-secondary);"
+                                    >{t.langLvl.pro}</span
+                                >
+                            </div>
+                            <div
+                                class="d-flex align-items-center justify-content-between"
+                            >
+                                <strong
+                                    style="color: var(--color-text-primary);"
+                                    >French</strong
+                                >
+                                <div
+                                    style="flex-grow: 1; border-bottom: 1px dashed rgba(255,255,255,0.1); margin: 0 1rem;"
+                                >
+                                </div>
+                                <span
+                                    style="color: var(--color-text-secondary);"
+                                    >{t.langLvl.fluent}</span
+                                >
+                            </div>
+                            <div
+                                class="d-flex align-items-center justify-content-between"
+                            >
+                                <strong
+                                    style="color: var(--color-text-primary);"
+                                    >Turkish</strong
+                                >
+                                <div
+                                    style="flex-grow: 1; border-bottom: 1px dashed rgba(255,255,255,0.1); margin: 0 1rem;"
+                                >
+                                </div>
+                                <span
+                                    style="color: var(--color-text-secondary);"
+                                    >{t.langLvl.fluent}</span
+                                >
+                            </div>
+                            <div
+                                class="d-flex align-items-center justify-content-between"
+                            >
+                                <strong
+                                    style="color: var(--color-text-primary);"
+                                    >German</strong
+                                >
+                                <div
+                                    style="flex-grow: 1; border-bottom: 1px dashed rgba(255,255,255,0.1); margin: 0 1rem;"
+                                >
+                                </div>
+                                <span
+                                    style="color: var(--color-text-secondary);"
+                                    >A1</span
+                                >
+                            </div>
+                            <div
+                                class="d-flex align-items-center justify-content-between"
+                            >
+                                <strong
+                                    style="color: var(--color-text-primary);"
+                                    >Malagasy</strong
+                                >
+                                <div
+                                    style="flex-grow: 1; border-bottom: 1px dashed rgba(255,255,255,0.1); margin: 0 1rem;"
+                                >
+                                </div>
+                                <span
+                                    style="color: var(--color-text-secondary);"
+                                    >{t.langLvl.native}</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Education & Experience -->
+                <div>
+                    <h3
+                        class="mb-4"
+                        style="color: var(--color-accent-2); font-size: 1.5rem;"
+                    >
+                        {t.eduHonors}
+                    </h3>
+
+                    <!-- Education Card 1 -->
+                    <div class="glass p-4 mb-4 edu-card">
+                        <h5
+                            class="fw-bold mb-2"
+                            style="color: var(--color-text-primary);"
+                        >
+                            {t.edu1.title}
+                        </h5>
+                        <p
+                            class="mb-2 small fw-bold"
+                            style="color: var(--color-accent-1);"
+                        >
+                            {t.edu1.year}
+                        </p>
+                        <p
+                            class="small mb-3"
+                            style="color: var(--color-text-secondary);"
+                        >
+                            {t.edu1.loc}
+                        </p>
+                        {showScholarship && (
+                            <div class="mt-2">
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="background: rgba(59, 130, 246, 0.1); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3);"
+                                    >{t.edu1.badge}</span
+                                >
+                            </div>
+                        )}
+                    </div>
+
+                    <!-- Education Card 2 -->
+                    <div class="glass p-4 mb-5 edu-card">
+                        <h5
+                            class="fw-bold mb-2"
+                            style="color: var(--color-text-primary);"
+                        >
+                            {t.edu2.title}
+                        </h5>
+                        <p
+                            class="mb-2 small fw-bold"
+                            style="color: var(--color-accent-1);"
+                        >
+                            {t.edu2.year}
+                        </p>
+                        <p
+                            class="small mb-3"
+                            style="color: var(--color-text-secondary);"
+                        >
+                            {t.edu2.loc}
+                        </p>
+                        <div class="mt-2">
+                            <span
+                                class="badge px-3 py-2"
+                                style="background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1);"
+                                >{t.edu2.badge}</span
+                            >
+                        </div>
+                    </div>
+
+                    <h3
+                        class="mb-4 mt-5"
+                        style="color: var(--color-accent-1); font-size: 1.5rem;"
+                    >
+                        {t.experience}
+                    </h3>
+
+                    <!-- Experience Card 1 -->
+                    <div class="glass p-4 mb-5 edu-card">
+                        <h5
+                            class="fw-bold mb-2"
+                            style="color: var(--color-text-primary);"
+                        >
+                            {t.exp1.title}
+                        </h5>
+                        <p
+                            class="mb-2 small fw-bold"
+                            style="color: var(--color-accent-2);"
+                        >
+                            {t.exp1.year}
+                        </p>
+                        <p
+                            class="small mb-4"
+                            style="color: var(--color-text-secondary);"
+                        >
+                            {t.exp1.loc}
+                        </p>
+                        <ul
+                            class="small mb-0 ps-3"
+                            style="color: var(--color-text-secondary); line-height: 1.6;"
+                        >
+                            <li class="mb-2">{t.exp1.li1}</li>
+                            <li class="mb-2">{t.exp1.li2}</li>
+                            <li>{t.exp1.li3}</li>
+                        </ul>
+                    </div>
+
+                    <h3
+                        class="mb-4 mt-5"
+                        style="color: var(--color-accent-2); font-size: 1.5rem;"
+                    >
+                        {t.courses}
+                    </h3>
+
+                    <!-- Courses card 1-->
+                    <a
+                        href={courseLinks.course1}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-decoration-none course-link d-block"
+                    >
+                        <div class="glass p-4 mb-4 edu-card">
+                            <div class="cert-overlay">
+                                <span class="cert-btn">{t.certTitle}</span>
+                            </div>
+                            <h5
+                                class="fw-bold mb-2 course-title"
+                                style="color: var(--color-text-primary);"
+                            >
+                                {t.course1.title}
+                            </h5>
+                            <p
+                                class="mb-2 small fw-bold"
+                                style="color: var(--color-accent-1);"
+                            >
+                                {t.course1.year}
+                            </p>
+                            <p
+                                class="small mb-4"
+                                style="color: var(--color-text-secondary);"
+                            >
+                                {t.course1.loc}
+                            </p>
+                            <ul
+                                class="small mb-0 ps-3"
+                                style="color: var(--color-text-secondary); line-height: 1.6;"
+                            >
+                                <li class="mb-2">{t.course1.li1}</li>
+                                <li>{t.course1.li2}</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Courses card 2-->
+                    <a
+                        href={courseLinks.course2}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-decoration-none course-link d-block"
+                    >
+                        <div class="glass p-4 mb-4 edu-card">
+                            <div class="cert-overlay">
+                                <span class="cert-btn">{t.certTitle}</span>
+                            </div>
+                            <h5
+                                class="fw-bold mb-2 course-title"
+                                style="color: var(--color-text-primary);"
+                            >
+                                {t.course2.title}
+                            </h5>
+                            <p
+                                class="mb-2 small fw-bold"
+                                style="color: var(--color-accent-1);"
+                            >
+                                {t.course2.year}
+                            </p>
+                            <p
+                                class="small mb-4"
+                                style="color: var(--color-text-secondary);"
+                            >
+                                {t.course2.loc}
+                            </p>
+                            <ul
+                                class="small mb-0 ps-3"
+                                style="color: var(--color-text-secondary); line-height: 1.6;"
+                            >
+                                <li class="mb-2">{t.course2.li1}</li>
+                                <li class="mb-2">{t.course2.li2}</li>
+                                <li>{t.course2.li3}</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Courses card 3-->
+                    <a
+                        href={courseLinks.course3}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-decoration-none course-link d-block"
+                    >
+                        <div class="glass p-4 mb-4 edu-card">
+                            <div class="cert-overlay">
+                                <span class="cert-btn">{t.certTitle}</span>
+                            </div>
+                            <h5
+                                class="fw-bold mb-2 course-title"
+                                style="color: var(--color-text-primary);"
+                            >
+                                {t.course3.title}
+                            </h5>
+                            <p
+                                class="mb-2 small fw-bold"
+                                style="color: var(--color-accent-1);"
+                            >
+                                {t.course3.year}
+                            </p>
+                            <p
+                                class="small mb-4"
+                                style="color: var(--color-text-secondary);"
+                            >
+                                {t.course3.loc}
+                            </p>
+                            <ul
+                                class="small mb-0 ps-3"
+                                style="color: var(--color-text-secondary); line-height: 1.6;"
+                            >
+                                <li class="mb-2">{t.course3.li1}</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Courses card 4-->
+                    <a
+                        href={courseLinks.course4}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-decoration-none course-link d-block"
+                    >
+                        <div class="glass p-4 mb-5 edu-card">
+                            <div class="cert-overlay">
+                                <span class="cert-btn">{t.certTitle}</span>
+                            </div>
+                            <h5
+                                class="fw-bold mb-2 course-title"
+                                style="color: var(--color-text-primary);"
+                            >
+                                {t.course4.title}
+                            </h5>
+                            <p
+                                class="mb-2 small fw-bold"
+                                style="color: var(--color-accent-1);"
+                            >
+                                {t.course4.year}
+                            </p>
+                            <p
+                                class="small mb-4"
+                                style="color: var(--color-text-secondary);"
+                            >
+                                {t.course4.loc}
+                            </p>
+                            <ul
+                                class="small mb-0 ps-3"
+                                style="color: var(--color-text-secondary); line-height: 1.6;"
+                            >
+                                <li class="mb-2">{t.course4.li1}</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <h3
+                        class="mb-4 mt-5"
+                        style="color: var(--color-accent-1); font-size: 1.5rem;"
+                    >
+                        {t.community}
+                    </h3>
+
+                    <!-- Community card 1-->
+                    <div class="glass p-4 mb-4 edu-card">
+                        <h5
+                            class="fw-bold mb-2"
+                            style="color: var(--color-text-primary);"
+                        >
+                            {t.com1.title}
+                        </h5>
+                        <p
+                            class="mb-2 small fw-bold"
+                            style="color: var(--color-accent-2);"
+                        >
+                            {t.com1.year}
+                        </p>
+                        <p
+                            class="small mb-4"
+                            style="color: var(--color-text-secondary);"
+                        >
+                            {t.com1.loc}
+                        </p>
+                        <ul
+                            class="small mb-0 ps-3"
+                            style="color: var(--color-text-secondary); line-height: 1.6;"
+                        >
+                            <li class="mb-2">{t.com1.li1}</li>
+                            <li class="mb-2">{t.com1.li2}</li>
+                            <li>{t.com1.li3}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Community card 2-->
+                    <div class="glass p-4 mb-4 edu-card">
+                        <h5
+                            class="fw-bold mb-2"
+                            style="color: var(--color-text-primary);"
+                        >
+                            {t.com2.title}
+                        </h5>
+                        <p
+                            class="mb-2 small fw-bold"
+                            style="color: var(--color-accent-2);"
+                        >
+                            {t.com2.year}
+                        </p>
+                        <p
+                            class="small mb-4"
+                            style="color: var(--color-text-secondary);"
+                        >
+                            {t.com2.loc}
+                        </p>
+                        <ul
+                            class="small mb-0 ps-3"
+                            style="color: var(--color-text-secondary); line-height: 1.6;"
+                        >
+                            <li class="mb-2">{t.com2.li1}</li>
+                            <li>{t.com2.li2}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style is:global>
+    /* Hover Effects for Cards matching ProjectCards */
+    .edu-card {
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .edu-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--color-accent-1);
+    }
+
+    .ps-3 {
+        padding-left: 1rem;
+    }
+
+    .course-link {
+        color: inherit;
+    }
+
+    .cert-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 10, 10, 0.7);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+
+    .cert-btn {
+        background: var(--color-accent-1);
+        color: #fff;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transform: translateY(15px);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .course-link:hover .cert-overlay {
+        opacity: 1;
+    }
+
+    .course-link:hover .cert-btn {
+        transform: translateY(0);
+    }
+</style>
+</file>
+
+<file path="src/styles/global.css">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap');
+
+:root {
+  --color-bg: #0a0a0a;
+  --color-bg-elevated: rgba(30, 30, 40, 0.4);
+  --color-bg-card: rgba(255, 255, 255, 0.02);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-accent-1: #3b82f6; /* Blue */
+  --color-accent-2: #8b5cf6; /* Purple */
+  --font-primary: 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --container-width: 1100px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+body {
+  overflow-x: hidden;
+  background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent 40%),
+                    radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.1), transparent 40%);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent-1);
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.section-title span {
+  background: linear-gradient(to right, var(--color-accent-1), var(--color-accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Utilities */
+.glass {
+  background: var(--color-bg-elevated);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-accent-1), var(--color-accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-accent-1), var(--color-accent-2));
+  color: white;
+  box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+}
+
+.btn-primary:hover {
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(59, 130, 246, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(4px);
+}
+
+.btn-outline:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-accent-2);
+  background: rgba(139, 92, 246, 0.05);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- Layout & Utility additions replacing Bootstrap --- */
+/* Typography */
+.text-center { text-align: center; }
+.text-muted { color: var(--color-text-secondary); }
+.fw-bold { font-weight: 700; }
+.fw-light { font-weight: 300; }
+.text-uppercase { text-transform: uppercase; }
+.small { font-size: 0.875rem; }
+.lead { font-size: 1.25rem; opacity: 0.9; }
+
+.fs-1 { font-size: 2.5rem; }
+.fs-2 { font-size: 2rem; }
+.fs-3 { font-size: 1.75rem; }
+.fs-4 { font-size: 1.5rem; }
+.fs-5 { font-size: 1.25rem; }
+.fs-6 { font-size: 1rem; }
+.w-100 { width: 100%; }
+.h-100 { height: 100%; }
+.img-fluid { max-width: 100%; height: auto; }
+.rounded-full { border-radius: 9999px; }
+
+/* Display & Flex */
+.d-flex { display: flex; }
+.d-none { display: none; }
+.flex-column { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.align-items-center { align-items: center; }
+.align-items-stretch { align-items: stretch; }
+.justify-content-center { justify-content: center; }
+.justify-content-between { justify-content: space-between; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 1rem; }
+.gap-4 { gap: 1.5rem; }
+
+/* Margins & Paddings */
+.m-0 { margin: 0; }
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 3rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
+.mt-auto { margin-top: auto; }
+.ms-auto { margin-left: auto; }
+.me-2 { margin-right: 0.5rem; }
+.me-3 { margin-right: 1rem; }
+.p-0 { padding: 0; }
+.p-3 { padding: 1rem; }
+.p-4 { padding: 1.5rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.py-3 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-5 { padding-top: 3rem; padding-bottom: 3rem; }
+.px-3 { padding-left: 1rem; padding-right: 1rem; }
+.px-4 { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+/* Grid Systems */
+.grid { display: grid; gap: 1.5rem; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .md-flex-column { flex-direction: column; }
+    .md-text-center { text-align: center; }
+    .md-mt-4 { margin-top: 1.5rem; }
+    .section { padding: 60px 0; }
+    .section-title { font-size: 2rem; }
+}
+
+@media (min-width: 768px) {
+    .md-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .d-md-flex { display: flex; }
+    .d-md-none { display: none; }
+}
+
+@media (min-width: 1024px) {
+    .lg-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .lg-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .lg-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .lg-d-flex { display: flex; }
+    .lg-d-none { display: none; }
+}
+
+/* Base Component Additions */
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.375rem;
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+@keyframes pulseIndicator {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+</file>
+
+<file path="src/components/pages/ProjectDetail.astro">
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import fs from "fs/promises";
+import path from "path";
+import { useTranslatedPath } from "../../i18n/ui";
+
+export interface Props {
+    lang: "en" | "fr" | "tr";
+    project: any;
+}
+const { lang, project } = Astro.props;
+const translatePath = useTranslatedPath(lang);
+
+// Helper to determine the hero image URL with BASE_URL routing
+let heroImage = project.image;
+if (heroImage && !heroImage.startsWith("http")) {
+    const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+        ? import.meta.env.BASE_URL
+        : import.meta.env.BASE_URL + "/";
+    heroImage = `${baseUrl}${heroImage}`;
+}
+
+let descriptionContent = project.longDescription
+    ? typeof project.longDescription === "object"
+        ? project.longDescription[lang]
+        : project.longDescription
+    : project.description[lang] || project.description.en;
+let isTextFile =
+    typeof descriptionContent === "string" &&
+    descriptionContent.endsWith(".txt");
+if (isTextFile) {
+    try {
+        const filePath = path.join(
+            process.cwd(),
+            "public",
+            descriptionContent.replace(/^\/+/, ""),
+        );
+        descriptionContent = await fs.readFile(filePath, "utf-8");
+    } catch (err) {
+        console.error("Failed to read description file:", err);
+        descriptionContent =
+            project.description[lang] || project.description.en;
+    }
+}
+
+const subtitleRegex = /^(Project Overview|Role & Responsibilities|System Architecture|Results & Recognition|Aperçu du Projet|Rôle et Responsabilités|Architecture du Système|Résultats et Reconnaissance|Proje Özeti|Rol ve Sorumluluklar|Sistem Mimarisi|Sonuçlar ve Başarılar):?$/i;
+
+const parsedLongDescription = (
+    typeof descriptionContent === "string" ? descriptionContent : ""
+)
+    .split("\n")
+    .filter((p) => p.trim() !== "")
+    .map((p) => {
+        const trimmed = p.trim();
+        if (subtitleRegex.test(trimmed)) {
+            return `<h3 class="mb-3 mt-5" style="color: var(--color-accent-1); font-size: 1.5rem;">${trimmed}</h3>`;
+        }
+        return `<p class="mb-3 text-muted">${trimmed}</p>`;
+    })
+    .join("");
+
+const t_back = {
+    en: "Back to Projects",
+    fr: "Retour aux projets",
+    tr: "Projelere Dön",
+};
+const t_tech = {
+    en: "Technologies Built With",
+    fr: "Technologies Utilisées",
+    tr: "Kullanılan Teknolojiler",
+};
+const t_gallery = { en: "Gallery", fr: "Galerie", tr: "Galeri" };
+const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
+---
+
+<BaseLayout title={`${project.title[lang]} - Marc Projects`}>
+    <section class="section">
+        <div class="container animate-fade-up">
+            <!-- Navigation Back -->
+            <div class="mb-5">
+                <a
+                    href={translatePath("/projects")}
+                    class="text-decoration-none d-inline-flex align-items-center gap-2" style="color: var(--color-accent-1);"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                        ></path>
+                    </svg>
+                    <span style="font-weight: 500;">{t_back[lang]}</span>
+                </a>
+            </div>
+
+            <!-- Project Header -->
+            <div class="mb-5 text-center">
+                <div class="mb-4">
+                    <span class="badge px-4 py-2" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.5); color: #fff; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">
+                        {project.category[lang]}
+                    </span>
+                </div>
+                <h1 class="mb-4 gradient-text" style="font-size: 3rem;">{project.title[lang]}</h1>
+
+                {
+                    project.achievements && project.achievements[lang] && (
+                        <div class="d-inline-block p-3 rounded glass mb-5" style="border-left: 3px solid var(--color-accent-2);">
+                            <span
+                                style="color: var(--color-text-primary); font-weight: 600;"
+                            >
+                                {project.achievements[lang]}
+                            </span>
+                        </div>
+                    )
+                }
+
+                <!-- Technologies & Architecture right under title -->
+                <div class="mb-5 d-flex flex-column align-items-center">
+                    <h4
+                        class="text-uppercase mb-3 small fw-bold"
+                        style="color: var(--color-text-secondary); letter-spacing: 2px;"
+                    >
+                        {t_tech[lang]}
+                    </h4>
+                    <div class="d-flex flex-wrap justify-content-center gap-2">
+                        {
+                            project.techStack.map((tech) => (
+                                <span class="badge px-3 py-2" style="background: var(--color-bg-elevated); border: 1px solid var(--color-border); font-size: 0.9rem;">
+                                    {tech}
+                                </span>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg-grid-cols-3 gap-5">
+                <!-- Left Column: Gallery -->
+                <div class="order-2 lg-order-2">
+                    {
+                        project.gallery && project.gallery.length > 0 && (
+                            <div class="glass p-4 sticky-top" style="top: 100px;">
+                                <h3
+                                    class="mb-4"
+                                    style="color: var(--color-text-primary); font-size: 1.5rem;"
+                                >
+                                    {t_gallery[lang]}
+                                </h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    {project.gallery.map((galleryImg) => {
+                                        // Handle correct routing for gallery images
+                                        let imgPath = galleryImg;
+                                        if (!imgPath.startsWith("http")) {
+                                            const bUrl =
+                                                import.meta.env.BASE_URL.endsWith(
+                                                    "/",
+                                                )
+                                                    ? import.meta.env.BASE_URL
+                                                    : import.meta.env.BASE_URL +
+                                                      "/";
+                                            imgPath = `${bUrl}${imgPath}`;
+                                        }
+                                        return (
+                                            <div
+                                                class="glass overflow-hidden"
+                                                style="cursor: pointer; aspect-ratio: 1; padding: 0;"
+                                            >
+                                                <img
+                                                    src={imgPath}
+                                                    class="h-100 w-100 gallery-image"
+                                                    style="object-fit: cover; transition: transform 0.3s ease; display: block;"
+                                                    alt="Project Gallery Image"
+                                                    loading="lazy"
+                                                />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
+
+                <!-- Right Column: Media Hero & Description -->
+                <div class="lg-grid-col-span-2 order-1 lg-order-1" style="grid-column: span 2;">
+                    <!-- Media Hero (YouTube or Image) -->
+                    <div
+                        class="mb-5 glass overflow-hidden p-0"
+                    >
+                        {
+                            project.youtubeId ? (
+                                <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
+                                    <iframe
+                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                        src={`https://www.youtube.com/embed/${project.youtubeId}?rel=0`}
+                                        title="Technical hardware overview of the project"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                    />
+                                </div>
+                            ) : (
+                                heroImage && (
+                                    <img
+                                        src={heroImage}
+                                        alt={project.title[lang]}
+                                        class="w-100"
+                                        style="object-fit: cover; max-height: 500px; display: block;"
+                                    />
+                                )
+                            )
+                        }
+                    </div>
+
+                    <!-- Long Description -->
+                    <div class="mb-5 glass p-4 md-p-5">
+                        <h3
+                            class="mb-4 gradient-text"
+                            style="font-size: 2rem;"
+                        >
+                            {t_overview[lang]}
+                        </h3>
+                        <div class="project-details" style="line-height: 1.8; font-size: 1.1rem;">
+                            <span set:html={parsedLongDescription} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Modal -->
+    <div id="customImageModal" class="custom-modal">
+        <div class="custom-modal-content">
+            <span class="custom-modal-close">&times;</span>
+            <img id="customModalImage" src="" alt="Large project image view" />
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    .order-1 { order: 1; }
+    .order-2 { order: 2; }
+    @media (min-width: 1024px) {
+        .lg-order-1 { order: 1; }
+        .lg-order-2 { order: 2; }
+    }
+    
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .gallery-image:hover {
+        transform: scale(1.1);
+    }
+    
+    /* Custom Modal Styles */
+    .custom-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(5px);
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .custom-modal.show {
+        display: flex;
+        opacity: 1;
+    }
+    
+    .custom-modal-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+    }
+    
+    .custom-modal-content img {
+        max-width: 100%;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    
+    .custom-modal-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+    
+    .custom-modal-close:hover {
+        color: var(--color-accent-1);
+    }
+</style>
+
+<script>
+    const galleryImages = document.querySelectorAll(".gallery-image");
+    const modal = document.getElementById("customImageModal");
+    const modalImg = document.getElementById("customModalImage");
+    const closeBtn = document.querySelector(".custom-modal-close");
+
+    galleryImages.forEach((img) => {
+        img.addEventListener("click", function () {
+            if (modal && modalImg) {
+                modalImg.src = this.src;
+                modal.classList.add("show");
+                document.body.style.overflow = "hidden"; // Prevent scrolling
+            }
+        });
+    });
+
+    const closeModal = () => {
+        if (modal) {
+            modal.classList.remove("show");
+            document.body.style.overflow = "auto";
+        }
+    };
+
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    
+    if (modal) {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+</script>
+</file>
+
+<file path="src/pages/projects/[slug].astro">
+---
+import ProjectDetail from '../../components/pages/ProjectDetail.astro';
+import projectsData from '../../data/projects.json';
+
+export async function getStaticPaths() {
+  return projectsData
+    .filter((project) => project.active)
+    .map((project) => ({
+      params: { slug: project.slug },
+      props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+---
+<ProjectDetail lang="en" project={project} />
+</file>
+
+<file path="src/components/ProjectCard.astro">
+---
+import { useTranslatedPath } from '../i18n/ui';
+
+interface Props {
+  lang: 'en' | 'fr' | 'tr';
+  project: {
+    id: number;
+    category: Record<'en' | 'fr' | 'tr', string>;
+    title: Record<'en' | 'fr' | 'tr', string>;
+    techStack: string[];
+    description: Record<'en' | 'fr' | 'tr', string>;
+    achievements?: Record<'en' | 'fr' | 'tr', string>;
+    image?: string;
+    slug?: string;
+    active?: number;
+  }
+}
+
+const { project, lang } = Astro.props;
+const translatePath = useTranslatedPath(lang);
+
+const uiTexts = {
+  en: { soon: "Details available soon" },
+  fr: { soon: "Détails disponibles bientôt" },
+  tr: { soon: "Detaylar yakında" }
+};
+
+// Determine image URL with fallback handling
+let imageUrl = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80'; // Default placeholder
+
+if (project.image) {
+    if (project.image.startsWith('http')) {
+        imageUrl = project.image; // Unsplash links
+    } else {
+        // Local images: prepend BASE_URL ensuring proper formatting
+        const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
+            ? import.meta.env.BASE_URL 
+            : import.meta.env.BASE_URL + '/';
+        imageUrl = `${baseUrl}${project.image}`;
+    }
+}
+
+// Determine the proper link path considering GitHub Pages base url
+const projectPath = project.slug ? `/projects/${project.slug}` : `/projects/${project.id}`;
+const projectLink = translatePath(projectPath);
+
+const isActive = project.active === 1;
+const Wrapper = isActive ? 'a' : 'div';
+const wrapperProps = isActive 
+    ? { href: projectLink, class: "text-decoration-none d-block h-100" } 
+    : { class: "d-block h-100 position-relative disabled-wrapper" };
+---
+
+<Wrapper {...wrapperProps}>
+    <div class="glass h-100 project-card d-flex flex-column p-0 overflow-hidden" style="min-height: 400px; display: flex; flex-direction: column;">
+        <!-- Card Background / Image section -->
+        <div class="position-relative" style={`background-image: url('${imageUrl}'); background-size: cover; background-position: center; height: 200px;`}>
+            <div class="position-absolute w-100 h-100" style="background: linear-gradient(to bottom, transparent, var(--color-bg-elevated)); top: 0; left: 0;"></div>
+            
+            {!isActive && (
+                <div class="position-absolute w-100 h-100 z-2 d-flex justify-content-center align-items-center coming-soon-overlay" style="background-color: rgba(10, 10, 10, 0.8); top: 0; left: 0;">
+                    <span class="badge" style="background: var(--color-accent-2); color: white;">{uiTexts[lang].soon}</span>                 
+                </div>
+            )}
+            
+            <div class="position-absolute p-3" style="bottom: 0; left: 0; z-index: 2;">
+                 <span class="badge" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.5); color: #fff;">{project.category[lang]}</span>
+            </div>
+        </div>
+
+        <!-- Card Content -->
+        <div class="p-4 d-flex flex-column flex-grow-1 position-relative z-1">
+            <h5 class="fw-bold mb-2" style="font-size: 1.25rem; color: var(--color-text-primary);">{project.title[lang]}</h5>
+            <p class="small mb-3" style="color: var(--color-accent-1); font-weight: 600;">
+                {project.techStack.join(', ')}
+            </p>
+            <p class="small mb-auto text-muted" style="line-height: 1.5;">
+                {project.description[lang]}
+            </p>
+            {project.achievements && project.achievements[lang] && (
+                <div class="mt-4 p-3 rounded" style="background: rgba(139, 92, 246, 0.1); border-left: 3px solid var(--color-accent-2);">
+                    <p class="small mb-0" style="color: var(--color-text-primary); font-weight: 500;">
+                        {project.achievements[lang]}
+                    </p>
+                </div>
+            )}
+        </div>
+    </div>
+</Wrapper>
+
+<style>
+.project-card {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent-1);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+}
+
+.disabled-wrapper {
+    cursor: default;
+}
+
+.coming-soon-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.disabled-wrapper:hover .coming-soon-overlay {
+    opacity: 1;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.z-1 { z-index: 1; }
+.z-2 { z-index: 2; }
+</style>
+</file>
+
+<file path="src/layouts/BaseLayout.astro">
+---
+import '../styles/global.css';
+import { getLangFromUrl, useTranslations, useTranslatedPath, getRouteFromUrl, languages, flags } from '../i18n/ui';
+
+const { title = "Marc | Engineering Portfolio" } = Astro.props;
+const currentPath = Astro.url.pathname;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+const route = getRouteFromUrl(Astro.url);
+---
+<!DOCTYPE html>
+<html lang={lang}>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
+
+    <!-- Google Fonts are now imported in global.css -->
+        
+    <!-- Client-side Routing and Language Auto-Detection -->
+    <script is:inline>
+        (function() {
+            try {
+                const storedLang = localStorage.getItem('preferredLang');
+                const browserLang = navigator.language.split('-')[0];
+                const supportedLangs = ['en', 'fr', 'tr'];
+                const defaultLang = 'en';
+
+                const currentPath = window.location.pathname;
+                const basePath = '/engineering_portfolio';
+                let pathWithoutBase = currentPath.replace(basePath, '');
+                if(!pathWithoutBase.startsWith('/')) pathWithoutBase = '/' + pathWithoutBase;
+                
+                const currentDocLang = supportedLangs.find(l => pathWithoutBase.startsWith(`/${l}/`) || pathWithoutBase === `/${l}`) || defaultLang;
+
+                if (!storedLang) {
+                    const targetLang = supportedLangs.includes(browserLang) ? browserLang : defaultLang;
+                    if (targetLang !== defaultLang && currentDocLang === defaultLang && (pathWithoutBase === '/' || pathWithoutBase === '')) {
+                        localStorage.setItem('preferredLang', targetLang);
+                        window.location.replace(basePath + '/' + targetLang + '/');
+                    }
+                }
+            } catch(e) {}
+        })();
+    </script>
+</head>
+
+<body class="d-flex flex-column">
+    <!-- ===================== NAVBAR ===================== -->
+    <header class="navbar-wrapper">
+        <div class="container py-3">
+            <nav id="main-nav" class="glass d-flex align-items-center justify-content-between px-4 py-2">
+                <a class="fw-bold fs-4 text-decoration-none gradient-text" href={translatePath('/')} style="font-family: var(--font-display);">Marc</a>
+                
+                <!-- Desktop Menu -->
+                <ul class="nav-links d-none lg-d-flex align-items-center gap-4 m-0" style="list-style: none;">
+                    <li>
+                        <a class:list={['nav-link', { active: route === '/' }]} href={translatePath('/')}>{t('nav.home')}</a>
+                    </li>
+                    <li>
+                        <a class:list={['nav-link', { active: route.includes('/about') }]} href={translatePath('/about')}>{t('nav.about')}</a>
+                    </li>
+                    <li>
+                        <a class:list={['nav-link', { active: route.includes('/projects') }]} href={translatePath('/projects')}>{t('nav.projects')}</a>
+                    </li>
+                    <li>
+                        <a class:list={['nav-link', { active: route.includes('/contacts') }]} href={translatePath('/contacts')}>{t('nav.contact')}</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Language Switcher -->
+                    <div class="dropdown-wrapper position-relative">
+                        <button id="langToggle" class="btn btn-outline py-2 px-3 badge d-flex align-items-center gap-2 m-0" style="font-size: 1rem; border-radius: 99px;">
+                            {flags[lang]}
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                        <div id="langMenu" class="dropdown-menu glass position-absolute d-none flex-column mt-2 p-2" style="right: 0; min-width: 120px; z-index: 1000;">
+                            {Object.entries(languages).map(([code, name]) => (
+                                <a class="dropdown-item d-flex align-items-center gap-2 p-2 text-decoration-none" href={translatePath(route, code as keyof typeof languages)} onclick={`localStorage.setItem('preferredLang', '${code}')`}>
+                                    <span>{flags[code as keyof typeof languages]}</span>
+                                    <span>{name}</span>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobileMenuToggle" class="btn btn-outline p-2 lg-d-none" aria-label="Toggle navigation" style="border-radius: 8px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                    </button>
+                </div>
+            </nav>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="glass mt-2 p-3 d-none flex-column gap-3 lg-d-none animate-fade-up">
+                <a class:list={['nav-link', { active: route === '/' }]} href={translatePath('/')}>{t('nav.home')}</a>
+                <a class:list={['nav-link', { active: route.includes('/about') }]} href={translatePath('/about')}>{t('nav.about')}</a>
+                <a class:list={['nav-link', { active: route.includes('/projects') }]} href={translatePath('/projects')}>{t('nav.projects')}</a>
+                <a class:list={['nav-link', { active: route.includes('/contacts') }]} href={translatePath('/contacts')}>{t('nav.contact')}</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+        <slot />
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="py-5 mt-auto glass" style="border-radius: 0; border-bottom: none; border-left: none; border-right: none;">
+        <div class="container text-center small text-muted">
+            <div class="mb-3">
+                © <span id="currentYear"></span> Marc — Engineering Portfolio
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="https://github.com/marcravel" target="_blank" rel="noopener noreferrer"
+                    class="text-decoration-none hover-accent">{t('footer.github')}</a>
+                <a href="https://www.linkedin.com/in/marc-anjaniaina-ravelontsalama/" target="_blank"
+                    rel="noopener noreferrer" class="text-decoration-none hover-accent">{t('footer.linkedin')}</a>
+                <a href={translatePath('/contacts')} class="text-decoration-none hover-accent">{t('footer.contact')}</a>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .navbar-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-link {
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            position: relative;
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--color-text-primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, var(--color-accent-1), var(--color-accent-2));
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .hover-accent:hover {
+            color: var(--color-accent-1);
+        }
+
+        .dropdown-item {
+            color: var(--color-text-secondary);
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--color-text-primary);
+        }
+        
+        .flex-grow-1 {
+            flex-grow: 1;
+        }
+    </style>
+
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="/assets/js/main.js" is:inline></script>
+    <script is:inline>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Custom UI interactions
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mobile Menu
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    if (mobileMenu.classList.contains('d-none')) {
+                        mobileMenu.classList.remove('d-none');
+                        mobileMenu.classList.add('d-flex');
+                    } else {
+                        mobileMenu.classList.add('d-none');
+                        mobileMenu.classList.remove('d-flex');
+                    }
+                });
+            }
+
+            // Language Dropdown
+            const langToggle = document.getElementById('langToggle');
+            const langMenu = document.getElementById('langMenu');
+            
+            if (langToggle && langMenu) {
+                langToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (langMenu.classList.contains('d-none')) {
+                        langMenu.classList.remove('d-none');
+                        langMenu.classList.add('d-flex');
+                    } else {
+                        langMenu.classList.add('d-none');
+                        langMenu.classList.remove('d-flex');
+                    }
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', () => {
+                    if (!langMenu.classList.contains('d-none')) {
+                        langMenu.classList.add('d-none');
+                        langMenu.classList.remove('d-flex');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
+</file>
+
+<file path="src/pages/index.astro">
+---
+import Home from '../components/pages/Home.astro';
+---
+<Home lang="en" />
+</file>
+
+<file path="src/data/projects.json">
+[
+  {
+    "id": 1,
+    "active": 0,
+    "slug": "real-time-defect-detection",
+    "category": {
+      "en": "AI & Computer Vision",
+      "fr": "IA & Vision par Ordinateur",
+      "tr": "Yapay Zeka ve Bilgisayarlı Görme"
+    },
+    "title": {
+      "en": "Real-Time Automated Defect Detection Pipeline",
+      "fr": "Pipeline de détection automatisée de défauts en temps réel",
+      "tr": "Gerçek Zamanlı Otomatik Hata Tespiti"
+    },
+    "techStack": [
+      "Python",
+      "PyTorch",
+      "OpenCV",
+      "CNN Architecture",
+      "System Profiling"
+    ],
+    "description": {
+      "en": "Developed a real-time computer vision system for manufacturing quality control. Built an end-to-end pipeline from data augmentation to live webcam inference, emphasizing computational profiling for future edge deployment.",
+      "fr": "Développement d'un système de vision par ordinateur en temps réel pour le contrôle qualité dans la fabrication. Construction d'un pipeline de l'augmentation des données à l'inférence par webcam.",
+      "tr": "Üretim kalite kontrolü için gerçek zamanlı bir bilgisayarlı görme sistemi geliştirildi. Veri artırmadan canlı web kamerası çıkarımına kadar uçtan uca bir boru hattı oluşturuldu."
+    },
+    "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+    "longDescription": "This project establishes a foundational architecture for industrial visual inspection. Utilizing a public dataset of manufacturing anomalies (such as PCB soldering defects or metal casting flaws), a custom Convolutional Neural Network (CNN) and YOLO-based models were trained using PyTorch. The system performs live inference via OpenCV. To ensure readiness for constrained embedded hardware, the project strictly profiles engineering metrics: tracking model footprint in megabytes, calculating floating-point operations per second (FLOPs), and benchmarking inference latency across CPU and GPU execution.",
+    "youtubeId": null,
+    "gallery": null
+  },
+  {
+    "id": 2,
+    "active": 0,
+    "slug": "ros2-autonomous-navigation",
+    "category": {
+      "en": "Robotics & Autonomous Systems",
+      "fr": "Robotique & Systèmes Autonomes",
+      "tr": "Robotik ve Otonom Sistemler"
+    },
+    "title": {
+      "en": "ROS2 Autonomous Navigation & SLAM System",
+      "fr": "Navigation Autonome ROS2 & Système SLAM",
+      "tr": "ROS2 Otonom Navigasyon ve SLAM Sistemi"
+    },
+    "techStack": [
+      "ROS2",
+      "Gazebo",
+      "Nav2 Stack",
+      "SLAM Toolbox",
+      "URDF"
+    ],
+    "description": {
+      "en": "Engineered an autonomous mobile robot simulation in ROS2 and Gazebo. Implemented full SLAM mapping, sensor simulation, and dynamic path planning.",
+      "fr": "Conception d'une simulation de robot mobile autonome dans ROS2 et Gazebo. Mappage SLAM complet, simulation de capteurs et planification de trajectoire dynamique.",
+      "tr": "ROS2 ve Gazebo'da otonom bir mobil robot simülasyonu tasarlandı. Tam SLAM haritalama, sensör simülasyonu ve dinamik yol planlaması uygulandı."
+    },
+    "image": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/6091875/starship-delivery-robot-029.0.jpg?quality=90&strip=all&crop=0%2C0%2C100%2C100&w=2400",
+    "longDescription": "This project demonstrates high-level robotic system architecture and autonomous navigation within a simulated environment. A differential drive robot was modeled using URDF and deployed in Gazebo, complete with simulated LiDAR and odometry sensors. Simultaneous Localization and Mapping (SLAM) was executed via slam_toolbox to generate accurate 2D occupancy grids. The ROS2 Nav2 stack was configured to handle global path planning (A*/Dijkstra) and local obstacle avoidance. The architecture focuses on node separation, topic communication, and system profiling using rqt_graph.",
+    "youtubeId": null,
+    "gallery": null
+  },
+  {
+    "id": 3,
+    "active": 0,
+    "slug": "smart-greenhouse",
+    "category": {
+      "en": "Automation & IoT",
+      "fr": "Automatisation & IoT",
+      "tr": "Otomasyon ve Nesnelerin İnterneti"
+    },
+    "title": {
+      "en": "Smart Greenhouse Control System",
+      "fr": "Système de Contrôle Intelligent pour Serre",
+      "tr": "Akıllı Sera Kontrol Sistemi"
+    },
+    "techStack": [
+      "ESP32",
+      "Fuzzy Logic",
+      "IoT",
+      "Web Dashboard"
+    ],
+    "description": {
+      "en": "Developed an ESP32-based smart greenhouse controller utilizing a fuzzy logic control system for adaptive environmental regulation. Features a web-based dashboard.",
+      "fr": "Développement d'un contrôleur de serre intelligent basé sur ESP32 utilisant la logique floue pour une régulation environnementale adaptative.",
+      "tr": "Uyarlanabilir çevresel düzenleme için bulank mantık kullanan ESP32 tabanlı akıllı sera kontrol cihazı geliştirildi."
+    },
+    "image": "https://images.unsplash.com/photo-1595801362095-816cc142dce4?auto=format&fit=crop&w=800&q=80",
+    "longDescription": "A comprehensive IoT solution for agricultural environment control. Powered by an ESP32, the system reads data from multiple specialized sensors (Temperature, Soil moisture, Air humidity, and lighting levels). Instead of simple thresholds, it utilizes a Fuzzy Logic control system to make nuanced decisions, activating fans, heaters, or pumps proportionately to maintain ideal growing conditions. Data is logged and accessible via a responsive web dashboard.",
+    "youtubeId": null,
+    "gallery": null
+  },
+  {
+    "id": 4,
+    "active": 1,
+    "slug": "line-follower-robot",
+    "category": {
+      "en": "Robotics",
+      "fr": "Robotique",
+      "tr": "Robotik"
+    },
+    "title": {
+      "en": "High-Speed Line Follower Robot",
+      "fr": "Robot Suiveur de Ligne à Grande Vitesse",
+      "tr": "Yüksek Hızlı Çizgi İzleyen Robot"
+    },
+    "techStack": [
+      "Embedded C",
+      "MPLAB XC8",
+      "Microcontrollers"
+    ],
+    "description": {
+      "en": "Designed and programmed a fast autonomous line follower. Implemented efficient control logic for high-speed path tracking.",
+      "fr": "Conception et programmation d'un robot suiveur de ligne autonome rapide. Lmplementation d'une logique de contrôle efficace pour un suivi à grande vitesse.",
+      "tr": "Hızlı, otonom bir çizgi izleyici tasarlandı ve programlandı. Yüksek hızlı yol takibi için verimli kontrol mantığı uygulandı."
+    },
+    "achievements": {
+      "en": "🥇 1st place + 2 Gold Medals at the Madagascar Cup of Robotics",
+      "fr": "🥇 1ère place + 2 Médailles d'Or à la Coupe de Robotique de Madagascar",
+      "tr": "🥇 Madagaskar Robotik Kupası'nda 1.lik ve 2 Altın Madalya"
+    },
+    "image": "img/projects/line-follower-robot/line-follower-bots.jpg",
+    "longDescription": {
+      "en": "/docs/high_speed_line_follower.txt",
+      "fr": "/docs/high_speed_line_follower_fr.txt",
+      "tr": "/docs/high_speed_line_follower_tr.txt"
+    },
+    "youtubeId": "MYcDsQJcqpI",
+    "gallery": [
+      "img/projects/line-follower-robot/line-follower-bots.jpg",
+      "img/projects/line-follower-robot/arduino-line-follower-bot.jpg",
+      "img/projects/line-follower-robot/pic-line-follower-bot.jpg",
+      "img/projects/line-follower-robot/work.jpg",
+      "img/projects/line-follower-robot/work1.jpg",
+      "img/projects/line-follower-robot/work2.jpg",
+      "img/projects/line-follower-robot/work3.jpg",
+      "img/projects/line-follower-robot/work4.jpg",
+      "img/projects/line-follower-robot/1.jpg",
+      "img/projects/line-follower-robot/2.jpg",
+      "img/projects/line-follower-robot/3.jpg",
+      "img/projects/line-follower-robot/4.jpg",
+      "img/projects/line-follower-robot/comp1.jpg",
+      "img/projects/line-follower-robot/comp2.jpg",
+      "img/projects/line-follower-robot/comp3.jpg",
+      "img/projects/line-follower-robot/cup.jpg",
+      "img/projects/line-follower-robot/pod1.jpg",
+      "img/projects/line-follower-robot/pod3.jpg",
+      "img/projects/line-follower-robot/pod4.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "active": 0,
+    "slug": "maze-solver-robot",
+    "category": {
+      "en": "Robotics",
+      "fr": "Robotique",
+      "tr": "Robotik"
+    },
+    "title": {
+      "en": "Maze Solver Robot",
+      "fr": "Robot Résolveur de Labyrinthe",
+      "tr": "Labirent Çözen Robot"
+    },
+    "techStack": [
+      "Embedded Control",
+      "Sensor Logic"
+    ],
+    "description": {
+      "en": "Built an autonomous robot capable of navigating and solving maze paths. Developed navigation algorithms and sensor-based decision logic for real-time movement.",
+      "fr": "Construction d'un robot autonome capable de naviguer et de résoudre des labyrinthes. Développement d'algorithmes de navigation.",
+      "tr": "Labirent yollarında gezinebilen ve çözebilen otonom bir robot yapıldı. Gerçek zamanlı hareket için sensör tabanlı karar mantığı geliştirildi."
+    },
+    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+    "longDescription": "The Maze Solver Robot is an autonomous vehicle designed to find the shortest path from a starting point to the center of a maze. It relies on a combination of ultrasonic and infrared sensors for wall detection and distance measurement. The internal logic implements popular algorithms like Wall Follower or Flood Fill to guarantee a solution.",
+    "youtubeId": null,
+    "gallery": null
+  },
+  {
+    "id": 6,
+    "active": 1,
+    "slug": "automatic-plant-watering",
+    "category": {
+      "en": "Automation & IoT",
+      "fr": "Automatisation & IoT",
+      "tr": "Otomasyon ve Nesnelerin İnterneti"
+    },
+    "title": {
+      "en": "Automatic Plant Watering System",
+      "fr": "Système d'Arrosage Automatique",
+      "tr": "Otomatik Bitki Sulama Sistemi"
+    },
+    "techStack": [
+      "Control Logic",
+      "Soil Moisture Sensing"
+    ],
+    "description": {
+      "en": "Designed an automated irrigation system based on soil moisture sensing, implementing control logic for efficient water usage.",
+      "fr": "Conception d'un système d'irrigation automatisé basé sur la détection de l'humidité du sol.",
+      "tr": "Verimli su kullanımı için kontrol mantığı uygulayarak, toprak nemi algılamaya dayalı otomatik bir sulama sistemi tasarlandı."
+    },
+    "achievements": {
+      "en": "🥉 3rd place at the MADA ROBOT CONTEST",
+      "fr": "🥉 3ème place au MADA ROBOT CONTEST",
+      "tr": "🥉 MADA ROBOT YARIŞMASI'nda 3.lük"
+    },
+    "image": "img/projects/automatic-watering-system/mrc2021.png",
+    "longDescription": {
+      "en": "/docs/automatic_plant_watering.txt",
+      "fr": "/docs/automatic_plant_watering_fr.txt",
+      "tr": "/docs/automatic_plant_watering_tr.txt"
+    },
+    "youtubeId": "K-mv0HUHN_M",
+    "gallery": null
+  }
+]
+</file>
+
+</files>

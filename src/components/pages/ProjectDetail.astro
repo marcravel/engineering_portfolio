@@ -3,10 +3,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import fs from "fs/promises";
 import path from "path";
 import { useTranslatedPath } from "../../i18n/ui";
+import type { Project, Lang } from "../../types/project";
 
 export interface Props {
-    lang: "en" | "fr" | "tr";
-    project: any;
+    lang: Lang;
+    project: Project;
 }
 const { lang, project } = Astro.props;
 const translatePath = useTranslatedPath(lang);
@@ -43,7 +44,8 @@ if (isTextFile) {
     }
 }
 
-const subtitleRegex = /^(Project Overview|Role & Responsibilities|System Architecture|Results & Recognition|Aperçu du Projet|Rôle et Responsabilités|Architecture du Système|Résultats et Reconnaissance|Proje Özeti|Rol ve Sorumluluklar|Sistem Mimarisi|Sonuçlar ve Başarılar):?$/i;
+const subtitleRegex =
+    /^(Project Overview|Role & Responsibilities|System Architecture|Results & Recognition|Aperçu du Projet|Rôle et Responsabilités|Architecture du Système|Résultats et Reconnaissance|Proje Özeti|Rol ve Sorumluluklar|Sistem Mimarisi|Sonuçlar ve Başarılar):?$/i;
 
 const parsedLongDescription = (
     typeof descriptionContent === "string" ? descriptionContent : ""
@@ -80,7 +82,8 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
             <div class="mb-5">
                 <a
                     href={translatePath("/projects")}
-                    class="text-decoration-none d-inline-flex align-items-center gap-2" style="color: var(--color-accent-1);"
+                    class="text-decoration-none d-inline-flex align-items-center gap-2"
+                    style="color: var(--color-accent-1);"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -101,18 +104,24 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
             <!-- Project Header -->
             <div class="mb-5 text-center">
                 <div class="mb-4">
-                    <span class="badge px-4 py-2" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.5); color: #fff; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">
+                    <span
+                        class="badge px-4 py-2"
+                        style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.5); color: #fff; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;"
+                    >
                         {project.category[lang]}
                     </span>
                 </div>
-                <h1 class="mb-4 gradient-text" style="font-size: 3rem;">{project.title[lang]}</h1>
+                <h1 class="mb-4 gradient-text" style="font-size: 3rem;">
+                    {project.title[lang]}
+                </h1>
 
                 {
                     project.achievements && project.achievements[lang] && (
-                        <div class="d-inline-block p-3 rounded glass mb-5" style="border-left: 3px solid var(--color-accent-2);">
-                            <span
-                                style="color: var(--color-text-primary); font-weight: 600;"
-                            >
+                        <div
+                            class="d-inline-block p-3 rounded glass mb-5"
+                            style="border-left: 3px solid var(--color-accent-2);"
+                        >
+                            <span style="color: var(--color-text-primary); font-weight: 600;">
                                 {project.achievements[lang]}
                             </span>
                         </div>
@@ -130,7 +139,10 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                     <div class="d-flex flex-wrap justify-content-center gap-2">
                         {
                             project.techStack.map((tech) => (
-                                <span class="badge px-3 py-2" style="background: var(--color-bg-elevated); border: 1px solid var(--color-border); font-size: 0.9rem;">
+                                <span
+                                    class="badge px-3 py-2"
+                                    style="background: var(--color-bg-elevated); border: 1px solid var(--color-border); font-size: 0.9rem;"
+                                >
                                     {tech}
                                 </span>
                             ))
@@ -144,7 +156,10 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                 <div class="order-2 lg-order-2">
                     {
                         project.gallery && project.gallery.length > 0 && (
-                            <div class="glass p-4 sticky-top" style="top: 100px;">
+                            <div
+                                class="glass p-4 sticky-top"
+                                style="top: 100px;"
+                            >
                                 <h3
                                     class="mb-4"
                                     style="color: var(--color-text-primary); font-size: 1.5rem;"
@@ -187,11 +202,12 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
                 </div>
 
                 <!-- Right Column: Media Hero & Description -->
-                <div class="lg-grid-col-span-2 order-1 lg-order-1" style="grid-column: span 2;">
+                <div
+                    class="lg-grid-col-span-2 order-1 lg-order-1"
+                    style="grid-column: span 2;"
+                >
                     <!-- Media Hero (YouTube or Image) -->
-                    <div
-                        class="mb-5 glass overflow-hidden p-0"
-                    >
+                    <div class="mb-5 glass overflow-hidden p-0">
                         {
                             project.youtubeId ? (
                                 <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
@@ -218,13 +234,13 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
 
                     <!-- Long Description -->
                     <div class="mb-5 glass p-4 md-p-5">
-                        <h3
-                            class="mb-4 gradient-text"
-                            style="font-size: 2rem;"
-                        >
+                        <h3 class="mb-4 gradient-text" style="font-size: 2rem;">
                             {t_overview[lang]}
                         </h3>
-                        <div class="project-details" style="line-height: 1.8; font-size: 1.1rem;">
+                        <div
+                            class="project-details"
+                            style="line-height: 1.8; font-size: 1.1rem;"
+                        >
                             <span set:html={parsedLongDescription} />
                         </div>
                     </div>
@@ -243,13 +259,21 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
 </BaseLayout>
 
 <style>
-    .order-1 { order: 1; }
-    .order-2 { order: 2; }
-    @media (min-width: 1024px) {
-        .lg-order-1 { order: 1; }
-        .lg-order-2 { order: 2; }
+    .order-1 {
+        order: 1;
     }
-    
+    .order-2 {
+        order: 2;
+    }
+    @media (min-width: 1024px) {
+        .lg-order-1 {
+            order: 1;
+        }
+        .lg-order-2 {
+            order: 2;
+        }
+    }
+
     .sticky-top {
         position: sticky;
         top: 0;
@@ -259,7 +283,7 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
     .gallery-image:hover {
         transform: scale(1.1);
     }
-    
+
     /* Custom Modal Styles */
     .custom-modal {
         display: none;
@@ -277,26 +301,26 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
         opacity: 0;
         transition: opacity 0.3s ease;
     }
-    
+
     .custom-modal.show {
         display: flex;
         opacity: 1;
     }
-    
+
     .custom-modal-content {
         position: relative;
         max-width: 90%;
         max-height: 90%;
     }
-    
+
     .custom-modal-content img {
         max-width: 100%;
         max-height: 90vh;
         object-fit: contain;
         border-radius: 12px;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     }
-    
+
     .custom-modal-close {
         position: absolute;
         top: -40px;
@@ -307,7 +331,7 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
         cursor: pointer;
         transition: color 0.3s;
     }
-    
+
     .custom-modal-close:hover {
         color: var(--color-accent-1);
     }
@@ -337,7 +361,7 @@ const t_overview = { en: "Overview", fr: "Aperçu", tr: "Genel Bakış" };
     };
 
     if (closeBtn) closeBtn.addEventListener("click", closeModal);
-    
+
     if (modal) {
         modal.addEventListener("click", (e) => {
             if (e.target === modal) {

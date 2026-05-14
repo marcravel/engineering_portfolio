@@ -1,129 +1,188 @@
 ---
-import { useTranslatedPath } from '../i18n/ui';
+import { useTranslatedPath } from "../i18n/ui";
+import type { Project, Lang } from "../types/project";
 
-interface Props {
-  lang: 'en' | 'fr' | 'tr';
-  project: {
-    id: number;
-    category: Record<'en' | 'fr' | 'tr', string>;
-    title: Record<'en' | 'fr' | 'tr', string>;
-    techStack: string[];
-    description: Record<'en' | 'fr' | 'tr', string>;
-    achievements?: Record<'en' | 'fr' | 'tr', string>;
-    image?: string;
-    slug?: string;
-    active?: number;
-  }
+export interface Props {
+    lang: Lang;
+    project: Project;
 }
+
+// interface Props {
+//   lang: 'en' | 'fr' | 'tr';
+//   project: {
+//     id: number;
+//     category: Record<'en' | 'fr' | 'tr', string>;
+//     title: Record<'en' | 'fr' | 'tr', string>;
+//     techStack: string[];
+//     description: Record<'en' | 'fr' | 'tr', string>;
+//     achievements?: Record<'en' | 'fr' | 'tr', string>;
+//     image?: string;
+//     slug?: string;
+//     active?: number;
+//   }
+// }
 
 const { project, lang } = Astro.props;
 const translatePath = useTranslatedPath(lang);
 
 const uiTexts = {
-  en: { soon: "Details available soon" },
-  fr: { soon: "Détails disponibles bientôt" },
-  tr: { soon: "Detaylar yakında" }
+    en: { soon: "Details available soon" },
+    fr: { soon: "Détails disponibles bientôt" },
+    tr: { soon: "Detaylar yakında" },
 };
 
 // Determine image URL with fallback handling
-let imageUrl = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80'; // Default placeholder
+let imageUrl =
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"; // Default placeholder
 
 if (project.image) {
-    if (project.image.startsWith('http')) {
+    if (project.image.startsWith("http")) {
         imageUrl = project.image; // Unsplash links
     } else {
         // Local images: prepend BASE_URL ensuring proper formatting
-        const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
-            ? import.meta.env.BASE_URL 
-            : import.meta.env.BASE_URL + '/';
+        const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+            ? import.meta.env.BASE_URL
+            : import.meta.env.BASE_URL + "/";
         imageUrl = `${baseUrl}${project.image}`;
     }
 }
 
 // Determine the proper link path considering GitHub Pages base url
-const projectPath = project.slug ? `/projects/${project.slug}` : `/projects/${project.id}`;
+const projectPath = project.slug
+    ? `/projects/${project.slug}`
+    : `/projects/${project.id}`;
 const projectLink = translatePath(projectPath);
 
 const isActive = project.active === 1;
-const Wrapper = isActive ? 'a' : 'div';
-const wrapperProps = isActive 
-    ? { href: projectLink, class: "text-decoration-none d-block h-100" } 
+const Wrapper = isActive ? "a" : "div";
+const wrapperProps = isActive
+    ? { href: projectLink, class: "text-decoration-none d-block h-100" }
     : { class: "d-block h-100 position-relative disabled-wrapper" };
 ---
 
 <Wrapper {...wrapperProps}>
-    <div class="glass h-100 project-card d-flex flex-column p-0 overflow-hidden" style="min-height: 400px; display: flex; flex-direction: column;">
+    <div
+        class="glass h-100 project-card d-flex flex-column p-0 overflow-hidden"
+        style="min-height: 400px; display: flex; flex-direction: column;"
+    >
         <!-- Card Background / Image section -->
-        <div class="position-relative" style={`background-image: url('${imageUrl}'); background-size: cover; background-position: center; height: 200px;`}>
-            <div class="position-absolute w-100 h-100" style="background: linear-gradient(to bottom, transparent, var(--color-bg-elevated)); top: 0; left: 0;"></div>
-            
-            {!isActive && (
-                <div class="position-absolute w-100 h-100 z-2 d-flex justify-content-center align-items-center coming-soon-overlay" style="background-color: rgba(10, 10, 10, 0.8); top: 0; left: 0;">
-                    <span class="badge" style="background: var(--color-accent-2); color: white;">{uiTexts[lang].soon}</span>                 
-                </div>
-            )}
-            
-            <div class="position-absolute p-3" style="bottom: 0; left: 0; z-index: 2;">
-                 <span class="badge" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.5); color: #fff;">{project.category[lang]}</span>
+        <div
+            class="position-relative"
+            style={`background-image: url('${imageUrl}'); background-size: cover; background-position: center; height: 200px;`}
+        >
+            <div
+                class="position-absolute w-100 h-100"
+                style="background: linear-gradient(to bottom, transparent, var(--color-bg-elevated)); top: 0; left: 0;"
+            >
+            </div>
+
+            {
+                !isActive && (
+                    <div
+                        class="position-absolute w-100 h-100 z-2 d-flex justify-content-center align-items-center coming-soon-overlay"
+                        style="background-color: rgba(10, 10, 10, 0.8); top: 0; left: 0;"
+                    >
+                        <span
+                            class="badge"
+                            style="background: var(--color-accent-2); color: white;"
+                        >
+                            {uiTexts[lang].soon}
+                        </span>
+                    </div>
+                )
+            }
+
+            <div
+                class="position-absolute p-3"
+                style="bottom: 0; left: 0; z-index: 2;"
+            >
+                <span
+                    class="badge"
+                    style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.5); color: #fff;"
+                    >{project.category[lang]}</span
+                >
             </div>
         </div>
 
         <!-- Card Content -->
         <div class="p-4 d-flex flex-column flex-grow-1 position-relative z-1">
-            <h5 class="fw-bold mb-2" style="font-size: 1.25rem; color: var(--color-text-primary);">{project.title[lang]}</h5>
-            <p class="small mb-3" style="color: var(--color-accent-1); font-weight: 600;">
-                {project.techStack.join(', ')}
+            <h5
+                class="fw-bold mb-2"
+                style="font-size: 1.25rem; color: var(--color-text-primary);"
+            >
+                {project.title[lang]}
+            </h5>
+            <p
+                class="small mb-3"
+                style="color: var(--color-accent-1); font-weight: 600;"
+            >
+                {project.techStack.join(", ")}
             </p>
             <p class="small mb-auto text-muted" style="line-height: 1.5;">
                 {project.description[lang]}
             </p>
-            {project.achievements && project.achievements[lang] && (
-                <div class="mt-4 p-3 rounded" style="background: rgba(139, 92, 246, 0.1); border-left: 3px solid var(--color-accent-2);">
-                    <p class="small mb-0" style="color: var(--color-text-primary); font-weight: 500;">
-                        {project.achievements[lang]}
-                    </p>
-                </div>
-            )}
+            {
+                project.achievements && project.achievements[lang] && (
+                    <div
+                        class="mt-4 p-3 rounded"
+                        style="background: rgba(139, 92, 246, 0.1); border-left: 3px solid var(--color-accent-2);"
+                    >
+                        <p
+                            class="small mb-0"
+                            style="color: var(--color-text-primary); font-weight: 500;"
+                        >
+                            {project.achievements[lang]}
+                        </p>
+                    </div>
+                )
+            }
         </div>
     </div>
 </Wrapper>
 
 <style>
-.project-card {
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
+    .project-card {
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
+    }
 
-.project-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-accent-1);
-    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
-}
+    .project-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--color-accent-1);
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+    }
 
-.disabled-wrapper {
-    cursor: default;
-}
+    .disabled-wrapper {
+        cursor: default;
+    }
 
-.coming-soon-overlay {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+    .coming-soon-overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
 
-.disabled-wrapper:hover .coming-soon-overlay {
-    opacity: 1;
-}
+    .disabled-wrapper:hover .coming-soon-overlay {
+        opacity: 1;
+    }
 
-.overflow-hidden {
-    overflow: hidden;
-}
+    .overflow-hidden {
+        overflow: hidden;
+    }
 
-.position-relative {
-    position: relative;
-}
+    .position-relative {
+        position: relative;
+    }
 
-.position-absolute {
-    position: absolute;
-}
+    .position-absolute {
+        position: absolute;
+    }
 
-.z-1 { z-index: 1; }
-.z-2 { z-index: 2; }
+    .z-1 {
+        z-index: 1;
+    }
+    .z-2 {
+        z-index: 2;
+    }
 </style>
